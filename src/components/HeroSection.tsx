@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ArrowDown } from "lucide-react";
+import styled from "styled-components";
 
 interface HeroSectionProps {
   name?: string;
@@ -11,32 +12,24 @@ interface HeroSectionProps {
   onExploreClick?: () => void;
 }
 
-const HeroSection = ({
+const HeroSection: React.FC<HeroSectionProps> = ({
   name = "Ageu Menezes",
   title = "Full Stack Web Developer",
   bio = "Full Stack Web Developer passionate about technology and innovation. Specialized in React, Node.js, TypeScript, and development of modern, scalable web applications.",
   avatarUrl = "https://github.com/ageumenezesDev19.png",
   onExploreClick = () => {},
-}: HeroSectionProps) => {
+}) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-      },
+      transition: { staggerChildren: 0.3 },
     },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
@@ -83,12 +76,11 @@ const HeroSection = ({
               <motion.img
                 src={avatarUrl}
                 alt={name}
-                className="rounded-full shadow-2xl"
+                className="rounded-full shadow-2xl dark:shadow-[2px_2px_15px_#FFA500] relative z-10"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.5 }}
               />
-              <div className="absolute inset-0 rounded-full bg-primary/10 animate-pulse" />
             </div>
           </motion.div>
         </div>
