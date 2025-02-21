@@ -28,7 +28,7 @@ const defaultProjects: Project[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1517292987719-0369a794ec0f?w=800&auto=format&fit=crop&q=60",
     category: "Frontend",
-    repoUrl: "https://github.com/ageumenezesDev19/design-system",
+    repoUrl: "https://github.com/ageumenezesDev19/05-design-system",
     techStack: [
       { name: "React", color: "bg-blue-100 text-blue-800" },
       { name: "Storybook", color: "bg-pink-100 text-pink-800" },
@@ -72,13 +72,13 @@ const defaultProjects: Project[] = [
   {
     id: 4,
     title: "To-Do App",
-    demoUrl: "https://endearing-hamster-35a11e.netlify.app",
+    demoUrl: "https://endearing-hamster-35a11e.netlify.app/",
     description:
       "A feature-rich todo application with task management, categories, and progress tracking.",
     imageUrl:
       "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=60",
     category: "Frontend",
-    repoUrl: "https://github.com/ageumenezesDev19/todo-app",
+    repoUrl: "https://github.com/ageumenezesDev19/project-my-tasks-to-do",
     techStack: [
       { name: "React", color: "bg-blue-100 text-blue-800" },
       { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
@@ -95,7 +95,7 @@ const defaultProjects: Project[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=800&auto=format&fit=crop&q=60",
     category: "Frontend",
-    repoUrl: "https://github.com/ageumenezesDev19/solar-system",
+    repoUrl: "https://github.com/ageumenezesDev19/project-solar-system",
     techStack: [
       { name: "React", color: "bg-blue-100 text-blue-800" },
       { name: "Three.js", color: "bg-yellow-100 text-yellow-800" },
