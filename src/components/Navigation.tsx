@@ -106,6 +106,11 @@ const Navigation = ({
                   {item.label}
                 </motion.button>
               ))}
+
+              {/* Adicionando o ThemeToggle para mobile */}
+              <div className="border-t border-muted pt-4">
+                <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+              </div>
             </div>
           </motion.div>
         )}
