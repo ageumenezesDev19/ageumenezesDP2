@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import ProjectCard from "./ProjectCard";
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
@@ -187,16 +187,29 @@ const ProjectsSection = ({
   projects = defaultProjects,
 }: ProjectsSectionProps) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // Pre-filter projects by category for better performance
+  const projectsByCategory = useMemo(() => {
+    const categories = {} as Record<string, typeof projects>;
+    categories["all"] = projects;
+
+    projects.forEach((project) => {
+      if (!categories[project.category]) {
+        categories[project.category] = [];
+      }
+      categories[project.category].push(project);
+    });
+
+    return categories;
+  }, [projects]);
 
   const categories = [
     "all",
     ...new Set(projects.map((project) => project.category)),
   ];
 
-  const filteredProjects =
-    selectedCategory === "all"
-      ? projects
-      : projects.filter((project) => project.category === selectedCategory);
+  const filteredProjects = projectsByCategory[selectedCategory] || [];
 
   return (
     <section className="py-16 px-4 md:px-8 lg:px-16 bg-muted/50">
@@ -216,8 +229,14 @@ const ProjectsSection = ({
               <TabsTrigger
                 key={category}
                 value={category}
-                onClick={() => setSelectedCategory(category)}
-                className="capitalize"
+                onClick={() => {
+                  if (!isAnimating && category !== selectedCategory) {
+                    setIsAnimating(true);
+                    setSelectedCategory(category);
+                  }
+                }}
+                className="capitalize transition-all duration-200 hover:scale-105"
+                disabled={isAnimating}
               >
                 {category}
               </TabsTrigger>
@@ -234,6 +253,7 @@ const ProjectsSection = ({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
+                  onAnimationComplete={() => setIsAnimating(false)}
                 >
                   <ProjectCard
                     title={project.title}
