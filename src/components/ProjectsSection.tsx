@@ -102,22 +102,22 @@ const defaultProjects: Project[] = [
       { name: "JavaScript", color: "bg-yellow-100 text-yellow-800" },
     ],
   },
-  {
-    id: 1,
-    title: "Trybe Futebol Clube",
-    description:
-      "RESTful API for a football matches and standings information website. Built with TypeScript, Node.js, Express.js, and MySQL.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=60",
-    category: "Back-end",
-    repoUrl: "https://github.com/ageumenezesDev19/project-trybe-futebol-clube",
-    techStack: [
-      { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
-      { name: "Node.js", color: "bg-green-100 text-green-800" },
-      { name: "MySQL", color: "bg-orange-100 text-orange-800" },
-      { name: "Docker", color: "bg-blue-100 text-blue-800" },
-    ],
-  },
+  // {
+  //   id: 1,
+  //   title: "Trybe Futebol Clube",
+  //   description:
+  //     "RESTful API for a football matches and standings information website. Built with TypeScript, Node.js, Express.js, and MySQL.",
+  //   imageUrl:
+  //     "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=60",
+  //   category: "Back-end",
+  //   repoUrl: "https://github.com/ageumenezesDev19/project-trybe-futebol-clube",
+  //   techStack: [
+  //     { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
+  //     { name: "Node.js", color: "bg-green-100 text-green-800" },
+  //     { name: "MySQL", color: "bg-orange-100 text-orange-800" },
+  //     { name: "Docker", color: "bg-blue-100 text-blue-800" },
+  //   ],
+  // },
   {
     id: 2,
     title: "Delivery App",
@@ -126,7 +126,7 @@ const defaultProjects: Project[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1526367790999-0150786686a2?w=800&auto=format&fit=crop&q=60",
     category: "Full Stack",
-    repoUrl: "https://github.com/ageumenezesDev19/project-delivery-app",
+    repoUrl: "https://github.com/ageumenezesDev19/pizzashop-web",
     techStack: [
       { name: "React", color: "bg-blue-100 text-blue-800" },
       { name: "Node.js", color: "bg-green-100 text-green-800" },
@@ -134,21 +134,21 @@ const defaultProjects: Project[] = [
       { name: "Express", color: "bg-purple-100 text-purple-800" },
     ],
   },
-  {
-    id: 3,
-    title: "Trybers and Dragons",
-    description:
-      "RPG-based project developed with TypeScript applying SOLID principles and Object-Oriented Programming.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format&fit=crop&q=60",
-    category: "Back-end",
-    repoUrl: "https://github.com/ageumenezesDev19/project-trybers-and-dragons",
-    techStack: [
-      { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
-      { name: "POO", color: "bg-purple-100 text-purple-800" },
-      { name: "SOLID", color: "bg-yellow-100 text-yellow-800" },
-    ],
-  },
+  // {
+  //   id: 3,
+  //   title: "Trybers and Dragons",
+  //   description:
+  //     "RPG-based project developed with TypeScript applying SOLID principles and Object-Oriented Programming.",
+  //   imageUrl:
+  //     "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format&fit=crop&q=60",
+  //   category: "Back-end",
+  //   repoUrl: "https://github.com/ageumenezesDev19/project-trybers-and-dragons",
+  //   techStack: [
+  //     { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
+  //     { name: "POO", color: "bg-purple-100 text-purple-800" },
+  //     { name: "SOLID", color: "bg-yellow-100 text-yellow-800" },
+  //   ],
+  // },
   {
     id: 4,
     title: "Store Manager",
