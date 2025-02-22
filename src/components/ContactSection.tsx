@@ -5,6 +5,7 @@ import { Textarea } from "./ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Github, Linkedin, Mail, FileText, Send } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/providers/language-provider";
 
 interface SocialLink {
   icon: React.ReactNode;
@@ -17,6 +18,19 @@ interface ContactSectionProps {
   resumeUrl?: string;
   onSubmit?: (data: { name: string; email: string; message: string }) => void;
 }
+
+const content = {
+  en: {
+    title: "Contact Me",
+    email: "Email: ageumenezes23@gmail.com",
+    message: "I'm always looking for new challenges and opportunities to grow professionally. If you're seeking a developer who's passionate about technology and committed to excellence, let's connect!",
+  },
+  pt: {
+    title: "Entre em Contato",
+    email: "Email: ageumenezes23@gmail.com",
+    message: "Estou sempre em busca de novos desafios e oportunidades para crescer profissionalmente. Se você está procurando um desenvolvedor que é apaixonado por tecnologia e comprometido com a excelência, vamos nos conectar!",
+  },
+};
 
 const ContactSection = ({
   socialLinks = [
@@ -39,6 +53,9 @@ const ContactSection = ({
   resumeUrl = "/resume.pdf",
   onSubmit = () => {},
 }: ContactSectionProps) => {
+  const { language } = useLanguage();
+  const t = content[language];
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -58,11 +75,9 @@ const ContactSection = ({
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold mb-4">Get In Touch</h2>
+          <h2 className="text-4xl font-bold mb-4">{t.title}</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            I'm always looking for new challenges and opportunities to grow
-            professionally. If you're seeking a developer who's passionate about
-            technology and committed to excellence, let's connect!
+            {t.message}
           </p>
         </motion.div>
 
