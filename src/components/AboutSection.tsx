@@ -26,7 +26,6 @@ const content = {
     bio: "Greetings! I'm a Front-end Web Developer who embarked on my coding journey at Trybe, a distinguished Computer Science school, dedicating 8 months to refining my skills. With the knowledge gained, I launched my career as a Software Engineer, crafting not only this portfolio but also various other projects. My learning journey extends to platforms such as Rocketseat, Cataline and Udemy.",
     currentStatus:
       "I am currently working as a freelancer and studying at Rocketseat, Cataline and Udemy.",
-    age: "21 years old",
     from: "From Ceará, Brazil",
   },
   pt: {
@@ -42,7 +41,6 @@ const content = {
     bio: "Olá! Sou um Desenvolvedor Web Front-end que iniciou sua jornada na programação na Trybe, uma escola de Ciência da Computação reconhecida, dedicando 8 meses ao aperfeiçoamento de minhas habilidades. Com o conhecimento adquirido, iniciei minha carreira como Engenheiro de Software, desenvolvendo não apenas este portfólio, mas também vários outros projetos. Minha jornada de aprendizado se estende a plataformas como Rocketseat, Cataline e Udemy.",
     currentStatus:
       "Atualmente estou trabalhando como freelancer e estudando na Rocketseat, Cataline e Udemy.",
-    age: "21 anos",
     from: "De Ceará, Brasil",
   },
 };
@@ -50,6 +48,19 @@ const content = {
 const AboutSection = () => {
   const { language } = useLanguage();
   const t = content[language];
+
+  // Função para calcular a idade dinamicamente
+  const calcAge = (birthDate: Date) => {
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  const ageValue = calcAge(new Date(2002, 10, 1)); // Novembro = 10 (0-indexed)
 
   const interests = [
     { name: "Web Development", icon: <Code2 className="h-4 w-4" /> },
@@ -88,14 +99,19 @@ const AboutSection = () => {
                   <span className="font-medium">{t.name}:</span> Ageu Menezes
                 </p>
                 <p>
-                  <span className="font-medium">{t.age}</span>
+                  <span className="font-medium">
+                    {language === "pt" ? "Idade:" : "Age:"}
+                  </span>{" "}
+                  {language === "pt"
+                    ? `${ageValue} anos`
+                    : `${ageValue} years old`}
                 </p>
                 <p>
                   <span className="font-medium">{t.from}</span>
                 </p>
                 <p>
                   <span className="font-medium">Email:</span>{" "}
-                  ageumenezes.dev19@gmail.com
+                  ageumenezes23@gmail.com
                 </p>
               </div>
             </CardContent>
