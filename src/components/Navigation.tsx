@@ -17,6 +17,19 @@ interface NavigationProps {
   onNavClick?: (href: string) => void;
 }
 
+const content = {
+  en: {
+    home: "Home",
+    about: "About",
+    contact: "Contact",
+  },
+  pt: {
+    home: "Início",
+    about: "Sobre",
+    contact: "Contato",
+  },
+};
+
 const Navigation = ({
   items = [
     { label: "Home", href: "#hero" },
@@ -34,6 +47,7 @@ const Navigation = ({
   const { language, toggleLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const t = content[language];
 
   useEffect(() => {
     const handleScroll = () => {
