@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ui/theme-toggle";
+import { LanguageToggle } from "./ui/language-toggle";
 import { useTheme } from "@/providers/theme-provider";
+import { useLanguage } from "@/providers/language-provider";
 import { Button } from "./ui/button";
 
 interface NavItem {
@@ -19,6 +21,7 @@ const Navigation = ({
   items = [
     { label: "Home", href: "#hero" },
     { label: "Projects", href: "#projects" },
+    { label: "About", href: "#about" },
     { label: "Skills", href: "#skills" },
     { label: "Contact", href: "#contact" },
   ],
@@ -28,6 +31,7 @@ const Navigation = ({
   },
 }: NavigationProps) => {
   const { theme, toggleTheme } = useTheme();
+  const { language, toggleLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -68,7 +72,13 @@ const Navigation = ({
                 {item.label}
               </motion.button>
             ))}
-            <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+            <div className="flex items-center gap-2">
+              <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+              <LanguageToggle
+                language={language}
+                toggleLanguage={toggleLanguage}
+              />
+            </div>
           </div>
 
           {/* Mobile Navigation Button */}
@@ -107,9 +117,12 @@ const Navigation = ({
                 </motion.button>
               ))}
 
-              {/* Adicionando o ThemeToggle para mobile */}
-              <div className="border-t border-muted pt-4">
+              <div className="border-t border-muted pt-4 flex items-center gap-4">
                 <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+                <LanguageToggle
+                  language={language}
+                  toggleLanguage={toggleLanguage}
+                />
               </div>
             </div>
           </motion.div>

@@ -4,6 +4,7 @@ import HeroSection from "./HeroSection";
 import ProjectsSection from "./ProjectsSection";
 import SkillsSection from "./SkillsSection";
 import ContactSection from "./ContactSection";
+import AboutSection from "./AboutSection";
 import { motion } from "framer-motion";
 
 const Home = () => {
@@ -27,6 +28,10 @@ const Home = () => {
 
         <section id="projects">
           <ProjectsSection />
+        </section>
+
+        <section id="about">
+          <AboutSection />
         </section>
 
         <section id="skills">
