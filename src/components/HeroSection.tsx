@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ArrowDown } from "lucide-react";
-import styled from "styled-components";
+import { useLanguage } from "@/providers/language-provider";
 
 interface HeroSectionProps {
   name?: string;
@@ -12,13 +12,29 @@ interface HeroSectionProps {
   onExploreClick?: () => void;
 }
 
+const content = {
+  en: {
+    greeting: "Hi, I'm",
+    title: "Full Stack Web Developer",
+    bio: "Full Stack Web Developer passionate about technology and innovation. Specialized in React, Node.js, TypeScript, and development of modern, scalable web applications.",
+    exploreButton: "Explore My Work",
+  },
+  pt: {
+    greeting: "Olá, eu sou",
+    title: "Desenvolvedor Web Full Stack",
+    bio: "Desenvolvedor Web Full Stack apaixonado por tecnologia e inovação. Especializado em React, Node.js, TypeScript e desenvolvimento de aplicações web modernas e escaláveis.",
+    exploreButton: "Explorar Meu Trabalho",
+  },
+};
+
 const HeroSection: React.FC<HeroSectionProps> = ({
   name = "Ageu Menezes",
-  title = "Full Stack Web Developer",
-  bio = "Full Stack Web Developer passionate about technology and innovation. Specialized in React, Node.js, TypeScript, and development of modern, scalable web applications.",
   avatarUrl = "https://github.com/ageumenezesDev19.png",
   onExploreClick = () => {},
 }) => {
+  const { language } = useLanguage();
+  const t = content[language];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -46,23 +62,23 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-4"
               variants={itemVariants}
             >
-              Hi, I'm {name}
+              {t.greeting} {name}
             </motion.h1>
             <motion.h2
               className="text-2xl sm:text-3xl md:text-4xl text-muted-foreground mb-6"
               variants={itemVariants}
             >
-              {title}
+              {t.title}
             </motion.h2>
             <motion.p
               className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto"
               variants={itemVariants}
             >
-              {bio}
+              {t.bio}
             </motion.p>
             <motion.div variants={itemVariants}>
               <Button size="lg" onClick={onExploreClick} className="group">
-                Explore My Work
+                {t.exploreButton}
                 <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
               </Button>
             </motion.div>

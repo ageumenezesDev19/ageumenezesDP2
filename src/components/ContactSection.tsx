@@ -18,6 +18,35 @@ interface ContactSectionProps {
   onSubmit?: (data: { name: string; email: string; message: string }) => void;
 }
 
+import { useLanguage } from "@/providers/language-provider";
+
+const content = {
+  en: {
+    title: "Get In Touch",
+    subtitle:
+      "I'm always looking for new challenges and opportunities to grow professionally. If you're seeking a developer who's passionate about technology and committed to excellence, let's connect!",
+    contactForm: "Contact Form",
+    namePlaceholder: "Your Name",
+    emailPlaceholder: "Your Email",
+    messagePlaceholder: "Your Message",
+    sendButton: "Send Message",
+    connectWithMe: "Connect With Me",
+    downloadResume: "Download Resume",
+  },
+  pt: {
+    title: "Entre em Contato",
+    subtitle:
+      "Estou sempre em busca de novos desafios e oportunidades para crescer profissionalmente. Se você procura um desenvolvedor apaixonado por tecnologia e comprometido com a excelência, vamos nos conectar!",
+    contactForm: "Formulário de Contato",
+    namePlaceholder: "Seu Nome",
+    emailPlaceholder: "Seu Email",
+    messagePlaceholder: "Sua Mensagem",
+    sendButton: "Enviar Mensagem",
+    connectWithMe: "Conecte-se Comigo",
+    downloadResume: "Baixar Currículo",
+  },
+};
+
 const ContactSection = ({
   socialLinks = [
     {
@@ -39,6 +68,9 @@ const ContactSection = ({
   resumeUrl = "/resume.pdf",
   onSubmit = () => {},
 }: ContactSectionProps) => {
+  const { language } = useLanguage();
+  const t = content[language];
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -58,11 +90,9 @@ const ContactSection = ({
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold mb-4">Get In Touch</h2>
+          <h2 className="text-4xl font-bold mb-4">{t.title}</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            I'm always looking for new challenges and opportunities to grow
-            professionally. If you're seeking a developer who's passionate about
-            technology and committed to excellence, let's connect!
+            {t.subtitle}
           </p>
         </motion.div>
 
@@ -74,13 +104,13 @@ const ContactSection = ({
           >
             <Card>
               <CardHeader>
-                <CardTitle>Contact Form</CardTitle>
+                <CardTitle>{t.contactForm}</CardTitle>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <Input
-                      placeholder="Your Name"
+                      placeholder={t.namePlaceholder}
                       name="name"
                       required
                       className="w-full"
@@ -89,7 +119,7 @@ const ContactSection = ({
                   <div>
                     <Input
                       type="email"
-                      placeholder="Your Email"
+                      placeholder={t.emailPlaceholder}
                       name="email"
                       required
                       className="w-full"
@@ -97,14 +127,14 @@ const ContactSection = ({
                   </div>
                   <div>
                     <Textarea
-                      placeholder="Your Message"
+                      placeholder={t.messagePlaceholder}
                       name="message"
                       required
                       className="w-full min-h-[150px]"
                     />
                   </div>
                   <Button type="submit" className="w-full">
-                    <Send className="mr-2 h-4 w-4" /> Send Message
+                    <Send className="mr-2 h-4 w-4" /> {t.sendButton}
                   </Button>
                 </form>
               </CardContent>
@@ -119,7 +149,7 @@ const ContactSection = ({
           >
             <Card>
               <CardHeader>
-                <CardTitle>Connect With Me</CardTitle>
+                <CardTitle>{t.connectWithMe}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col space-y-4">
@@ -146,7 +176,7 @@ const ContactSection = ({
                   className="w-full"
                   onClick={() => window.open(resumeUrl, "_blank")}
                 >
-                  <FileText className="mr-2 h-4 w-4" /> Download Resume
+                  <FileText className="mr-2 h-4 w-4" /> {t.downloadResume}
                 </Button>
               </CardContent>
             </Card>

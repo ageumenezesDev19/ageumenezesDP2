@@ -18,175 +18,176 @@ interface ProjectsSectionProps {
   projects?: Project[];
 }
 
-const defaultProjects: Project[] = [
-  {
-    id: 1,
-    title: "Design System",
-    demoUrl: "https://ageumenezesdev19.github.io/05-design-system/",
-    description:
-      "A comprehensive design system built with React and Storybook, featuring reusable components and consistent styling guidelines.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517292987719-0369a794ec0f?w=800&auto=format&fit=crop&q=60",
-    category: "Frontend",
-    repoUrl: "https://github.com/ageumenezesDev19/05-design-system",
-    techStack: [
-      { name: "React", color: "bg-blue-100 text-blue-800" },
-      { name: "Storybook", color: "bg-pink-100 text-pink-800" },
-      { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
-      { name: "Tailwind", color: "bg-teal-100 text-teal-800" },
+import { useLanguage } from "@/providers/language-provider";
+
+const content = {
+  en: {
+    title: "My Projects",
+    all: "all",
+    projects: [
+      {
+        id: 1,
+        title: "Design System",
+        demoUrl: "https://ageumenezesdev19.github.io/05-design-system/",
+        description:
+          "A comprehensive design system built with React and Storybook, featuring reusable components and consistent styling guidelines.",
+        imageUrl:
+          "https://images.unsplash.com/photo-1517292987719-0369a794ec0f?w=800&auto=format&fit=crop&q=60",
+        category: "Frontend",
+        repoUrl: "https://github.com/ageumenezesDev19/05-design-system",
+        techStack: [
+          { name: "React", color: "bg-blue-100 text-blue-800" },
+          { name: "Storybook", color: "bg-pink-100 text-pink-800" },
+          { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
+          { name: "Tailwind", color: "bg-teal-100 text-teal-800" },
+        ],
+      },
+      {
+        id: 2,
+        title: "FitFlow",
+        demoUrl: "https://fitflow-taupe.vercel.app",
+        description:
+          "A fitness tracking application that helps users monitor their workouts and track their progress over time.",
+        imageUrl:
+          "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&auto=format&fit=crop&q=60",
+        category: "Full Stack",
+        repoUrl: "https://github.com/ageumenezesDev19/fitflow",
+        techStack: [
+          { name: "React", color: "bg-blue-100 text-blue-800" },
+          { name: "Node.js", color: "bg-green-100 text-green-800" },
+          { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
+          { name: "Express", color: "bg-purple-100 text-purple-800" },
+        ],
+      },
+      {
+        id: 3,
+        title: "Ignite Feed",
+        demoUrl: "https://ignite-feed-livid.vercel.app",
+        description:
+          "A modern social media feed application built with React, featuring real-time updates and interactive posts.",
+        imageUrl:
+          "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&auto=format&fit=crop&q=60",
+        category: "Frontend",
+        repoUrl: "https://github.com/ageumenezesDev19/ignite-feed",
+        techStack: [
+          { name: "React", color: "bg-blue-100 text-blue-800" },
+          { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
+          { name: "Tailwind", color: "bg-teal-100 text-teal-800" },
+        ],
+      },
+      {
+        id: 4,
+        title: "To-Do App",
+        demoUrl: "https://endearing-hamster-35a11e.netlify.app/",
+        description:
+          "A feature-rich todo application with task management, categories, and progress tracking.",
+        imageUrl:
+          "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=60",
+        category: "Frontend",
+        repoUrl: "https://github.com/ageumenezesDev19/project-my-tasks-to-do",
+        techStack: [
+          { name: "React", color: "bg-blue-100 text-blue-800" },
+          { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
+          { name: "Redux", color: "bg-purple-100 text-purple-800" },
+        ],
+      },
+      {
+        id: 5,
+        title: "Solar System",
+        demoUrl:
+          "https://project-solar-system-7s8g9uo88-ageumenezesdev19.vercel.app",
+        description:
+          "An interactive visualization of the solar system built with React and Three.js, featuring 3D models and animations.",
+        imageUrl:
+          "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=800&auto=format&fit=crop&q=60",
+        category: "Frontend",
+        repoUrl: "https://github.com/ageumenezesDev19/project-solar-system",
+        techStack: [
+          { name: "React", color: "bg-blue-100 text-blue-800" },
+          { name: "Three.js", color: "bg-yellow-100 text-yellow-800" },
+          { name: "JavaScript", color: "bg-yellow-100 text-yellow-800" },
+        ],
+      },
+      // {
+      //   id: 1,
+      //   title: "Trybe Futebol Clube",
+      //   description:
+      //     "RESTful API for a football matches and standings information website. Built with TypeScript, Node.js, Express.js, and MySQL.",
+      //   imageUrl:
+      //     "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=60",
+      //   category: "Back-end",
+      //   repoUrl: "https://github.com/ageumenezesDev19/project-trybe-futebol-clube",
+      //   techStack: [
+      //     { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
+      //     { name: "Node.js", color: "bg-green-100 text-green-800" },
+      //     { name: "MySQL", color: "bg-orange-100 text-orange-800" },
+      //     { name: "Docker", color: "bg-blue-100 text-blue-800" },
+      //   ],
+      // },
+      {
+        id: 2,
+        title: "Delivery App",
+        description:
+          "Full-stack beverage delivery application. Complete system with authentication, shopping cart, and order management.",
+        imageUrl:
+          "https://images.unsplash.com/photo-1526367790999-0150786686a2?w=800&auto=format&fit=crop&q=60",
+        category: "Full Stack",
+        repoUrl: "https://github.com/ageumenezesDev19/pizzashop-web",
+        techStack: [
+          { name: "React", color: "bg-blue-100 text-blue-800" },
+          { name: "Node.js", color: "bg-green-100 text-green-800" },
+          { name: "MySQL", color: "bg-orange-100 text-orange-800" },
+          { name: "Express", color: "bg-purple-100 text-purple-800" },
+        ],
+      },
     ],
   },
-  {
-    id: 2,
-    title: "FitFlow",
-    demoUrl: "https://fitflow-taupe.vercel.app",
-    description:
-      "A fitness tracking application that helps users monitor their workouts and track their progress over time.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&auto=format&fit=crop&q=60",
-    category: "Full Stack",
-    repoUrl: "https://github.com/ageumenezesDev19/fitflow",
-    techStack: [
-      { name: "React", color: "bg-blue-100 text-blue-800" },
-      { name: "Node.js", color: "bg-green-100 text-green-800" },
-      { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
-      { name: "Express", color: "bg-purple-100 text-purple-800" },
+  pt: {
+    title: "Meus Projetos",
+    all: "todos",
+    projects: [
+      {
+        id: 4,
+        title: "Store Manager",
+        description:
+          "RESTful API for sales management system with MSC architecture and unit testing.",
+        imageUrl:
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=60",
+        category: "Back-end",
+        repoUrl: "https://github.com/ageumenezesDev19/store-manager-project",
+        techStack: [
+          { name: "Node.js", color: "bg-green-100 text-green-800" },
+          { name: "Express", color: "bg-purple-100 text-purple-800" },
+          { name: "MySQL", color: "bg-orange-100 text-orange-800" },
+          { name: "Jest", color: "bg-red-100 text-red-800" },
+        ],
+      },
+      {
+        id: 5,
+        title: "Blogs API",
+        description:
+          "API for blog platform with JWT authentication, CRUD operations for posts and categories using Sequelize ORM.",
+        imageUrl:
+          "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&auto=format&fit=crop&q=60",
+        category: "Back-end",
+        repoUrl: "https://github.com/ageumenezesDev19/blogs-api-project",
+        techStack: [
+          { name: "Node.js", color: "bg-green-100 text-green-800" },
+          { name: "Sequelize", color: "bg-blue-100 text-blue-800" },
+          { name: "JWT", color: "bg-yellow-100 text-yellow-800" },
+          { name: "MySQL", color: "bg-orange-100 text-orange-800" },
+        ],
+      },
     ],
   },
-  {
-    id: 3,
-    title: "Ignite Feed",
-    demoUrl: "https://ignite-feed-livid.vercel.app",
-    description:
-      "A modern social media feed application built with React, featuring real-time updates and interactive posts.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&auto=format&fit=crop&q=60",
-    category: "Frontend",
-    repoUrl: "https://github.com/ageumenezesDev19/ignite-feed",
-    techStack: [
-      { name: "React", color: "bg-blue-100 text-blue-800" },
-      { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
-      { name: "Tailwind", color: "bg-teal-100 text-teal-800" },
-    ],
-  },
-  {
-    id: 4,
-    title: "To-Do App",
-    demoUrl: "https://endearing-hamster-35a11e.netlify.app/",
-    description:
-      "A feature-rich todo application with task management, categories, and progress tracking.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=60",
-    category: "Frontend",
-    repoUrl: "https://github.com/ageumenezesDev19/project-my-tasks-to-do",
-    techStack: [
-      { name: "React", color: "bg-blue-100 text-blue-800" },
-      { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
-      { name: "Redux", color: "bg-purple-100 text-purple-800" },
-    ],
-  },
-  {
-    id: 5,
-    title: "Solar System",
-    demoUrl:
-      "https://project-solar-system-7s8g9uo88-ageumenezesdev19.vercel.app",
-    description:
-      "An interactive visualization of the solar system built with React and Three.js, featuring 3D models and animations.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=800&auto=format&fit=crop&q=60",
-    category: "Frontend",
-    repoUrl: "https://github.com/ageumenezesDev19/project-solar-system",
-    techStack: [
-      { name: "React", color: "bg-blue-100 text-blue-800" },
-      { name: "Three.js", color: "bg-yellow-100 text-yellow-800" },
-      { name: "JavaScript", color: "bg-yellow-100 text-yellow-800" },
-    ],
-  },
-  // {
-  //   id: 1,
-  //   title: "Trybe Futebol Clube",
-  //   description:
-  //     "RESTful API for a football matches and standings information website. Built with TypeScript, Node.js, Express.js, and MySQL.",
-  //   imageUrl:
-  //     "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=60",
-  //   category: "Back-end",
-  //   repoUrl: "https://github.com/ageumenezesDev19/project-trybe-futebol-clube",
-  //   techStack: [
-  //     { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
-  //     { name: "Node.js", color: "bg-green-100 text-green-800" },
-  //     { name: "MySQL", color: "bg-orange-100 text-orange-800" },
-  //     { name: "Docker", color: "bg-blue-100 text-blue-800" },
-  //   ],
-  // },
-  {
-    id: 2,
-    title: "Delivery App",
-    description:
-      "Full-stack beverage delivery application. Complete system with authentication, shopping cart, and order management.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1526367790999-0150786686a2?w=800&auto=format&fit=crop&q=60",
-    category: "Full Stack",
-    repoUrl: "https://github.com/ageumenezesDev19/pizzashop-web",
-    techStack: [
-      { name: "React", color: "bg-blue-100 text-blue-800" },
-      { name: "Node.js", color: "bg-green-100 text-green-800" },
-      { name: "MySQL", color: "bg-orange-100 text-orange-800" },
-      { name: "Express", color: "bg-purple-100 text-purple-800" },
-    ],
-  },
-  // {
-  //   id: 3,
-  //   title: "Trybers and Dragons",
-  //   description:
-  //     "RPG-based project developed with TypeScript applying SOLID principles and Object-Oriented Programming.",
-  //   imageUrl:
-  //     "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format&fit=crop&q=60",
-  //   category: "Back-end",
-  //   repoUrl: "https://github.com/ageumenezesDev19/project-trybers-and-dragons",
-  //   techStack: [
-  //     { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
-  //     { name: "POO", color: "bg-purple-100 text-purple-800" },
-  //     { name: "SOLID", color: "bg-yellow-100 text-yellow-800" },
-  //   ],
-  // },
-  {
-    id: 4,
-    title: "Store Manager",
-    description:
-      "RESTful API for sales management system with MSC architecture and unit testing.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=60",
-    category: "Back-end",
-    repoUrl: "https://github.com/ageumenezesDev19/store-manager-project",
-    techStack: [
-      { name: "Node.js", color: "bg-green-100 text-green-800" },
-      { name: "Express", color: "bg-purple-100 text-purple-800" },
-      { name: "MySQL", color: "bg-orange-100 text-orange-800" },
-      { name: "Jest", color: "bg-red-100 text-red-800" },
-    ],
-  },
-  {
-    id: 5,
-    title: "Blogs API",
-    description:
-      "API for blog platform with JWT authentication, CRUD operations for posts and categories using Sequelize ORM.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&auto=format&fit=crop&q=60",
-    category: "Back-end",
-    repoUrl: "https://github.com/ageumenezesDev19/blogs-api-project",
-    techStack: [
-      { name: "Node.js", color: "bg-green-100 text-green-800" },
-      { name: "Sequelize", color: "bg-blue-100 text-blue-800" },
-      { name: "JWT", color: "bg-yellow-100 text-yellow-800" },
-      { name: "MySQL", color: "bg-orange-100 text-orange-800" },
-    ],
-  },
-];
+};
 
 const ProjectsSection = ({
-  projects = defaultProjects,
+  projects = content.en.projects,
 }: ProjectsSectionProps) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const { language } = useLanguage();
+  const t = content[language];
+  const [selectedCategory, setSelectedCategory] = useState<string>(t.all);
   const [isAnimating, setIsAnimating] = useState(false);
 
   // Pre-filter projects by category for better performance
@@ -220,10 +221,10 @@ const ProjectsSection = ({
         className="max-w-7xl mx-auto"
       >
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-          My Projects
+          {t.title}
         </h2>
 
-        <Tabs defaultValue="all" className="w-full mb-12">
+        <Tabs defaultValue={t.all} className="w-full mb-12">
           <TabsList className="flex justify-center flex-wrap gap-2">
             {categories.map((category) => (
               <TabsTrigger
