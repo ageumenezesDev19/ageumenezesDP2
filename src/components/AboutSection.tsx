@@ -14,6 +14,19 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/providers/language-provider";
 
+// Função para calcular a idade dinamicamente
+const calcAge = (birthDate: Date) => {
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+};
+
+const ageValue = calcAge(new Date(2002, 10, 1)); // Novembro = 10 (0-indexed)
+
 const content = {
   en: {
     title: "About Me",
@@ -27,6 +40,7 @@ const content = {
     location: "Location",
     email: "Email",
     bio: "Greetings! I'm a Front-end Web Developer who embarked on my coding journey at Trybe, a distinguished Computer Science school, dedicating 8 months to refining my skills. With the knowledge gained, I launched my career as a Software Engineer, crafting not only this portfolio but also various other projects. My learning journey extends to platforms such as Rocketseat, Cataline and Udemy.",
+    age: `Age: ${ageValue}`,
     currentStatus:
       "I am currently working as a freelancer and studying at Rocketseat, Cataline and Udemy.",
     from: "From Ceará, Brazil",
@@ -95,7 +109,7 @@ const content = {
     personalInfo: "Informações Pessoais",
     name: "Nome",
     location: "Localização",
-    email: "Email",
+    age: `Idade: ${ageValue}`,
     bio: "Olá! Sou um Desenvolvedor Web Front-end que iniciou sua jornada na programação na Trybe, uma escola de Ciência da Computação reconhecida, dedicando 8 meses ao aperfeiçoamento de minhas habilidades. Com o conhecimento adquirido, iniciei minha carreira como Engenheiro de Software, desenvolvendo não apenas este portfólio, mas também vários outros projetos. Minha jornada de aprendizado se estende a plataformas como Rocketseat, Cataline e Udemy.",
     currentStatus:
       "Atualmente estou trabalhando como freelancer e estudando na Rocketseat, Cataline e Udemy.",

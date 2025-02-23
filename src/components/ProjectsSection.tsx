@@ -187,10 +187,11 @@ const ProjectsSection = ({
 }: ProjectsSectionProps) => {
   const { language } = useLanguage();
   const t = content[language];
-  const [selectedCategory, setSelectedCategory] = useState<string>(t.all);
+  // Use "all" como chave padrão independentemente do idioma
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // Pre-filter projects by category for better performance
+  // Pre-filtra os projetos por categoria para melhor performance
   const projectsByCategory = useMemo(() => {
     const categories = {} as Record<string, typeof projects>;
     categories["all"] = projects;
@@ -205,6 +206,7 @@ const ProjectsSection = ({
     return categories;
   }, [projects]);
 
+  // Inclui "all" (sempre em inglês na lógica) e as demais categorias dos projetos
   const categories = [
     "all",
     ...new Set(projects.map((project) => project.category)),
@@ -224,7 +226,7 @@ const ProjectsSection = ({
           {t.title}
         </h2>
 
-        <Tabs defaultValue={t.all} className="w-full mb-12">
+        <Tabs defaultValue="all" className="w-full mb-12">
           <TabsList className="flex justify-center flex-wrap gap-2">
             {categories.map((category) => (
               <TabsTrigger
@@ -239,7 +241,7 @@ const ProjectsSection = ({
                 className="capitalize transition-all duration-200 hover:scale-105"
                 disabled={isAnimating}
               >
-                {category}
+                {category === "all" ? t.all : category}
               </TabsTrigger>
             ))}
           </TabsList>
