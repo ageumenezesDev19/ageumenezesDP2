@@ -63,15 +63,18 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-4"
               variants={itemVariants}
             >
-              {t.greeting} {name}
+              {language === "pt" ? (
+                <>
+                  {t.greeting}
+                  <br />
+                  {name}
+                </>
+              ) : (
+                <>
+                  {t.greeting} {name}
+                </>
+              )}
             </motion.h1>
-            {language === 'pt' && (
-              <motion.h1
-                className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-4"
-              >
-                {name}
-              </motion.h1>
-            )}
             <motion.h2
               className="text-2xl sm:text-3xl md:text-4xl text-muted-foreground mb-6"
               variants={itemVariants}
