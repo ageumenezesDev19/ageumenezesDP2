@@ -5,6 +5,7 @@ import { Textarea } from "./ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Github, Linkedin, Mail, FileText, Send } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/providers/language-provider";
 
 interface SocialLink {
   icon: React.ReactNode;

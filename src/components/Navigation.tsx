@@ -54,6 +54,7 @@ const Navigation = ({
 
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const t = content[language];
 
   useEffect(() => {
     const handleScroll = () => {
