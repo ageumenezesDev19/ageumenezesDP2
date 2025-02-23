@@ -19,25 +19,29 @@ interface NavigationProps {
 
 const content = {
   en: {
-    home: "Home",
-    about: "About",
-    contact: "Contact",
+    portfolio: "Portfolio",
+    menuItems: [
+      { label: "Home", href: "#hero" },
+      { label: "Projects", href: "#projects" },
+      { label: "About", href: "#about" },
+      { label: "Skills", href: "#skills" },
+      { label: "Contact", href: "#contact" },
+    ],
   },
   pt: {
-    home: "Início",
-    about: "Sobre",
-    contact: "Contato",
+    portfolio: "Portfólio",
+    menuItems: [
+      { label: "Início", href: "#hero" },
+      { label: "Projetos", href: "#projects" },
+      { label: "Sobre", href: "#about" },
+      { label: "Habilidades", href: "#skills" },
+      { label: "Contato", href: "#contact" },
+    ],
   },
 };
 
 const Navigation = ({
-  items = [
-    { label: "Home", href: "#hero" },
-    { label: "Projects", href: "#projects" },
-    { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
-    { label: "Contact", href: "#contact" },
-  ],
+  items,
   onNavClick = (href) => {
     const element = document.querySelector(href);
     element?.scrollIntoView({ behavior: "smooth" });
@@ -45,6 +49,9 @@ const Navigation = ({
 }: NavigationProps) => {
   const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage } = useLanguage();
+  const t = content[language];
+  const currentItems = items || t.menuItems;
+
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const t = content[language];
@@ -71,12 +78,12 @@ const Navigation = ({
             className="text-2xl font-bold text-primary cursor-pointer"
             onClick={() => onNavClick("#hero")}
           >
-            Portfolio
+            {t.portfolio}
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {items.map((item, index) => (
+            {currentItems.map((item, index) => (
               <motion.button
                 key={index}
                 whileHover={{ scale: 1.05 }}
@@ -117,7 +124,7 @@ const Navigation = ({
             className="md:hidden absolute top-20 left-0 right-0 bg-background shadow-lg py-4"
           >
             <div className="flex flex-col space-y-4 px-4">
-              {items.map((item, index) => (
+              {currentItems.map((item, index) => (
                 <motion.button
                   key={index}
                   whileHover={{ scale: 1.05 }}

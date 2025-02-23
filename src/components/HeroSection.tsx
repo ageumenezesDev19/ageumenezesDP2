@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ArrowDown } from "lucide-react";
-import styled from "styled-components";
+
 import { useLanguage } from "@/providers/language-provider";
 
 interface HeroSectionProps {
@@ -15,24 +15,21 @@ interface HeroSectionProps {
 
 const content = {
   en: {
-    greeting: "Hi, I'm {name}",
+    greeting: "Hi, I'm",
     title: "Full Stack Web Developer",
     bio: "Full Stack Web Developer passionate about technology and innovation. Specialized in React, Node.js, TypeScript, and development of modern, scalable web applications.",
-    explore: "Explore My Work",
+    exploreButton: "Explore My Work",
   },
   pt: {
     greeting: "Olá, eu sou",
-    name: "{name}",
     title: "Desenvolvedor Web Full Stack",
-    bio: "Desenvolvedor Full Stack Web apaixonado por tecnologia e inovação. Especializado em React, Node.js, TypeScript e no desenvolvimento de aplicações web modernas e escaláveis.",
-    explore: "Explore Meu Trabalho",
+    bio: "Desenvolvedor Web Full Stack apaixonado por tecnologia e inovação. Especializado em React, Node.js, TypeScript e desenvolvimento de aplicações web modernas e escaláveis.",
+    exploreButton: "Explorar Meu Trabalho",
   },
 };
 
 const HeroSection: React.FC<HeroSectionProps> = ({
   name = "Ageu Menezes",
-  title = "Full Stack Web Developer",
-  bio = "Full Stack Web Developer passionate about technology and innovation. Specialized in React, Node.js, TypeScript, and development of modern, scalable web applications.",
   avatarUrl = "https://github.com/ageumenezesDev19.png",
   onExploreClick = () => {},
 }) => {
@@ -66,7 +63,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-4"
               variants={itemVariants}
             >
-              {language === 'pt' ? t.greeting : t.greeting.replace("{name}", name)}
+              {t.greeting} {name}
             </motion.h1>
             {language === 'pt' && (
               <motion.h1
@@ -89,7 +86,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             </motion.p>
             <motion.div variants={itemVariants}>
               <Button size="lg" onClick={onExploreClick} className="group">
-                {t.explore}
+                {t.exploreButton}
                 <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
               </Button>
             </motion.div>
