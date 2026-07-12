@@ -1,11 +1,11 @@
-import React from "react";
 import Navigation from "./Navigation";
 import HeroSection from "./HeroSection";
 import ProjectsSection from "./ProjectsSection";
+import ExperienceSection from "./ExperienceSection";
+import AboutSection from "./AboutSection";
 import SkillsSection from "./SkillsSection";
 import ContactSection from "./ContactSection";
-import AboutSection from "./AboutSection";
-import { motion } from "framer-motion";
+import Footer from "./Footer";
 
 const Home = () => {
   const handleScroll = (sectionId: string) => {
@@ -17,17 +17,17 @@ const Home = () => {
     <div className="bg-background min-h-screen">
       <Navigation onNavClick={handleScroll} />
 
-      <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
+      <main>
         <section id="hero">
           <HeroSection onExploreClick={() => handleScroll("#projects")} />
         </section>
 
         <section id="projects">
           <ProjectsSection />
+        </section>
+
+        <section id="experience">
+          <ExperienceSection />
         </section>
 
         <section id="about">
@@ -39,14 +39,11 @@ const Home = () => {
         </section>
 
         <section id="contact">
-          <ContactSection
-            onSubmit={(data) => {
-              // Handle form submission
-              console.log("Form submitted:", data);
-            }}
-          />
+          <ContactSection />
         </section>
-      </motion.main>
+      </main>
+
+      <Footer />
     </div>
   );
 };

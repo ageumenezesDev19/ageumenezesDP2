@@ -19,20 +19,18 @@ interface NavigationProps {
 
 const content = {
   en: {
-    portfolio: "Portfolio",
     menuItems: [
-      { label: "Home", href: "#hero" },
       { label: "Projects", href: "#projects" },
+      { label: "Experience", href: "#experience" },
       { label: "About", href: "#about" },
       { label: "Skills", href: "#skills" },
       { label: "Contact", href: "#contact" },
     ],
   },
   pt: {
-    portfolio: "Portfólio",
     menuItems: [
-      { label: "Início", href: "#hero" },
       { label: "Projetos", href: "#projects" },
+      { label: "Experiência", href: "#experience" },
       { label: "Sobre", href: "#about" },
       { label: "Habilidades", href: "#skills" },
       { label: "Contato", href: "#contact" },
@@ -68,17 +66,18 @@ const Navigation = ({
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 bg-background ${isScrolled ? "shadow-md" : ""}`}
+      className={`fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-md ${isScrolled ? "border-b border-border" : ""}`}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold text-primary cursor-pointer"
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <button
+            className="font-mono text-lg font-bold tracking-tight cursor-pointer"
             onClick={() => onNavClick("#hero")}
+            aria-label="Back to top"
           >
-            {t.portfolio}
-          </motion.div>
+            A<span className="text-primary">M</span>
+            <span className="text-muted-foreground">_</span>
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -86,7 +85,7 @@ const Navigation = ({
               <motion.button
                 key={index}
                 whileHover={{ scale: 1.05 }}
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 onClick={() => onNavClick(item.href)}
               >
                 {item.label}
@@ -108,6 +107,8 @@ const Navigation = ({
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
               className="text-muted-foreground"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </Button>
@@ -120,7 +121,7 @@ const Navigation = ({
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden absolute top-20 left-0 right-0 bg-background shadow-lg py-4"
+            className="md:hidden absolute top-16 left-0 right-0 bg-background border-b border-border shadow-lg py-4"
           >
             <div className="flex flex-col space-y-4 px-4">
               {currentItems.map((item, index) => (

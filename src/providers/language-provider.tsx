@@ -33,6 +33,7 @@ export function LanguageProvider({
 
   useEffect(() => {
     localStorage.setItem(storageKey, language);
+    document.documentElement.lang = language === "pt" ? "pt-BR" : "en";
   }, [language, storageKey]);
 
   const toggleLanguage = () => {

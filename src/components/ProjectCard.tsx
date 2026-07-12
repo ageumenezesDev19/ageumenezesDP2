@@ -1,101 +1,120 @@
-import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
-import { motion } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
+import { useLanguage } from "@/providers/language-provider";
+import { Project } from "@/data/types";
 
-interface TechStack {
-  name: string;
-  color?: string;
-}
+const content = {
+  en: { liveDemo: "live demo", openSource: "open source", source: "Source", demo: "Live" },
+  pt: { liveDemo: "demo online", openSource: "código aberto", source: "Código", demo: "Ver online" },
+};
 
 interface ProjectCardProps {
-  title?: string;
-  description?: string;
-  imageUrl?: string;
-  techStack?: TechStack[];
-  repoUrl?: string;
-  demoUrl?: string;
+  project: Project;
+  image?: string;
 }
 
-const ProjectCard = ({
-  title = "Project Title",
-  description = "A brief description of the project and its key features. This showcases the main functionality and purpose of the project.",
-  imageUrl = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=60",
-  techStack = [
-    { name: "React", color: "bg-blue-100 text-blue-800" },
-    { name: "TypeScript", color: "bg-blue-100 text-blue-800" },
-    { name: "Tailwind", color: "bg-teal-100 text-teal-800" },
-  ],
-  repoUrl,
-  demoUrl,
-}: ProjectCardProps) => {
+/** Typographic fallback for projects without a screenshot yet: a stack manifest panel. */
+const StackManifest = ({ project }: { project: Project }) => (
+  <div
+    className="h-44 bg-muted/40 border-b border-border p-5 font-mono text-xs leading-relaxed overflow-hidden"
+    aria-hidden="true"
+  >
+    <p className="text-primary mb-2">$ cat stack.txt</p>
+    {project.stack.map((tech) => (
+      <p key={tech} className="text-muted-foreground">
+        <span className="text-primary/60">-</span> {tech}
+      </p>
+    ))}
+  </div>
+);
+
+const ProjectCard = ({ project, image }: ProjectCardProps) => {
+  const { language } = useLanguage();
+  const t = content[language];
+
   return (
-    <motion.div
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.2 }}
-      className="w-full"
-    >
-      <Card className="overflow-hidden h-full bg-card hover:bg-card/80 transition-colors">
-        <div className="relative h-48 overflow-hidden">
+    <article className="group h-full flex flex-col rounded-xl border border-border bg-card overflow-hidden transition-colors hover:border-primary/50">
+      {image ? (
+        <div className="h-44 overflow-hidden border-b border-border">
           <img
-            src={imageUrl}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            src={image}
+            alt={`${project.title} — screenshot`}
+            width={1280}
+            height={800}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
           />
         </div>
+      ) : (
+        <StackManifest project={project} />
+      )}
 
-        <CardHeader>
-          <CardTitle className="text-xl font-semibold">{title}</CardTitle>
-          <CardDescription className="line-clamp-2">
-            {description}
-          </CardDescription>
-        </CardHeader>
-
-        <CardContent>
-          <div className="flex flex-wrap gap-2">
-            {techStack.map((tech, index) => (
-              <Badge key={index} variant="secondary" className={tech.color}>
-                {tech.name}
-              </Badge>
-            ))}
-          </div>
-        </CardContent>
-
-        <CardFooter className="flex justify-between items-center gap-2">
-          {repoUrl && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => window.open(repoUrl, "_blank")}
-              className="flex-1"
-            >
-              <Github className="h-4 w-4 mr-2" />
-              Source
-            </Button>
+      <div className="p-5 flex flex-col flex-1">
+        <p className="font-mono text-[11px] text-muted-foreground mb-2 flex items-center gap-1.5">
+          {project.links.live ? (
+            <>
+              <span className="inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" aria-hidden="true" />
+              {t.liveDemo}
+            </>
+          ) : (
+            <>
+              <span className="inline-flex rounded-full h-1.5 w-1.5 bg-muted-foreground/50" aria-hidden="true" />
+              {t.openSource}
+            </>
           )}
-          {demoUrl && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => window.open(demoUrl, "_blank")}
-              className="flex-1"
+        </p>
+
+        <h3 className="text-lg font-bold tracking-tight mb-2">{project.title}</h3>
+        <p className="text-sm text-muted-foreground mb-4 flex-1">
+          {project.description[language]}
+        </p>
+
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {project.stack.map((tech) => (
+            <span key={tech} className="chip !px-2 !py-0.5 !text-[11px]">
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-4 pt-3 border-t border-border">
+          {project.links.repo && (
+            <a
+              href={project.links.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
             >
-              <ExternalLink className="h-4 w-4 mr-2" />
-              Demo
-            </Button>
+              <Github className="h-3.5 w-3.5" aria-hidden="true" />
+              {t.source}
+            </a>
           )}
-        </CardFooter>
-      </Card>
-    </motion.div>
+          {project.links.extraRepos?.map((r) => (
+            <a
+              key={r.url}
+              href={r.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Github className="h-3.5 w-3.5" aria-hidden="true" />
+              {r.label}
+            </a>
+          ))}
+          {project.links.live && (
+            <a
+              href={project.links.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono text-xs text-primary hover:underline underline-offset-4"
+            >
+              <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+              {t.demo}
+            </a>
+          )}
+        </div>
+      </div>
+    </article>
   );
 };
 
