@@ -106,20 +106,17 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
 
         {/* Static (no entrance animation): this image is the LCP element */}
         <div className="flex justify-center lg:justify-end">
-          <figure className="relative w-64 sm:w-72 lg:w-80">
-            <div
-              className="absolute -inset-3 rounded-xl border border-primary/40 translate-x-3 translate-y-3"
-              aria-hidden="true"
-            />
+          <figure className="w-64 sm:w-72 lg:w-80 rounded-xl border border-border bg-card overflow-hidden shadow-2xl shadow-black/30">
             <img
               src={heroPhoto}
               alt={t.photoCaption}
               width={800}
               height={1067}
               fetchPriority="high"
-              className="relative rounded-xl border border-border object-cover aspect-[4/5] w-full"
+              className="object-cover aspect-[4/5] w-full"
             />
-            <figcaption className="mt-3 font-mono text-xs text-muted-foreground text-right">
+            <figcaption className="flex items-center gap-2 border-t-2 border-primary px-4 py-3 font-mono text-xs text-muted-foreground">
+              <span className="inline-flex rounded-full h-1.5 w-1.5 bg-primary shrink-0" aria-hidden="true" />
               {t.photoCaption}
             </figcaption>
           </figure>
