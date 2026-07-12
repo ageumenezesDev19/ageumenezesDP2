@@ -29,3 +29,9 @@ dist-ssr
 **/tempobook/storyboards/
 
 core
+
+.superpowers
+
+# Local Claude Code instructions (contains security notes, not for version control)
+CLAUDE.md
+.claude/
