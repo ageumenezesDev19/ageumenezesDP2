@@ -73,7 +73,6 @@ const Navigation = ({
           <button
             className="font-mono text-lg font-bold tracking-tight cursor-pointer"
             onClick={() => onNavClick("#hero")}
-            aria-label="Back to top"
           >
             A<span className="text-primary">M</span>
             <span className="text-muted-foreground">_</span>

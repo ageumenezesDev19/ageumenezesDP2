@@ -1,11 +1,14 @@
+import { lazy, Suspense } from "react";
 import Navigation from "./Navigation";
 import HeroSection from "./HeroSection";
-import ProjectsSection from "./ProjectsSection";
-import ExperienceSection from "./ExperienceSection";
-import AboutSection from "./AboutSection";
-import SkillsSection from "./SkillsSection";
-import ContactSection from "./ContactSection";
-import Footer from "./Footer";
+
+// Below-the-fold sections are split out of the initial bundle
+const ProjectsSection = lazy(() => import("./ProjectsSection"));
+const ExperienceSection = lazy(() => import("./ExperienceSection"));
+const AboutSection = lazy(() => import("./AboutSection"));
+const SkillsSection = lazy(() => import("./SkillsSection"));
+const ContactSection = lazy(() => import("./ContactSection"));
+const Footer = lazy(() => import("./Footer"));
 
 const Home = () => {
   const handleScroll = (sectionId: string) => {
@@ -22,28 +25,32 @@ const Home = () => {
           <HeroSection onExploreClick={() => handleScroll("#projects")} />
         </section>
 
-        <section id="projects">
-          <ProjectsSection />
-        </section>
+        <Suspense fallback={null}>
+          <section id="projects">
+            <ProjectsSection />
+          </section>
 
-        <section id="experience">
-          <ExperienceSection />
-        </section>
+          <section id="experience">
+            <ExperienceSection />
+          </section>
 
-        <section id="about">
-          <AboutSection />
-        </section>
+          <section id="about">
+            <AboutSection />
+          </section>
 
-        <section id="skills">
-          <SkillsSection />
-        </section>
+          <section id="skills">
+            <SkillsSection />
+          </section>
 
-        <section id="contact">
-          <ContactSection />
-        </section>
+          <section id="contact">
+            <ContactSection />
+          </section>
+        </Suspense>
       </main>
 
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </div>
   );
 };

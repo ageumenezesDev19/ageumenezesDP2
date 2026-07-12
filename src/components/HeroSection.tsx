@@ -3,7 +3,8 @@ import { ArrowDown, FileText, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import { useLanguage } from "@/providers/language-provider";
 import { profile } from "@/data/profile";
-import heroPhoto from "@/assets/photos/ageu-hero.webp";
+
+const heroPhoto = "/photos/ageu-hero.webp";
 
 const content = {
   en: {
@@ -103,7 +104,8 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
           </motion.p>
         </div>
 
-        <motion.div variants={item} className="flex justify-center lg:justify-end">
+        {/* Static (no entrance animation): this image is the LCP element */}
+        <div className="flex justify-center lg:justify-end">
           <figure className="relative w-64 sm:w-72 lg:w-80">
             <div
               className="absolute -inset-3 rounded-xl border border-primary/40 translate-x-3 translate-y-3"
@@ -121,7 +123,7 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
               {t.photoCaption}
             </figcaption>
           </figure>
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   );

@@ -76,19 +76,19 @@ const AboutSection = () => {
           <motion.div {...reveal}>
             <p className="text-lg leading-relaxed mb-8">{profile.bio[language]}</p>
 
-            <dl className="space-y-4">
+            <ul className="space-y-4">
               {facts.map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex items-start gap-3">
+                <li key={label} className="flex items-start gap-3">
                   <Icon className="h-4 w-4 mt-1 text-primary shrink-0" aria-hidden="true" />
                   <div>
-                    <dt className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                    <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
                       {label}
-                    </dt>
-                    <dd className="text-sm">{value}</dd>
+                    </p>
+                    <p className="text-sm">{value}</p>
                   </div>
-                </div>
+                </li>
               ))}
-            </dl>
+            </ul>
           </motion.div>
         </div>
 
