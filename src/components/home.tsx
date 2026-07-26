@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import Navigation from "./Navigation";
 import HeroSection from "./HeroSection";
+import { scrollToSection } from "@/lib/scroll";
 
 // Below-the-fold sections are split out of the initial bundle
 const ProjectsSection = lazy(() => import("./ProjectsSection"));
@@ -11,10 +12,7 @@ const ContactSection = lazy(() => import("./ContactSection"));
 const Footer = lazy(() => import("./Footer"));
 
 const Home = () => {
-  const handleScroll = (sectionId: string) => {
-    const element = document.querySelector(sectionId);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
+  const handleScroll = (sectionId: string) => scrollToSection(sectionId);
 
   return (
     <div className="bg-background min-h-screen">

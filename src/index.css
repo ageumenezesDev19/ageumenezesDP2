@@ -72,14 +72,8 @@
   * {
     @apply border-border;
   }
-  html {
-    scroll-behavior: smooth;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
+  /* Scrolling is animated in JS (src/lib/scroll.ts) so the easing and
+     duration can be controlled; CSS smooth scrolling would fight it. */
   body {
     @apply bg-background text-foreground antialiased;
   }

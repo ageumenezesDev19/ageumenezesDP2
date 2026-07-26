@@ -24,8 +24,8 @@ export const experience: ExperienceItem[] = [
     },
     organization: "Self-employed",
     period: {
-      en: "2023 — Present",
-      pt: "2023 — Presente",
+      en: "2022 — Present",
+      pt: "2022 — Presente",
     },
     description: {
       en: "Building web applications for clients and personal products with React, Next.js and TypeScript — from landing pages to full applications with authentication, dashboards and deploys on Vercel.",

@@ -3,6 +3,7 @@ import { ArrowDown, FileText, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import { useLanguage } from "@/providers/language-provider";
 import { profile } from "@/data/profile";
+import { handleAnchorClick } from "@/lib/scroll";
 
 const heroPhoto = "/photos/ageu-hero.webp";
 
@@ -92,7 +93,7 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
               </a>
             </Button>
             <Button size="lg" variant="ghost" asChild>
-              <a href="#contact">
+              <a href="#contact" onClick={handleAnchorClick}>
                 <Mail className="mr-2 h-4 w-4" />
                 {t.contact}
               </a>

@@ -3,6 +3,7 @@ import { Lock, ArrowUpRight } from "lucide-react";
 import ProjectCard from "./ProjectCard";
 import { useLanguage } from "@/providers/language-provider";
 import { projects } from "@/data/projects";
+import { handleAnchorClick } from "@/lib/scroll";
 import komerbenImg from "@/assets/projects/komerben.webp";
 import despensaImg from "@/assets/projects/despensa.webp";
 import fitflowImg from "@/assets/projects/fitflow.webp";
@@ -125,6 +126,7 @@ const ProjectsSection = () => {
 
               <a
                 href="#contact"
+                onClick={handleAnchorClick}
                 className="mt-auto inline-flex items-center gap-1 font-mono text-sm text-primary hover:underline underline-offset-4 w-fit"
               >
                 {t.askAbout}
