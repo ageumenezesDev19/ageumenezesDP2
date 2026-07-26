@@ -15,8 +15,8 @@ export const profile: Profile = {
     pt: "React · Next.js · TypeScript — com backend e DevOps suficientes para levar uma ideia do design à produção.",
   },
   bio: {
-    en: "I'm a front-end developer from Brazil, currently building and maintaining a production inventory management system for a retail client as a freelancer. I trained full-stack at Trybe (a 1500-hour intensive program) and keep specializing through Rocketseat — React, Next.js, Node.js and DevOps fundamentals. I care about the whole product: clean UI, tested code, real deploys.",
-    pt: "Sou desenvolvedor front-end brasileiro e atualmente construo e mantenho, como freelancer, um sistema de gestão de estoque em produção para um cliente do varejo. Me formei full-stack na Trybe (programa intensivo de 1500 horas) e sigo me especializando pela Rocketseat — React, Next.js, Node.js e fundamentos de DevOps. Me importo com o produto inteiro: UI limpa, código testado, deploys reais.",
+    en: "I'm a front-end developer from Brazil, currently building and maintaining a production inventory management system for a retail client as a freelancer. I started out in web development at Trybe and keep specializing through Rocketseat — React, Next.js, Node.js and DevOps fundamentals. I care about the whole product: clean UI, tested code, real deploys.",
+    pt: "Sou desenvolvedor front-end brasileiro e atualmente construo e mantenho, como freelancer, um sistema de gestão de estoque em produção para um cliente do varejo. Comecei no desenvolvimento web pela Trybe e sigo me especializando pela Rocketseat — React, Next.js, Node.js e fundamentos de DevOps. Me importo com o produto inteiro: UI limpa, código testado, deploys reais.",
   },
   email: "ageumenezes23@gmail.com",
   socials: [

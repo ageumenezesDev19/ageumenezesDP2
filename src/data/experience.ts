@@ -48,14 +48,14 @@ export const education: EducationItem[] = [
     },
   },
   {
-    title: "Trybe — Full Stack Web Development",
+    title: "Trybe — Web Development",
     period: {
-      en: "2022 — 2023",
-      pt: "2022 — 2023",
+      en: "2021 — 2022",
+      pt: "2021 — 2022",
     },
     description: {
-      en: "1500-hour intensive program covering front-end, back-end (Node.js, SQL), computer science fundamentals and agile teamwork on real projects.",
-      pt: "Programa intensivo de 1500 horas cobrindo front-end, back-end (Node.js, SQL), fundamentos de ciência da computação e trabalho ágil em projetos reais.",
+      en: "Intensive web development program. Certified in the Web Development Fundamentals module: Unix & Bash, Git & GitHub, HTML & CSS, JavaScript, DOM and unit testing.",
+      pt: "Programa intensivo de desenvolvimento web. Certificado no módulo de Fundamentos do Desenvolvimento Web: Unix & Bash, Git & GitHub, HTML & CSS, JavaScript, DOM e testes unitários.",
     },
   },
 ];

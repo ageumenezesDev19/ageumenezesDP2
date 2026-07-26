@@ -3,7 +3,7 @@
 **Front-end developer who ships full products** — React, Next.js and TypeScript, with the backend and DevOps skills to take an idea from design to production.
 
 - 🏭 Currently the sole front-end engineer of a **production inventory management system** used daily by a retail client (freelance, under NDA)
-- 🎓 Trained full-stack at **Trybe** (1500-hour program) · ongoing specialization at **Rocketseat** (React, Next.js, Node.js, DDD, DevOps)
+- 🎓 Started out in web development at **Trybe** ([certified in Web Development Fundamentals](https://www.credential.net/b94dcdea-0ce4-4d09-9f81-30ff1a2f5bc2)) · ongoing specialization at **Rocketseat** (React, Next.js, Node.js, DDD, DevOps)
 - 🌎 Ceará, Brazil (UTC-3) · Portuguese (native) · English (professional)
 - 🌐 **Portfolio:** https://ageumenezes-dp-2.vercel.app
 

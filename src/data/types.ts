@@ -52,8 +52,11 @@ export interface SkillGroup {
 export interface Certificate {
   title: LocalizedString;
   issuer: string;
-  /** Path under public/, e.g. /certificates/react-fundamentals.pdf */
-  file: string;
+  /** Local PDF (/certificates/*.pdf) or an external credential URL */
+  url: string;
+  /** True when backed by a publicly verifiable credential (e.g. credential.net) */
+  verified?: boolean;
+  year?: string;
 }
 
 export interface SocialLink {

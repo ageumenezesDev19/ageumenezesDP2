@@ -1,5 +1,12 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { Award, ArrowUpRight, MapPin, Languages, Sparkles } from "lucide-react";
+import {
+  Award,
+  ArrowUpRight,
+  BadgeCheck,
+  MapPin,
+  Languages,
+  Sparkles,
+} from "lucide-react";
 import { useLanguage } from "@/providers/language-provider";
 import { profile } from "@/data/profile";
 import { certificates } from "@/data/certificates";
@@ -15,7 +22,8 @@ const content = {
     factsInterests: "Off the clock",
     factsInterestsValue: "Sci-fi, electronic music and video editing",
     certificatesTitle: "Certificates",
-    certificatesSubtitle: "Rocketseat course certificates — click to open the PDF.",
+    certificatesSubtitle: "Course certificates — click to open the credential.",
+    verified: "verified",
     view: "View PDF",
   },
   pt: {
@@ -27,7 +35,8 @@ const content = {
     factsInterests: "Fora do expediente",
     factsInterestsValue: "Ficção científica, música eletrônica e edição de vídeo",
     certificatesTitle: "Certificados",
-    certificatesSubtitle: "Certificados de cursos da Rocketseat — clique para abrir o PDF.",
+    certificatesSubtitle: "Certificados de cursos — clique para abrir a credencial.",
+    verified: "verificado",
     view: "Ver PDF",
   },
 };
@@ -101,17 +110,24 @@ const AboutSection = () => {
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {certificates.map((cert) => (
-              <li key={cert.file}>
+              <li key={cert.url}>
                 <a
-                  href={cert.file}
+                  href={cert.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center justify-between gap-3 rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/50"
                 >
                   <div>
                     <p className="text-sm font-medium">{cert.title[language]}</p>
-                    <p className="font-mono text-xs text-muted-foreground">
+                    <p className="flex flex-wrap items-center gap-2 font-mono text-xs text-muted-foreground">
                       {cert.issuer}
+                      {cert.year && <span>· {cert.year}</span>}
+                      {cert.verified && (
+                        <span className="inline-flex items-center gap-1 rounded border border-primary/40 px-1.5 py-0.5 text-[10px] text-primary">
+                          <BadgeCheck className="h-3 w-3" aria-hidden="true" />
+                          {t.verified}
+                        </span>
+                      )}
                     </p>
                   </div>
                   <ArrowUpRight
