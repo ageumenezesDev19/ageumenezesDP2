@@ -54,9 +54,6 @@ export interface Certificate {
   issuer: string;
   /** Local PDF (/certificates/*.pdf) or an external credential URL */
   url: string;
-  /** True when backed by a publicly verifiable credential (e.g. credential.net) */
-  verified?: boolean;
-  year?: string;
 }
 
 export interface SocialLink {

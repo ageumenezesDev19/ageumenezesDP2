@@ -12,8 +12,6 @@ export const certificates: Certificate[] = [
     },
     issuer: "Trybe",
     url: "https://www.credential.net/b94dcdea-0ce4-4d09-9f81-30ff1a2f5bc2",
-    verified: true,
-    year: "2022",
   },
   {
     title: { en: "React Fundamentals", pt: "Fundamentos do React" },
