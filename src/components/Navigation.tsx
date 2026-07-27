@@ -66,9 +66,9 @@ const Navigation = ({
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-md ${isScrolled ? "border-b border-border" : ""}`}
+      className={`fixed top-0 left-0 right-0 z-50 safe-x bg-background/85 backdrop-blur-md ${isScrolled ? "border-b border-border" : ""}`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 safe-x">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <button
             className="font-mono text-lg font-bold tracking-tight cursor-pointer flex min-h-11 items-center"

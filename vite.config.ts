@@ -4,10 +4,30 @@ import react from "@vitejs/plugin-react-swc";
 
 const tailscaleHost = process.env.TAILSCALE_HOST;
 
+/**
+ * iOS Safari ignores the `download` attribute and previews PDFs instead.
+ * Production sets this header via vercel.json; this mirrors it in dev so the
+ * behaviour can be verified on a real phone.
+ */
+const resumeDownloadHeader = {
+  name: "resume-download-header",
+  configureServer(server: { middlewares: { use: (fn: (req: any, res: any, next: () => void) => void) => void } }) {
+    server.middlewares.use((req, res, next) => {
+      if (req.url?.split("?")[0] === "/resume.pdf") {
+        res.setHeader(
+          "Content-Disposition",
+          'attachment; filename="Ageu-Menezes-Resume.pdf"',
+        );
+      }
+      next();
+    });
+  },
+};
+
 // https://vitejs.dev/config/
 export default defineConfig({
   base: process.env.NODE_ENV === "development" ? "/" : process.env.VITE_BASE_PATH || "/",
-  plugins: [react()],
+  plugins: [react(), resumeDownloadHeader],
   resolve: {
     preserveSymlinks: true,
     alias: {

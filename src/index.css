@@ -86,7 +86,9 @@
 }
 
 @layer utilities {
-  /* Keeps fixed chrome clear of the notch and home indicator on iPhones. */
+  /* Keeps chrome clear of the notch and home indicator on iPhones.
+     Apply only to elements that have no padding utility of their own: both
+     set the same properties and would otherwise cancel each other out. */
   .safe-x {
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);

@@ -15,8 +15,8 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border pt-8 pb-8 safe-bottom px-4 sm:px-6 lg:px-8 bg-background">
-      <div className="max-w-6xl mx-auto safe-x flex flex-col sm:flex-row items-center justify-between gap-4">
+    <footer className="border-t border-border pt-8 safe-bottom safe-x bg-background">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="font-mono text-xs text-muted-foreground">
           © {year} {profile.name}
         </p>
