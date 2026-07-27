@@ -39,8 +39,8 @@ export const education: EducationItem[] = [
   {
     title: "Rocketseat",
     period: {
-      en: "2023 — Present",
-      pt: "2023 — Presente",
+      en: "2024 — Present",
+      pt: "2024 — Presente",
     },
     description: {
       en: "Ongoing specialization: React, Next.js, Node.js (incl. DDD), design systems and DevOps fundamentals — 11 course certificates.",

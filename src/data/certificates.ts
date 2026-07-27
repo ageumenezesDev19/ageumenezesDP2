@@ -24,7 +24,10 @@ export const certificates: Certificate[] = [
     url: "/certificates/advanced-hooks.pdf",
   },
   {
-    title: { en: "React (2022 track)", pt: "React — trilha 2022" },
+    title: {
+      en: "ReactJS Specialization (50h)",
+      pt: "Especialização em ReactJS (50h)",
+    },
     issuer: "Rocketseat",
     url: "/certificates/react-2022.pdf",
   },
