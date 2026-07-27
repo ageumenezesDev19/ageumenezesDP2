@@ -36,9 +36,9 @@ const SkillsSection = () => {
   };
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-background">
+    <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-background">
       <div className="max-w-6xl mx-auto">
-        <motion.div {...reveal} className="mb-12">
+        <motion.div {...reveal} className="mb-8 md:mb-12">
           <p className="eyebrow mb-3">{t.eyebrow}</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
             {t.title}

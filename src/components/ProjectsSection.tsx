@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Lock, ArrowUpRight } from "lucide-react";
 import ProjectCard from "./ProjectCard";
@@ -28,6 +29,8 @@ const content = {
     ndaNote:
       "This is client work: the code and data are confidential. I'm happy to talk through the architecture and my decisions on a call.",
     askAbout: "Ask me about this project",
+    carouselLabel: "Other projects, swipe to browse",
+    cardPosition: (current: number, total: number) => `Project ${current} of ${total}`,
   },
   pt: {
     eyebrow: "trabalhos selecionados",
@@ -40,6 +43,8 @@ const content = {
     ndaNote:
       "Este é um trabalho para cliente: código e dados são confidenciais. Posso falar sobre a arquitetura e minhas decisões em uma call.",
     askAbout: "Pergunte sobre este projeto",
+    carouselLabel: "Outros projetos, deslize para navegar",
+    cardPosition: (current: number, total: number) => `Projeto ${current} de ${total}`,
   },
 };
 
@@ -51,6 +56,17 @@ const ProjectsSection = () => {
   const flagship = projects.find((p) => p.flagship)!;
   const rest = projects.filter((p) => !p.flagship);
 
+  // Tracks which card the swipe row is centred on, to drive the dots.
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [activeCard, setActiveCard] = useState(0);
+
+  const handleTrackScroll = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    const index = Math.round(track.scrollLeft / (track.scrollWidth / rest.length));
+    setActiveCard(Math.min(Math.max(index, 0), rest.length - 1));
+  };
+
   const reveal = {
     initial: { opacity: 0, y: reduceMotion ? 0 : 24 },
     whileInView: { opacity: 1, y: 0 },
@@ -59,9 +75,9 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
+    <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-6xl mx-auto">
-        <motion.div {...reveal} className="mb-12">
+        <motion.div {...reveal} className="mb-8 md:mb-12">
           <p className="eyebrow mb-3">{t.eyebrow}</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
             {t.title}
@@ -127,7 +143,7 @@ const ProjectsSection = () => {
               <a
                 href="#contact"
                 onClick={handleAnchorClick}
-                className="mt-auto inline-flex items-center gap-1 font-mono text-sm text-primary hover:underline underline-offset-4 w-fit"
+                className="mt-auto inline-flex min-h-11 items-center gap-1 font-mono text-sm text-primary hover:underline underline-offset-4 w-fit"
               >
                 {t.askAbout}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -151,20 +167,57 @@ const ProjectsSection = () => {
           </div>
         </motion.article>
 
-        {/* Remaining projects */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {rest.map((project, i) => (
+        {/* Remaining projects: swipeable row on phones, grid from md: up.
+            The stagger is driven by the track (not per card) — with
+            whileInView on each card, the ones off-screen horizontally would
+            stay invisible and the swipe affordance would be lost. */}
+        <motion.div
+          ref={trackRef}
+          onScroll={handleTrackScroll}
+          role="region"
+          aria-label={t.carouselLabel}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.08 } },
+          }}
+          className="
+            flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4
+            [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+            md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 lg:grid-cols-3
+          "
+        >
+          {rest.map((project) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: reduceMotion ? 0 : (i % 3) * 0.08 }}
+              variants={{
+                hidden: { opacity: 0, y: reduceMotion ? 0 : 24 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+              }}
+              className="w-[85%] shrink-0 snap-center md:w-auto md:shrink"
             >
               <ProjectCard project={project} image={projectImages[project.id]} />
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Position dots mirror the swipe position; hidden once the grid kicks in. */}
+        <div className="mt-4 flex justify-center gap-2 md:hidden">
+          {rest.map((project, i) => (
+            <span
+              key={project.id}
+              aria-hidden="true"
+              className={`h-1.5 rounded-full transition-all ${
+                i === activeCard ? "w-6 bg-primary" : "w-1.5 bg-muted-foreground/40"
+              }`}
+            />
+          ))}
         </div>
+        <p className="sr-only" aria-live="polite">
+          {t.cardPosition(activeCard + 1, rest.length)}
+        </p>
       </div>
     </section>
   );

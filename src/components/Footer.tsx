@@ -15,8 +15,8 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border py-8 px-4 sm:px-6 lg:px-8 bg-background">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <footer className="border-t border-border pt-8 pb-8 safe-bottom px-4 sm:px-6 lg:px-8 bg-background">
+      <div className="max-w-6xl mx-auto safe-x flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="font-mono text-xs text-muted-foreground">
           © {year} {profile.name}
         </p>
@@ -33,7 +33,7 @@ const Footer = () => {
                     target={social.id === "email" ? undefined : "_blank"}
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="flex min-h-11 min-w-11 items-center justify-center text-muted-foreground hover:text-primary transition-colors"
                   >
                     <Icon className="h-4 w-4" aria-hidden="true" />
                   </a>

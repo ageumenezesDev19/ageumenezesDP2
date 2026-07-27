@@ -83,7 +83,7 @@ const ProjectCard = ({ project, image }: ProjectCardProps) => {
               href={project.links.repo}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
+              className="inline-flex min-h-11 items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
             >
               <Github className="h-3.5 w-3.5" aria-hidden="true" />
               {t.source}
@@ -95,7 +95,7 @@ const ProjectCard = ({ project, image }: ProjectCardProps) => {
               href={r.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
+              className="inline-flex min-h-11 items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
             >
               <Github className="h-3.5 w-3.5" aria-hidden="true" />
               {r.label}
@@ -106,7 +106,7 @@ const ProjectCard = ({ project, image }: ProjectCardProps) => {
               href={project.links.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-xs text-primary hover:underline underline-offset-4"
+              className="inline-flex min-h-11 items-center gap-1.5 font-mono text-xs text-primary hover:underline underline-offset-4"
             >
               <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
               {t.demo}

@@ -49,7 +49,8 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
   };
 
   return (
-    <section className="min-h-screen flex items-center bg-background px-4 sm:px-6 lg:px-8 pt-20">
+    // dvh keeps the hero from being clipped by mobile browser toolbars
+    <section className="min-h-screen supports-[min-height:100dvh]:min-h-[100dvh] flex items-center bg-background px-4 sm:px-6 lg:px-8 pt-24 pb-12 lg:pt-20 lg:pb-0">
       <motion.div
         className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center"
         variants={container}
@@ -57,7 +58,26 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
         animate="visible"
       >
         <div>
-          <motion.p variants={item} className="eyebrow flex items-center gap-2 mb-6">
+          {/* Mobile identity row: the face shows up before the fold. The full
+              badge card below takes over from lg: up. */}
+          <motion.div variants={item} className="flex items-center gap-3 mb-6 lg:hidden">
+            <img
+              src={heroPhoto}
+              alt={t.photoCaption}
+              width={800}
+              height={1067}
+              className="h-14 w-14 rounded-full border border-border object-cover object-top shrink-0"
+            />
+            <p className="eyebrow flex items-center gap-2">
+              <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+                <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+              </span>
+              {t.status}
+            </p>
+          </motion.div>
+
+          <motion.p variants={item} className="eyebrow hidden lg:flex items-center gap-2 mb-6">
             <span className="relative flex h-2 w-2" aria-hidden="true">
               <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
@@ -81,18 +101,25 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
             {profile.tagline[language]}
           </motion.p>
 
-          <motion.div variants={item} className="flex flex-wrap gap-3 mb-10">
-            <Button size="lg" onClick={onExploreClick} className="group font-semibold">
+          <motion.div
+            variants={item}
+            className="flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-10"
+          >
+            <Button
+              size="lg"
+              onClick={onExploreClick}
+              className="group font-semibold w-full sm:w-auto min-h-11"
+            >
               {t.viewWork}
               <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-11" asChild>
               <a href={profile.resumeUrl} download="Ageu-Menezes-Resume.pdf">
                 <FileText className="mr-2 h-4 w-4" />
                 {t.downloadCV}
               </a>
             </Button>
-            <Button size="lg" variant="ghost" asChild>
+            <Button size="lg" variant="ghost" className="w-full sm:w-auto min-h-11" asChild>
               <a href="#contact" onClick={handleAnchorClick}>
                 <Mail className="mr-2 h-4 w-4" />
                 {t.contact}
@@ -100,20 +127,26 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
             </Button>
           </motion.div>
 
-          <motion.p variants={item} className="font-mono text-xs text-muted-foreground">
-            {profile.location[language]} · React · Next.js · TypeScript · Node.js
+          <motion.p
+            variants={item}
+            className="font-mono text-xs text-muted-foreground leading-relaxed"
+          >
+            {profile.location[language]}
+            <span className="hidden sm:inline"> · </span>
+            <span className="block sm:inline">
+              React · Next.js · TypeScript · Node.js
+            </span>
           </motion.p>
         </div>
 
-        {/* Static (no entrance animation): this image is the LCP element */}
-        <div className="flex justify-center lg:justify-end">
+        {/* Badge card is desktop-only; mobile shows the compact avatar above. */}
+        <div className="hidden lg:flex justify-center lg:justify-end">
           <figure className="w-64 sm:w-72 lg:w-80 rounded-xl border border-border bg-card overflow-hidden shadow-2xl shadow-black/30">
             <img
               src={heroPhoto}
               alt={t.photoCaption}
               width={800}
               height={1067}
-              fetchPriority="high"
               className="object-cover aspect-[4/5] w-full"
             />
             <figcaption className="flex items-center gap-2 border-t-2 border-primary px-4 py-3 font-mono text-xs text-muted-foreground">

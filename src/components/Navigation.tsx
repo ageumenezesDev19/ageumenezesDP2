@@ -68,10 +68,10 @@ const Navigation = ({
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-md ${isScrolled ? "border-b border-border" : ""}`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 safe-x">
         <div className="flex items-center justify-between h-16">
           <button
-            className="font-mono text-lg font-bold tracking-tight cursor-pointer"
+            className="font-mono text-lg font-bold tracking-tight cursor-pointer flex min-h-11 items-center"
             onClick={() => onNavClick("#hero")}
           >
             A<span className="text-primary">M</span>
@@ -105,7 +105,7 @@ const Navigation = ({
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
-              className="text-muted-foreground"
+              className="text-muted-foreground h-11 w-11"
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >
@@ -127,7 +127,7 @@ const Navigation = ({
                 <motion.button
                   key={index}
                   whileHover={{ scale: 1.05 }}
-                  className="text-muted-foreground hover:text-primary transition-colors text-left py-2"
+                  className="text-muted-foreground hover:text-primary transition-colors text-left min-h-11 flex items-center"
                   onClick={() => {
                     onNavClick(item.href);
                     setIsOpen(false);

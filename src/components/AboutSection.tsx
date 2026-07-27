@@ -51,17 +51,17 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
+    <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-6xl mx-auto">
-        <motion.div {...reveal} className="mb-12">
+        <motion.div {...reveal} className="mb-8 md:mb-12">
           <p className="eyebrow mb-3">{t.eyebrow}</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
             {t.title}
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-12 mb-16 items-start">
-          <motion.figure {...reveal} className="max-w-xs mx-auto lg:mx-0">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-8 md:gap-12 mb-10 md:mb-16 items-start">
+          <motion.figure {...reveal} className="max-w-[220px] sm:max-w-xs mx-auto lg:mx-0">
             <img
               src={aboutPhoto}
               alt={profile.name}

@@ -113,9 +113,9 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
+    <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-6xl mx-auto">
-        <motion.div {...reveal} className="mb-12">
+        <motion.div {...reveal} className="mb-8 md:mb-12">
           <p className="eyebrow mb-3">{t.eyebrow}</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
             {t.title}
@@ -140,7 +140,7 @@ const ContactSection = () => {
                       rel="noopener noreferrer"
                       className="group flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
                     >
-                      <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card group-hover:border-primary/50 transition-colors">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-card group-hover:border-primary/50 transition-colors">
                         <Icon className="h-4 w-4" aria-hidden="true" />
                       </span>
                       <span className="font-mono text-sm">
@@ -152,7 +152,7 @@ const ContactSection = () => {
               })}
             </ul>
 
-            <Button variant="outline" asChild>
+            <Button variant="outline" className="min-h-11 w-full sm:w-auto" asChild>
               <a href={profile.resumeUrl} download="Ageu-Menezes-Resume.pdf">
                 <FileText className="mr-2 h-4 w-4" />
                 {t.downloadResume}
@@ -224,7 +224,7 @@ const ContactSection = () => {
 
               <Button
                 type="submit"
-                className="w-full font-semibold"
+                className="w-full min-h-11 font-semibold"
                 disabled={status === "sending"}
               >
                 {status === "sending" ? (
