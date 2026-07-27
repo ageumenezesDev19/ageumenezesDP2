@@ -28,8 +28,25 @@ Bilingual (EN/PT) portfolio of a front-end developer who ships full products.
 ```bash
 npm install
 npm run dev        # local dev server
+npm run dev:remote # dev server over HTTPS via Tailscale (see below)
 npm run build      # typecheck + production build
 npm run preview    # preview the production build
+```
+
+### Testing on a phone (`dev:remote`)
+
+`npm run dev:remote` puts the Vite server behind [`tailscale serve`](https://tailscale.com/kb/1312/serve)
+on HTTPS port 8443 and prints a `https://<machine>.<tailnet>.ts.net:8443` URL that works from any
+device signed into the same tailnet — including from mobile data. Hot reload works over `wss`.
+
+Requires Tailscale running on both machines and HTTPS certificates enabled for the tailnet. Port 8443
+is used so an existing `tailscale serve` mapping on 443 keeps working; the mapping is removed
+automatically when the dev server stops.
+
+Both ports can be overridden if something else is already listening:
+
+```bash
+PORT=5174 HTTPS_PORT=10000 npm run dev:remote
 ```
 
 ### Contact form (serverless)
