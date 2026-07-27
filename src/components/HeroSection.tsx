@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { useLanguage } from "@/providers/language-provider";
 import { profile } from "@/data/profile";
 import { handleAnchorClick } from "@/lib/scroll";
+import { useResumeShare } from "@/lib/use-resume-share";
 
 const heroPhoto = "/photos/ageu-hero.webp";
 
@@ -36,6 +37,7 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
   const { language } = useLanguage();
   const reduceMotion = useReducedMotion();
   const t = content[language];
+  const shareResume = useResumeShare(profile.resumeUrl);
 
   const container = {
     hidden: {},
@@ -114,7 +116,11 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
               <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
             </Button>
             <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-11" asChild>
-              <a href={profile.resumeUrl} download="Ageu-Menezes-Resume.pdf">
+              <a
+                href={profile.resumeUrl}
+                download="Ageu-Menezes-Resume.pdf"
+                onClick={shareResume}
+              >
                 <FileText className="mr-2 h-4 w-4" />
                 {t.downloadCV}
               </a>
