@@ -14,7 +14,7 @@ const content = {
     headline1: "Front-end developer",
     headline2: "who ships full products.",
     viewWork: "View work",
-    downloadCV: "Download CV",
+    downloadResume: "Download resume",
     contact: "Contact",
     photoCaption: "Ageu Menezes — front-end developer",
   },
@@ -23,7 +23,7 @@ const content = {
     headline1: "Dev front-end",
     headline2: "que entrega produtos completos.",
     viewWork: "Ver projetos",
-    downloadCV: "Baixar CV",
+    downloadResume: "Baixar currículo",
     contact: "Contato",
     photoCaption: "Ageu Menezes — desenvolvedor front-end",
   },
@@ -37,7 +37,8 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
   const { language } = useLanguage();
   const reduceMotion = useReducedMotion();
   const t = content[language];
-  const shareResume = useResumeShare(profile.resumeUrl);
+  const resume = profile.resume[language];
+  const shareResume = useResumeShare(resume);
 
   const container = {
     hidden: {},
@@ -117,12 +118,12 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
             </Button>
             <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-11" asChild>
               <a
-                href={profile.resumeUrl}
-                download="Ageu-Menezes-Resume.pdf"
+                href={resume.url}
+                download={resume.fileName}
                 onClick={shareResume}
               >
                 <FileText className="mr-2 h-4 w-4" />
-                {t.downloadCV}
+                {t.downloadResume}
               </a>
             </Button>
             <Button size="lg" variant="ghost" className="w-full sm:w-auto min-h-11" asChild>

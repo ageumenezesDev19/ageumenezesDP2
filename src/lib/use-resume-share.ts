@@ -1,13 +1,12 @@
 import { useEffect, useRef } from "react";
 
-const FILE_NAME = "Ageu-Menezes-Resume.pdf";
 const MIME = "application/pdf";
 
 /** Can this browser share an actual PDF file (iOS Safari, Android Chrome)? */
-function canSharePdf() {
+function canSharePdf(fileName: string) {
   if (typeof navigator === "undefined" || !navigator.canShare) return false;
   try {
-    const probe = new File([""], FILE_NAME, { type: MIME });
+    const probe = new File([""], fileName, { type: MIME });
     return navigator.canShare({ files: [probe] });
   } catch {
     return false;
@@ -23,19 +22,21 @@ function canSharePdf() {
  *
  * Desktop browsers fall through to the anchor's normal download behaviour.
  */
-export function useResumeShare(resumeUrl: string) {
+export function useResumeShare(resume: { url: string; fileName: string }) {
+  const { url, fileName } = resume;
   const fileRef = useRef<File | null>(null);
 
   useEffect(() => {
-    if (!canSharePdf()) return;
+    fileRef.current = null; // language changed: the cached file is the wrong one
+    if (!canSharePdf(fileName)) return;
 
     let cancelled = false;
     (async () => {
       try {
-        const response = await fetch(resumeUrl);
+        const response = await fetch(url);
         if (!response.ok) return;
         const blob = await response.blob();
-        if (!cancelled) fileRef.current = new File([blob], FILE_NAME, { type: MIME });
+        if (!cancelled) fileRef.current = new File([blob], fileName, { type: MIME });
       } catch {
         // Leave fileRef empty: the link still works as a normal download.
       }
@@ -44,7 +45,7 @@ export function useResumeShare(resumeUrl: string) {
     return () => {
       cancelled = true;
     };
-  }, [resumeUrl]);
+  }, [url, fileName]);
 
   return (event: React.MouseEvent<HTMLAnchorElement>) => {
     const file = fileRef.current;
@@ -55,7 +56,7 @@ export function useResumeShare(resumeUrl: string) {
     navigator.share({ files: [file] }).catch((error: unknown) => {
       const name = (error as { name?: string })?.name;
       if (name === "AbortError" || name === "NotAllowedError") return; // user dismissed
-      window.location.href = resumeUrl; // last resort: let the browser handle it
+      window.location.href = url; // last resort: let the browser handle it
     });
   };
 }

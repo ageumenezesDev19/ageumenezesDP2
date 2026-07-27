@@ -9,15 +9,18 @@ const tailscaleHost = process.env.TAILSCALE_HOST;
  * Production sets this header via vercel.json; this mirrors it in dev so the
  * behaviour can be verified on a real phone.
  */
+const resumeDownloads: Record<string, string> = {
+  "/resume.pdf": "Ageu-Menezes-Resume.pdf",
+  "/resume-pt.pdf": "Ageu-Menezes-Curriculo.pdf",
+};
+
 const resumeDownloadHeader = {
   name: "resume-download-header",
   configureServer(server: { middlewares: { use: (fn: (req: any, res: any, next: () => void) => void) => void } }) {
     server.middlewares.use((req, res, next) => {
-      if (req.url?.split("?")[0] === "/resume.pdf") {
-        res.setHeader(
-          "Content-Disposition",
-          'attachment; filename="Ageu-Menezes-Resume.pdf"',
-        );
+      const fileName = resumeDownloads[req.url?.split("?")[0] ?? ""];
+      if (fileName) {
+        res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`);
       }
       next();
     });

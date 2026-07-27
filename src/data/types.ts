@@ -70,5 +70,6 @@ export interface Profile {
   bio: LocalizedString;
   email: string;
   socials: SocialLink[];
-  resumeUrl: string;
+  /** One resume per language: both the file and its download name differ. */
+  resume: Record<Language, { url: string; fileName: string }>;
 }

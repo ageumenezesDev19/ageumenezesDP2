@@ -73,7 +73,8 @@ const ContactSection = () => {
   const reduceMotion = useReducedMotion();
   const t = content[language];
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const shareResume = useResumeShare(profile.resumeUrl);
+  const resume = profile.resume[language];
+  const shareResume = useResumeShare(resume);
 
   const schema = z.object({
     name: z.string().min(2, t.validation.name),
@@ -156,8 +157,8 @@ const ContactSection = () => {
 
             <Button variant="outline" className="min-h-11 w-full sm:w-auto" asChild>
               <a
-                href={profile.resumeUrl}
-                download="Ageu-Menezes-Resume.pdf"
+                href={resume.url}
+                download={resume.fileName}
                 onClick={shareResume}
               >
                 <FileText className="mr-2 h-4 w-4" />

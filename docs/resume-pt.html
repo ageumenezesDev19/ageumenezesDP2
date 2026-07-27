@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Ageu Menezes — Currículo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @page { size: A4; margin: 0; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #1a2233;
+    font-size: 10.5px;
+    line-height: 1.5;
+    width: 210mm;
+    min-height: 297mm;
+  }
+  .page { padding: 13mm 15mm; }
+  header { border-bottom: 2.5px solid #0B1120; padding-bottom: 12px; margin-bottom: 14px; }
+  h1 { font-size: 26px; letter-spacing: 0.5px; color: #0B1120; }
+  .role { font-size: 13px; color: #b7791f; font-weight: 600; margin-top: 2px; }
+  .contact { margin-top: 8px; color: #4a5568; font-size: 10px; }
+  .contact span + span::before { content: "  ·  "; color: #cbd5e0; }
+  h2 {
+    font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.6px;
+    color: #0B1120; border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 3px; margin: 14px 0 8px;
+  }
+  .item { margin-bottom: 10px; }
+  .item-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .item-title { font-weight: 700; font-size: 11.5px; }
+  .item-org { color: #b7791f; font-weight: 600; }
+  .period { color: #718096; font-size: 9.5px; white-space: nowrap; }
+  ul { margin: 4px 0 0 14px; }
+  li { margin-bottom: 2.5px; }
+  .skill-row { display: flex; gap: 6px; }
+  .skill-label { font-weight: 700; white-space: nowrap; min-width: 78px; }
+  .two-col { display: grid; grid-template-columns: 1.6fr 1fr; gap: 0 26px; }
+  .summary { color: #2d3748; }
+  a { color: #1a2233; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>Ageu Menezes</h1>
+    <div class="role">Desenvolvedor Front-End · React · Next.js · TypeScript</div>
+    <div class="contact">
+      <span>Ceará, Brasil (UTC-3)</span>
+      <span>ageumenezes23@gmail.com</span>
+      <span>github.com/ageumenezesDev19</span>
+      <span>linkedin.com/in/ageu-menezes-silva-dev</span>
+    </div>
+  </header>
+
+  <h2>Resumo</h2>
+  <p class="summary">
+    Desenvolvedor front-end com mais de 3 anos de experiência, especializado em React, Next.js e
+    TypeScript, com conhecimento aplicado de back-end e DevOps (Node.js, Docker, CI/CD). Atualmente
+    é o único engenheiro front-end de um sistema de gestão de estoque em produção, usado diariamente
+    por uma empresa do varejo. Começou no desenvolvimento web pela Trybe e segue se especializando
+    pela Rocketseat. Domina o ciclo completo: arquitetura, implementação, testes e deploys.
+  </p>
+
+  <div class="two-col">
+    <div>
+      <h2>Experiência</h2>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Desenvolvedor Front-End <span class="item-org">— Cliente do varejo (contrato freelance)</span></div>
+          <div class="period">2025 — Presente</div>
+        </div>
+        <ul>
+          <li>Único engenheiro front-end de um sistema web de gestão de estoque e produção (Next.js 15, React 19, TypeScript, Tailwind CSS).</li>
+          <li>Integração com API externa usando autenticação baseada em papéis, rotas protegidas e controle de permissões.</li>
+          <li>Relatórios completos: exportação em XLSX, PDF e DOCX usados na operação diária.</li>
+          <li>Testes end-to-end com Playwright, conventional commits e releases com changelog automatizado (~230 arquivos TS, 28 rotas).</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Desenvolvedor Web Freelancer <span class="item-org">— Autônomo</span></div>
+          <div class="period">2022 — Presente</div>
+        </div>
+        <ul>
+          <li>Concepção, desenvolvimento e deploy de aplicações web para clientes e produtos próprios com React, Next.js e TypeScript.</li>
+          <li>Entrega de um app desktop multiplataforma de gestão de estoque com Tauri (Rust) + React (DesPensa).</li>
+          <li>Rastreador de hábitos full-stack: uma API em Node.js servindo clientes web em React e mobile em React Native.</li>
+        </ul>
+      </div>
+
+      <h2>Projetos Selecionados</h2>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">DesPensa — gestor de estoque desktop multiplataforma</div>
+          <div class="period"><a href="https://des-pensa.vercel.app">des-pensa.vercel.app</a></div>
+        </div>
+        <ul>
+          <li>App desktop nativo feito com Tauri (Rust) e front end em React + TypeScript.</li>
+          <li>Múltiplos perfis com backup e restauração, histórico de retiradas, dark mode e persistência offline-first.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Ignite Shop — e-commerce com checkout Stripe</div>
+          <div class="period"><a href="https://github.com/ageumenezesDev19/04-ignite-shop">github.com/…/04-ignite-shop</a></div>
+        </div>
+        <ul>
+          <li>Loja em Next.js com sessões reais de checkout da Stripe, renderização no servidor e catálogo gerenciado por API.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Habits — rastreador full-stack (web / API / mobile)</div>
+          <div class="period"><a href="https://github.com/ageumenezesDev19/habits-web">github.com/…/habits-web</a></div>
+        </div>
+        <ul>
+          <li>Uma API REST em Node.js + Prisma servindo tanto um cliente web em React quanto um app mobile em React Native.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Portfólio de desenvolvedor — bilíngue, contato serverless</div>
+          <div class="period"><a href="https://github.com/ageumenezesDev19/ageumenezesDP2">github.com/…/ageumenezesDP2</a></div>
+        </div>
+        <ul>
+          <li>React + Vite + TypeScript, camada de conteúdo EN/PT, temas claro e escuro e função serverless na Vercel para envio de e-mail. Lighthouse: 100 SEO / 100 acessibilidade.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <h2>Competências</h2>
+      <div class="skill-row"><span class="skill-label">Front-End</span><span>React, Next.js, TypeScript, JavaScript (ES6+), Tailwind CSS, styled-components, Framer Motion, React Native, Tauri</span></div>
+      <div class="skill-row" style="margin-top:5px"><span class="skill-label">Back-End</span><span>Node.js, Express, APIs REST, MySQL, Prisma, Sequelize, autenticação JWT</span></div>
+      <div class="skill-row" style="margin-top:5px"><span class="skill-label">DevOps</span><span>Docker, CI/CD (GitHub Actions), Vercel, automação de releases</span></div>
+      <div class="skill-row" style="margin-top:5px"><span class="skill-label">Testes</span><span>Playwright (e2e), Jest, React Testing Library</span></div>
+      <div class="skill-row" style="margin-top:5px"><span class="skill-label">Idiomas</span><span>Português (nativo), Inglês (profissional)</span></div>
+
+      <h2>Formação</h2>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Trybe</div>
+          <div class="period">2021 — 2022</div>
+        </div>
+        <div>
+          Desenvolvimento Web — programa intensivo.
+          <a href="https://www.credential.net/b94dcdea-0ce4-4d09-9f81-30ff1a2f5bc2"><strong>Certificado</strong></a>
+          no módulo de Fundamentos do Desenvolvimento Web: Unix &amp; Bash, Git &amp; GitHub, HTML &amp; CSS,
+          JavaScript, DOM e testes unitários.
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Rocketseat</div>
+          <div class="period">2024 — Presente</div>
+        </div>
+        <div>Especialização contínua — 11 certificados, entre eles:</div>
+        <ul>
+          <li>Fundamentos do React e Aprofundando em Hooks</li>
+          <li>Fundamentos e aprofundamento em Next.js</li>
+          <li>Fundamentos do Node.js e DDD no Node.js</li>
+          <li>Design System</li>
+          <li>Fundamentos da Cultura DevOps</li>
+          <li>HTTP e Performance</li>
+        </ul>
+      </div>
+
+      <h2>Links</h2>
+      <ul style="list-style:none; margin-left:0">
+        <li>Portfólio: <a href="https://ageumenezes-dp-2.vercel.app">ageumenezes-dp-2.vercel.app</a></li>
+        <li>GitHub: <a href="https://github.com/ageumenezesDev19">github.com/ageumenezesDev19</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/ageu-menezes-silva-dev/">in/ageu-menezes-silva-dev</a></li>
+        <li>WhatsApp: +55 88 98177-4397</li>
+      </ul>
+
+      <h2>Disponibilidade</h2>
+      <p>Aberto a projetos freelance e vagas remotas. Baseado no Brasil (UTC-3), com sobreposição de horário com os EUA e a Europa.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -41,5 +41,8 @@ export const profile: Profile = {
       url: "https://wa.me/5588981774397",
     },
   ],
-  resumeUrl: "/resume.pdf",
+  resume: {
+    en: { url: "/resume.pdf", fileName: "Ageu-Menezes-Resume.pdf" },
+    pt: { url: "/resume-pt.pdf", fileName: "Ageu-Menezes-Curriculo.pdf" },
+  },
 };
