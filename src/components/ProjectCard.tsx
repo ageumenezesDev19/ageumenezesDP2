@@ -3,8 +3,20 @@ import { useLanguage } from "@/providers/language-provider";
 import { Project } from "@/data/types";
 
 const content = {
-  en: { liveDemo: "live demo", openSource: "open source", source: "Source", demo: "Live" },
-  pt: { liveDemo: "demo online", openSource: "código aberto", source: "Código", demo: "Ver online" },
+  en: {
+    liveDemo: "live demo",
+    openSource: "open source",
+    building: "in progress",
+    source: "Source",
+    demo: "Live",
+  },
+  pt: {
+    liveDemo: "demo online",
+    openSource: "código aberto",
+    building: "em construção",
+    source: "Código",
+    demo: "Ver online",
+  },
 };
 
 interface ProjectCardProps {
@@ -50,16 +62,23 @@ const ProjectCard = ({ project, image }: ProjectCardProps) => {
       )}
 
       <div className="p-5 flex flex-col flex-1">
+        {/* Three states, because "open source" with no repo link to show for it
+            is a claim the card can't back up. */}
         <p className="font-mono text-[11px] text-muted-foreground mb-2 flex items-center gap-1.5">
           {project.links.live ? (
             <>
               <span className="inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" aria-hidden="true" />
               {t.liveDemo}
             </>
-          ) : (
+          ) : project.links.repo ? (
             <>
               <span className="inline-flex rounded-full h-1.5 w-1.5 bg-muted-foreground/50" aria-hidden="true" />
               {t.openSource}
+            </>
+          ) : (
+            <>
+              <span className="inline-flex rounded-full h-1.5 w-1.5 bg-amber-500/70" aria-hidden="true" />
+              {t.building}
             </>
           )}
         </p>

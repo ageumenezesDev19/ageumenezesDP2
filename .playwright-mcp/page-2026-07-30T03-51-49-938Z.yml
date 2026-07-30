@@ -1,0 +1,58 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Pitch folio" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - text: Pitch
+        - generic [ref=e5]: folio
+      - navigation [ref=e6]:
+        - generic [ref=e7]:
+          - link "Proposals" [ref=e8] [cursor=pointer]:
+            - /url: /
+          - link "Cases" [ref=e9] [cursor=pointer]:
+            - /url: /cases
+          - link "Profile" [ref=e10] [cursor=pointer]:
+            - /url: /profile
+        - link "Sign in" [ref=e12] [cursor=pointer]:
+          - /url: /login
+        - link "New proposal" [ref=e13] [cursor=pointer]:
+          - /url: /new
+  - main [ref=e14]:
+    - generic [ref=e15]:
+      - paragraph [ref=e16]: Proposals
+      - heading "Your reply rate" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - text: This is example data.
+        - link "Sign in" [ref=e19] [cursor=pointer]:
+          - /url: /login
+        - text: to track your own proposals.
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - heading "Recent proposals" [level=2] [ref=e22]
+        - paragraph [ref=e23]:
+          - text: Reply rate
+          - strong [ref=e24]: 67%
+          - text: of 3
+      - table [ref=e25]:
+        - rowgroup [ref=e26]:
+          - row [ref=e27]:
+            - columnheader "Job" [ref=e28]
+            - columnheader "Budget" [ref=e29]
+            - columnheader "Sent" [ref=e30]
+            - columnheader "Status" [ref=e31]
+        - rowgroup [ref=e32]:
+          - row [ref=e33]:
+            - cell "Inventory dashboard for Shopify store" [ref=e34]
+            - cell "$3–5k" [ref=e35]
+            - cell "Jul 24" [ref=e36]
+            - cell "won" [ref=e37]
+          - row [ref=e38]:
+            - cell "Next.js marketing site rebuild" [ref=e39]
+            - cell "$2k" [ref=e40]
+            - cell "Jul 22" [ref=e41]
+            - cell "replied" [ref=e42]
+          - row [ref=e43]:
+            - cell "React Native app — bug triage" [ref=e44]
+            - cell "$45/h" [ref=e45]
+            - cell "Jul 19" [ref=e46]
+            - cell "sent" [ref=e47]

@@ -1,0 +1,56 @@
+- generic [ref=f19e1]:
+  - banner [ref=f19e2]:
+    - generic [ref=f19e3]:
+      - link "Pitch folio" [ref=f19e4] [cursor=pointer]:
+        - /url: /
+        - text: Pitch
+        - generic [ref=f19e5]: folio
+      - navigation [ref=f19e6]:
+        - generic [ref=f19e7]:
+          - link "Proposals" [ref=f19e8] [cursor=pointer]:
+            - /url: /
+          - link "Cases" [ref=f19e9] [cursor=pointer]:
+            - /url: /cases
+          - link "Profile" [ref=f19e10] [cursor=pointer]:
+            - /url: /profile
+        - link "New proposal" [ref=f19e11] [cursor=pointer]:
+          - /url: /new
+        - button "Account, signed out" [ref=f19e13]
+  - main [ref=f19e18]:
+    - generic [ref=f19e19]:
+      - paragraph [ref=f19e20]: New proposal
+      - heading "Your draft" [level=1] [ref=f19e71]
+    - paragraph [ref=f19e72]: Demo content — sign in to analyse your own job posts.
+    - paragraph [ref=f19e73]: This is a starting point — click any line to rewrite it before you send.
+    - generic [ref=f19e74]:
+      - article [ref=f19e75]:
+        - textbox "Greeting" [ref=f19e76]: Hi Sarah,
+        - textbox "Proposal paragraph" [ref=f19e78]: You mentioned the team loses about two hours a day reconciling stock between Shopify and the warehouse sheet. That is the part I would fix first — before adding any new reporting on top of numbers nobody trusts yet.
+        - textbox "Proposal paragraph" [ref=f19e81]: "I build inventory software for a retail client in production today: 28 screens, role-based access, and XLSX/PDF exports the team actually uses every morning. The reconciliation problem you described is the one I solved for them in week two."
+        - textbox "Proposal paragraph" [ref=f19e83]: For the reporting piece, I would want to see one example of a report you send today before quoting it. "Custom reports" can mean a table or a full BI layer, and the difference is four weeks.
+        - textbox "Proposal paragraph" [active] [ref=f19e86]: Happy to walk through the architecture on a short call.
+      - complementary [ref=f19e87]:
+        - heading "Analysis" [level=2] [ref=f19e88]
+        - generic [ref=f19e89]:
+          - heading "Requirements" [level=3] [ref=f19e90]
+          - list [ref=f19e91]:
+            - listitem [ref=f19e92]: React
+            - listitem [ref=f19e93]: Shopify API
+            - listitem [ref=f19e94]: Dashboards
+            - listitem [ref=f19e95]: CSV export
+        - generic [ref=f19e96]:
+          - heading "Budget & timeline" [level=3] [ref=f19e97]
+          - paragraph [ref=f19e98]: $3,000–5,000
+          - paragraph [ref=f19e99]: 4 weeks · fixed price
+        - generic [ref=f19e100]:
+          - heading "⚑ Watch out" [level=3] [ref=f19e101]
+          - paragraph [ref=f19e102]: "\"Custom reports\" is not specified. Ask for one example before committing to a fixed price."
+        - generic [ref=f19e103]:
+          - heading "Your best case" [level=3] [ref=f19e104]
+          - paragraph [ref=f19e105]: Inventory system — retail client
+          - paragraph [ref=f19e106]: 92% match
+    - generic [ref=f19e107]:
+      - button "Copy proposal" [ref=f19e108]
+      - button "Start over" [ref=f19e109]
+  - button "Open Next.js Dev Tools" [ref=f19e34] [cursor=pointer]
+  - alert [ref=f19e39]

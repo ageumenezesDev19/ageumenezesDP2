@@ -6,13 +6,15 @@ import { useLanguage } from "@/providers/language-provider";
 import { projects } from "@/data/projects";
 import { handleAnchorClick } from "@/lib/scroll";
 import komerbenImg from "@/assets/projects/komerben.webp";
-import despensaImg from "@/assets/projects/despensa.webp";
+import pitchfolioImg from "@/assets/projects/pitchfolio.webp";
+import exactaImg from "@/assets/projects/exacta.webp";
 import fitflowImg from "@/assets/projects/fitflow.webp";
 import igniteShopImg from "@/assets/projects/ignite-shop.webp";
 
 export const projectImages: Record<string, string> = {
   komerben: komerbenImg,
-  despensa: despensaImg,
+  pitchfolio: pitchfolioImg,
+  exacta: exactaImg,
   fitflow: fitflowImg,
   "ignite-shop": igniteShopImg,
 };

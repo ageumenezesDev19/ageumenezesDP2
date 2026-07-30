@@ -41,30 +41,83 @@ export const projects: Project[] = [
     links: {},
   },
   {
-    id: "despensa",
-    title: "DesPensa",
+    id: "pitchfolio",
+    category: "fullstack",
+    title: "Pitchfolio",
+    role: {
+      en: "Creator and sole developer",
+      pt: "Criador e único desenvolvedor",
+    },
+    description: {
+      en: "An AI assistant for freelance proposals: paste a job post, and it extracts what the client actually needs, flags what's ambiguous, and drafts a reply grounded in your own case studies — then tracks which proposals get replies. Built because I needed it, so it gets used rather than demoed.",
+      pt: "Assistente de IA para propostas de freelancer: você cola o anúncio da vaga e ele extrai o que o cliente realmente precisa, sinaliza o que está ambíguo e rascunha uma resposta baseada nos seus próprios cases — depois acompanha quais propostas foram respondidas. Construído porque eu precisava, então é usado de verdade, não só demonstrado.",
+    },
+    highlights: [
+      {
+        en: "Provider-agnostic AI layer: Groq streams first, Gemini takes over on rate limits, and seeded content covers the rest — the UI never dead-ends on an exhausted free tier",
+        pt: "Camada de IA agnóstica: Groq como principal, Gemini assume quando o limite estoura e o conteúdo semeado cobre o resto — a interface nunca trava por cota esgotada",
+      },
+      {
+        en: "Structured AI output validated with Zod, so the interface builds real components instead of printing a paragraph",
+        pt: "Saída da IA estruturada e validada com Zod, então a interface monta componentes de verdade em vez de imprimir um parágrafo",
+      },
+      {
+        en: "Per-user isolation with Postgres row-level security, plus a trigger that blocks privilege escalation RLS alone would allow",
+        pt: "Isolamento por usuário com row-level security no Postgres, mais um trigger que bloqueia a escalação de privilégio que só o RLS permitiria",
+      },
+      {
+        en: "Rate limiting on the shared AI quota, so one account can't exhaust the day for everyone",
+        pt: "Rate limiting sobre a cota de IA compartilhada, para que uma conta não esgote o dia de todos",
+      },
+      {
+        en: "Lighthouse 93 / 100 / 100 / 100 on the production build",
+        pt: "Lighthouse 93 / 100 / 100 / 100 na build de produção",
+      },
+    ],
+    stack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "PostgreSQL",
+      "Groq",
+      "Gemini",
+    ],
+    links: {},
+  },
+  {
+    id: "exacta",
+    title: "Exacta",
     category: "desktop",
     role: {
       en: "Creator and sole developer",
       pt: "Criador e único desenvolvedor",
     },
     description: {
-      en: "A cross-platform desktop app for personal inventory management, built with Tauri. Supports multiple profiles with backup, withdrawal history, dark mode and offline-first persistence.",
-      pt: "Aplicativo desktop multiplataforma para gestão de estoque pessoal, construído com Tauri. Suporta múltiplos perfis com backup, histórico de retiradas, dark mode e persistência offline-first.",
+      en: "A stock tool built around one hard question: which combination of products adds up to exactly this amount? It solves that subset-sum search over a live inventory, then writes the withdrawal back. I use it daily at a retail counter, which is how its worst bug got caught.",
+      pt: "Ferramenta de estoque construída em torno de uma pergunta difícil: qual combinação de produtos soma exatamente este valor? Ela resolve essa busca de subset-sum sobre um estoque real e depois registra a baixa. Uso diariamente num balcão de varejo, e foi assim que o pior bug dela apareceu.",
     },
     highlights: [
       {
-        en: "Native desktop build via Tauri (Rust) with a React front end",
-        pt: "Build desktop nativo via Tauri (Rust) com front end em React",
+        en: "Subset-sum search over thousands of products, run in a Web Worker so the interface never blocks",
+        pt: "Busca de subset-sum sobre milhares de produtos, executada em Web Worker para a interface nunca travar",
       },
       {
-        en: "Multi-profile support with backup and restore",
-        pt: "Suporte a múltiplos perfis com backup e restauração",
+        en: "Found and fixed a money bug in daily use: the displayed total summed the whole combination including items already removed, claiming R$27.80 on a R$22.90 withdrawal",
+        pt: "Encontrei e corrigi um bug de dinheiro no uso diário: o total exibido somava a combinação inteira incluindo itens já removidos, informando R$27,80 numa retirada de R$22,90",
+      },
+      {
+        en: "Rebuilt the visual layer on a design token system — replacing loose SCSS, emoji-as-icons and developer copy leaking into the interface",
+        pt: "Refiz a camada visual sobre um sistema de design tokens — substituindo SCSS solto, emoji no lugar de ícones e copy de desenvolvedor vazando na interface",
+      },
+      {
+        en: "Native desktop build via Tauri (Rust), multiple profiles with backup, and offline-first persistence",
+        pt: "Build desktop nativo via Tauri (Rust), múltiplos perfis com backup e persistência offline-first",
       },
     ],
-    stack: ["Tauri", "React", "TypeScript", "SCSS"],
+    stack: ["Tauri", "React", "TypeScript", "SCSS", "i18next", "Web Workers"],
     links: {
-      live: "https://des-pensa.vercel.app",
       repo: "https://github.com/ageumenezesDev19/DesPensa-",
     },
   },

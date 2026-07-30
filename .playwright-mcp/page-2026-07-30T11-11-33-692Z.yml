@@ -1,0 +1,64 @@
+- generic [ref=f17e1]:
+  - banner [ref=f17e2]:
+    - generic [ref=f17e3]:
+      - link "Pitch folio" [ref=f17e4] [cursor=pointer]:
+        - /url: /
+        - text: Pitch
+        - generic [ref=f17e5]: folio
+      - navigation [ref=f17e6]:
+        - generic [ref=f17e7]:
+          - link "Proposals" [ref=f17e8] [cursor=pointer]:
+            - /url: /
+          - link "Cases" [ref=f17e9] [cursor=pointer]:
+            - /url: /cases
+          - link "Profile" [ref=f17e10] [cursor=pointer]:
+            - /url: /profile
+        - link "New proposal" [ref=f17e11] [cursor=pointer]:
+          - /url: /new
+        - generic [ref=f17e12]:
+          - button "Account, signed out" [expanded] [active] [ref=f17e13]
+          - generic [ref=f17e62]:
+            - paragraph [ref=f17e63]: You're not signed in.
+            - link "Sign in" [ref=f17e64] [cursor=pointer]:
+              - /url: /login
+  - main [ref=f17e18]:
+    - generic [ref=f17e19]:
+      - paragraph [ref=f17e20]: Proposals
+      - heading "Your reply rate" [level=1] [ref=f17e21]
+      - paragraph [ref=f17e22]:
+        - text: This is example data.
+        - link "Sign in" [ref=f17e23] [cursor=pointer]:
+          - /url: /login
+        - text: to track your own proposals.
+    - generic [ref=f17e24]:
+      - generic [ref=f17e25]:
+        - heading "Recent proposals" [level=2] [ref=f17e26]
+        - paragraph [ref=f17e27]:
+          - text: Reply rate
+          - strong [ref=f17e28]: 67%
+          - text: of 3
+      - table [ref=f17e29]:
+        - rowgroup [ref=f17e30]:
+          - row [ref=f17e31]:
+            - columnheader "Job" [ref=f17e32]
+            - columnheader "Budget" [ref=f17e33]
+            - columnheader "Sent" [ref=f17e34]
+            - columnheader "Status" [ref=f17e35]
+        - rowgroup [ref=f17e36]:
+          - row [ref=f17e37]:
+            - cell "Inventory dashboard for Shopify store" [ref=f17e38]
+            - cell "$3–5k" [ref=f17e39]
+            - cell "Jul 24" [ref=f17e40]
+            - cell "won" [ref=f17e41]
+          - row [ref=f17e42]:
+            - cell "Next.js marketing site rebuild" [ref=f17e43]
+            - cell "$2k" [ref=f17e44]
+            - cell "Jul 22" [ref=f17e45]
+            - cell "replied" [ref=f17e46]
+          - row [ref=f17e47]:
+            - cell "React Native app — bug triage" [ref=f17e48]
+            - cell "$45/h" [ref=f17e49]
+            - cell "Jul 19" [ref=f17e50]
+            - cell "sent" [ref=f17e51]
+  - button "Open Next.js Dev Tools" [ref=f17e57] [cursor=pointer]
+  - alert [ref=f17e61]

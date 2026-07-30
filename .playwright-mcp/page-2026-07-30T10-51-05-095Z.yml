@@ -1,0 +1,67 @@
+- generic [active] [ref=f13e1]:
+  - banner [ref=f13e2]:
+    - generic [ref=f13e3]:
+      - link "Pitch folio" [ref=f13e4] [cursor=pointer]:
+        - /url: /
+        - text: Pitch
+        - generic [ref=f13e5]: folio
+      - navigation [ref=f13e6]:
+        - generic [ref=f13e7]:
+          - link "Proposals" [ref=f13e8] [cursor=pointer]:
+            - /url: /
+          - link "Cases" [ref=f13e9] [cursor=pointer]:
+            - /url: /cases
+          - link "Profile" [ref=f13e10] [cursor=pointer]:
+            - /url: /profile
+        - link "Sign in" [ref=f13e12] [cursor=pointer]:
+          - /url: /login
+        - link "New proposal" [ref=f13e13] [cursor=pointer]:
+          - /url: /new
+  - main [ref=f13e14]:
+    - generic [ref=f13e15]:
+      - paragraph [ref=f13e16]: Profile
+      - heading "Your account and your voice" [level=1] [ref=f13e17]
+      - paragraph [ref=f13e18]: The account below is who you sign in as. The voice below that is what every proposal borrows — write it the way you would talk to a client on a first call.
+    - generic [ref=f13e19]:
+      - heading "Account" [level=2] [ref=f13e20]
+      - generic [ref=f13e21]:
+        - paragraph [ref=f13e22]: You're not signed in.
+        - link "Sign in" [ref=f13e23] [cursor=pointer]:
+          - /url: /login
+    - generic [ref=f13e24]:
+      - heading "Voice" [level=2] [ref=f13e25]
+      - paragraph [ref=f13e26]:
+        - text: You're viewing an example — a fictional profile, not a real one.
+        - link "Sign in" [ref=f13e27] [cursor=pointer]:
+          - /url: /login
+        - text: to write your own; every draft borrows this voice.
+      - generic [ref=f13e28]:
+        - generic [ref=f13e29]:
+          - text: Headline
+          - generic [ref=f13e30]: "One line: what you do and for whom"
+          - 'textbox "Headline One line: what you do and for whom" [ref=f13e31]':
+            - /placeholder: Full-stack developer who ships end-to-end features
+            - text: Full-stack developer who ships end-to-end features
+        - generic [ref=f13e32]:
+          - text: How you introduce yourself
+          - generic [ref=f13e33]: Two or three sentences, in your own words
+          - textbox "How you introduce yourself Two or three sentences, in your own words" [ref=f13e34]:
+            - /placeholder: I've spent the last few years shipping production web apps end to end — from data model to deployed UI. I like owning a feature completely, not just the parts a spec happens to mention.
+            - text: I've spent the last few years shipping production web apps end to end — from data model to deployed UI. I like owning a feature completely, not just the parts a spec happens to mention.
+        - generic [ref=f13e35]:
+          - text: Stack
+          - generic [ref=f13e36]: Separated by commas
+          - textbox "Stack Separated by commas" [ref=f13e37]:
+            - /placeholder: React, Node.js, PostgreSQL, Docker
+            - text: React, Node.js, PostgreSQL, Docker
+        - generic [ref=f13e38]:
+          - text: What you will not take on
+          - generic [ref=f13e39]: Saying this up front saves both sides a call
+          - textbox "What you will not take on Saying this up front saves both sides a call" [ref=f13e40]:
+            - /placeholder: Unpaid trial projects, fixed price without a clear spec
+            - text: Unpaid trial projects, fixed price without a clear spec
+      - generic [ref=f13e41]:
+        - button "Save profile" [disabled]
+        - paragraph
+  - button "Open Next.js Dev Tools" [ref=f13e47] [cursor=pointer]
+  - alert [ref=f13e51]
