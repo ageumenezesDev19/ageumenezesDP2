@@ -16,8 +16,8 @@ export const projects: Project[] = [
       pt: "Desenvolvedor freelancer — único engenheiro front-end para um cliente do varejo",
     },
     description: {
-      en: "A production web system I build and maintain for a retail client: inventory, stock movements and production tracking used daily by the company's team. I own the front end end-to-end — from architecture and API integration to releases.",
-      pt: "Sistema web em produção que construo e mantenho para um cliente do varejo: estoque, movimentações e acompanhamento de produção usados diariamente pela equipe da empresa. Sou responsável por todo o front end — da arquitetura e integração com a API até as releases.",
+      en: "A production web system I build and maintain for a retail client: inventory, stock movements and production tracking used daily by the company's team. I own the front-end end-to-end — from architecture and API integration to releases.",
+      pt: "Sistema web em produção que construo e mantenho para um cliente do varejo: estoque, movimentações e acompanhamento de produção usados diariamente pela equipe da empresa. Sou responsável por todo o front-end — da arquitetura e integração com a API até as releases.",
     },
     highlights: [
       {
