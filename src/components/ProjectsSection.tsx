@@ -9,14 +9,14 @@ import komerbenImg from "@/assets/projects/komerben.webp";
 import pitchfolioImg from "@/assets/projects/pitchfolio.webp";
 import exactaImg from "@/assets/projects/exacta.webp";
 import fitflowImg from "@/assets/projects/fitflow.webp";
-import igniteShopImg from "@/assets/projects/ignite-shop.webp";
+import designSystemImg from "@/assets/projects/design-system.webp";
 
 export const projectImages: Record<string, string> = {
   komerben: komerbenImg,
   pitchfolio: pitchfolioImg,
   exacta: exactaImg,
+  "design-system": designSystemImg,
   fitflow: fitflowImg,
-  "ignite-shop": igniteShopImg,
 };
 
 const content = {
