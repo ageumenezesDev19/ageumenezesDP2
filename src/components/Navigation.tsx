@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ui/theme-toggle";
@@ -26,6 +26,9 @@ const content = {
       { label: "Skills", href: "#skills" },
       { label: "Contact", href: "#contact" },
     ],
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    menuLabel: "Main",
   },
   pt: {
     menuItems: [
@@ -35,6 +38,9 @@ const content = {
       { label: "Habilidades", href: "#skills" },
       { label: "Contato", href: "#contact" },
     ],
+    openMenu: "Abrir menu",
+    closeMenu: "Fechar menu",
+    menuLabel: "Principal",
   },
 };
 
@@ -53,6 +59,9 @@ const Navigation = ({
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const menuRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -61,6 +70,53 @@ const Navigation = ({
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  /**
+   * An open menu covers the page, so Tab must not walk onto what's behind it —
+   * it was reaching "View work" and "Download resume" underneath, which for a
+   * screen reader user means the menu silently disappears mid-navigation.
+   * Escape closes it, the way any overlay should, and focus returns to the
+   * button that opened it rather than resetting to the top of the document.
+   */
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const close = () => {
+      setIsOpen(false);
+      triggerRef.current?.focus();
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        close();
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const focusables = menuRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusables?.length) return;
+
+      // The trigger sits outside the panel but belongs to the same loop, so it
+      // anchors the cycle — otherwise shift-tabbing off the first item escapes.
+      const first = triggerRef.current ?? focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [isOpen]);
 
   return (
     <motion.nav
@@ -91,7 +147,7 @@ const Navigation = ({
               </motion.button>
             ))}
             <div className="flex items-center gap-2">
-              <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+              <ThemeToggle theme={theme} toggleTheme={toggleTheme} language={language} />
               <LanguageToggle
                 language={language}
                 toggleLanguage={toggleLanguage}
@@ -102,14 +158,20 @@ const Navigation = ({
           {/* Mobile Navigation Button */}
           <div className="md:hidden">
             <Button
+              ref={triggerRef}
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
               className="text-muted-foreground h-11 w-11"
-              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-label={isOpen ? t.closeMenu : t.openMenu}
               aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? (
+                <X size={24} aria-hidden="true" />
+              ) : (
+                <Menu size={24} aria-hidden="true" />
+              )}
             </Button>
           </div>
         </div>
@@ -117,6 +179,8 @@ const Navigation = ({
         {/* Mobile Navigation Menu */}
         {isOpen && (
           <motion.div
+            ref={menuRef}
+            id="mobile-menu"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -138,7 +202,7 @@ const Navigation = ({
               ))}
 
               <div className="border-t border-muted pt-4 flex items-center gap-4">
-                <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+                <ThemeToggle theme={theme} toggleTheme={toggleTheme} language={language} />
                 <LanguageToggle
                   language={language}
                   toggleLanguage={toggleLanguage}

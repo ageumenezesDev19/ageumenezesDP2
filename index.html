@@ -39,6 +39,59 @@
       href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
+
+    <!--
+      Structured data. Meta tags describe the page; this describes the person,
+      so a search engine can tell that "Ageu Menezes" is a named professional
+      with these profiles rather than a phrase that appears in the text. sameAs
+      is what ties this page to the GitHub and LinkedIn accounts as one identity.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://ageumenezes-dp-2.vercel.app/#ageu",
+            "name": "Ageu Menezes",
+            "jobTitle": "Front-End Developer",
+            "description": "Front-end developer who ships full products — React, Next.js and TypeScript, with the backend and DevOps skills to take an idea from design to production.",
+            "url": "https://ageumenezes-dp-2.vercel.app/",
+            "image": "https://ageumenezes-dp-2.vercel.app/photos/ageu-hero.webp",
+            "email": "mailto:ageumenezes23@gmail.com",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "Ceará",
+              "addressCountry": "BR"
+            },
+            "knowsLanguage": ["pt-BR", "en"],
+            "knowsAbout": [
+              "React",
+              "Next.js",
+              "TypeScript",
+              "Node.js",
+              "Tailwind CSS",
+              "PostgreSQL",
+              "Playwright",
+              "Docker"
+            ],
+            "sameAs": [
+              "https://github.com/ageumenezesDev19",
+              "https://www.linkedin.com/in/ageu-menezes-silva-dev/"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://ageumenezes-dp-2.vercel.app/#website",
+            "url": "https://ageumenezes-dp-2.vercel.app/",
+            "name": "Ageu Menezes — Front-End Developer",
+            "inLanguage": "en",
+            "author": { "@id": "https://ageumenezes-dp-2.vercel.app/#ageu" },
+            "publisher": { "@id": "https://ageumenezes-dp-2.vercel.app/#ageu" }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
