@@ -61,6 +61,12 @@ module.exports = {
           foreground: "hsl(var(--surface-deep-foreground))",
           muted: "hsl(var(--surface-deep-muted))",
         },
+        /* Mount that follows the portrait of the current theme. */
+        "surface-mount": {
+          DEFAULT: "hsl(var(--surface-mount))",
+          foreground: "hsl(var(--surface-mount-foreground))",
+          muted: "hsl(var(--surface-mount-muted))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

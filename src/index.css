@@ -51,6 +51,18 @@
     --surface-deep: 221 46% 12%;
     --surface-deep-foreground: 216 33% 97%;
     --surface-deep-muted: 215 20% 72%;
+
+    /*
+     * The portrait's mount, which tracks the photograph rather than the page.
+     * On a white card the frame stayed visible — brighter than both the page
+     * and the photo's own ground — and a visible frame reads as an ID photo
+     * rather than a portrait. Matched to the ground (measured at 93%) it
+     * disappears, which is what the dark theme already did by accident: there
+     * the mount sits 4 points off the page, and now so does this one.
+     */
+    --surface-mount: 266 19% 93%;
+    --surface-mount-foreground: 222 49% 10%;
+    --surface-mount-muted: 220 12% 40%;
   }
 
   .dark {
@@ -82,6 +94,13 @@
     --border: 221 39% 19%;
     --input: 221 39% 19%;
     --ring: 38 92% 50%;
+
+    /* Here the mount is the navy one, for the navy portrait — same rule,
+       other ground. Keeps the figure a single component with no theme
+       branching in its markup. */
+    --surface-mount: 221 46% 12%;
+    --surface-mount-foreground: 216 33% 97%;
+    --surface-mount-muted: 215 20% 72%;
   }
 }
 

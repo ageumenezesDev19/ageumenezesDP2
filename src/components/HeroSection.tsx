@@ -161,9 +161,12 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
 
         {/* Badge card is desktop-only; mobile shows the compact avatar above. */}
         <div className="hidden lg:flex justify-center lg:justify-end">
-          {/* The mount matches whichever portrait is showing, so in both themes
-              the frame is the same value as the photograph's own ground. */}
-          <figure className="w-64 sm:w-72 lg:w-80 rounded-xl border border-border bg-card dark:border-surface-deep dark:bg-surface-deep p-2 pb-0 overflow-hidden shadow-2xl shadow-black/30">
+          {/* One mount token that follows the portrait of the current theme, so
+              the frame reads the same in both: a soft edge around the picture
+              rather than a card the picture was placed on. The shadow is scaled
+              per theme because weight that vanishes on navy turns the same card
+              into a sticker on off-white. */}
+          <figure className="w-64 sm:w-72 lg:w-80 rounded-xl border border-surface-mount bg-surface-mount p-2 pb-0 overflow-hidden shadow-lg shadow-black/5 dark:shadow-2xl dark:shadow-black/30">
             <img
               src={heroPhoto}
               alt={t.photoCaption}
@@ -171,7 +174,7 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
               height={1067}
               className="object-cover aspect-[4/5] w-full rounded-lg"
             />
-            <figcaption className="mt-2 flex items-center gap-2 border-t-2 border-primary px-2 py-3 font-mono text-xs text-muted-foreground dark:text-surface-deep-muted">
+            <figcaption className="mt-2 flex items-center gap-2 border-t-2 border-primary px-2 py-3 font-mono text-xs text-surface-mount-muted">
               <span className="inline-flex rounded-full h-1.5 w-1.5 bg-primary shrink-0" aria-hidden="true" />
               {t.photoCaption}
             </figcaption>
