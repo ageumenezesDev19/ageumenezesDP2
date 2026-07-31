@@ -32,6 +32,12 @@
       content="Front-end developer who ships full products. React, Next.js and TypeScript."
     />
     <meta name="twitter:image" content="https://ageumenezes-dp-2.vercel.app/og-image.png" />
+    <!--
+      Preloads the dark portrait because dark is the default theme, so it's what
+      a first-time visitor gets. Someone with light saved fetches the other one
+      normally — worth it to keep the common path fast rather than preloading
+      both and wasting a request on every visit.
+    -->
     <link rel="preload" as="image" href="/photos/ageu-hero.webp" type="image/webp" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

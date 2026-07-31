@@ -2,11 +2,22 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, FileText, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import { useLanguage } from "@/providers/language-provider";
+import { useTheme } from "@/providers/theme-provider";
 import { profile } from "@/data/profile";
 import { handleAnchorClick } from "@/lib/scroll";
 import { useResumeShare } from "@/lib/use-resume-share";
 
-const heroPhoto = "/photos/ageu-hero.webp";
+/**
+ * The same portrait shot on two grounds, one per theme. A photograph carries
+ * its own background, so on the wrong theme it lands as a block: the navy one
+ * against the light page is a step of 221 out of 255, and the light one against
+ * the dark page is 218. Served this way each is within ~15 of its page and
+ * neither needs a frame to mediate. Only one ever loads.
+ */
+const heroPhotos = {
+  dark: "/photos/ageu-hero.webp",
+  light: "/photos/ageu-hero-light.webp",
+};
 
 const content = {
   en: {
@@ -35,10 +46,12 @@ interface HeroSectionProps {
 
 const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
   const { language } = useLanguage();
+  const { theme } = useTheme();
   const reduceMotion = useReducedMotion();
   const t = content[language];
   const resume = profile.resume[language];
   const shareResume = useResumeShare(resume);
+  const heroPhoto = heroPhotos[theme];
 
   const container = {
     hidden: {},
@@ -148,10 +161,9 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
 
         {/* Badge card is desktop-only; mobile shows the compact avatar above. */}
         <div className="hidden lg:flex justify-center lg:justify-end">
-          {/* Mounted in the photo's own navy rather than on white: on a light
-              page the portrait's dark ground would otherwise sit against the
-              brightest surface on screen, with nothing between them. */}
-          <figure className="w-64 sm:w-72 lg:w-80 rounded-xl border border-surface-deep bg-surface-deep p-2 pb-0 overflow-hidden shadow-2xl shadow-black/30">
+          {/* The mount matches whichever portrait is showing, so in both themes
+              the frame is the same value as the photograph's own ground. */}
+          <figure className="w-64 sm:w-72 lg:w-80 rounded-xl border border-border bg-card dark:border-surface-deep dark:bg-surface-deep p-2 pb-0 overflow-hidden shadow-2xl shadow-black/30">
             <img
               src={heroPhoto}
               alt={t.photoCaption}
@@ -159,7 +171,7 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
               height={1067}
               className="object-cover aspect-[4/5] w-full rounded-lg"
             />
-            <figcaption className="mt-2 flex items-center gap-2 border-t-2 border-primary px-2 py-3 font-mono text-xs text-surface-deep-muted">
+            <figcaption className="mt-2 flex items-center gap-2 border-t-2 border-primary px-2 py-3 font-mono text-xs text-muted-foreground dark:text-surface-deep-muted">
               <span className="inline-flex rounded-full h-1.5 w-1.5 bg-primary shrink-0" aria-hidden="true" />
               {t.photoCaption}
             </figcaption>
