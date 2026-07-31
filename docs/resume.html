@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Ageu Menezes — Resume</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @page { size: A4; margin: 0; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #1a2233;
+    font-size: 10.5px;
+    line-height: 1.5;
+    width: 210mm;
+    min-height: 297mm;
+  }
+  .page { padding: 13mm 15mm; }
+  header { border-bottom: 2.5px solid #0B1120; padding-bottom: 12px; margin-bottom: 14px; }
+  h1 { font-size: 26px; letter-spacing: 0.5px; color: #0B1120; }
+  .role { font-size: 13px; color: #b7791f; font-weight: 600; margin-top: 2px; }
+  .contact { margin-top: 8px; color: #4a5568; font-size: 10px; }
+  .contact span + span::before { content: "  ·  "; color: #cbd5e0; }
+  h2 {
+    font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.6px;
+    color: #0B1120; border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 3px; margin: 14px 0 8px;
+  }
+  .item { margin-bottom: 10px; }
+  .item-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .item-title { font-weight: 700; font-size: 11.5px; }
+  .item-org { color: #b7791f; font-weight: 600; }
+  .period { color: #718096; font-size: 9.5px; white-space: nowrap; }
+  ul { margin: 4px 0 0 14px; }
+  li { margin-bottom: 2.5px; }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; }
+  .skill-row { display: flex; gap: 6px; }
+  .skill-label { font-weight: 700; white-space: nowrap; min-width: 70px; }
+  .two-col { display: grid; grid-template-columns: 1.6fr 1fr; gap: 0 26px; }
+  .summary { color: #2d3748; }
+  .cert-list { columns: 2; column-gap: 24px; margin-left: 14px; }
+  .cert-list li { break-inside: avoid; }
+  a { color: #1a2233; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>Ageu Menezes</h1>
+    <div class="role">Front-End Developer · React · Next.js · TypeScript</div>
+    <div class="contact">
+      <span>Ceará, Brazil (UTC-3)</span>
+      <span>ageumenezes23@gmail.com</span>
+      <span>github.com/ageumenezesDev19</span>
+      <span>linkedin.com/in/ageu-menezes-silva-dev</span>
+    </div>
+  </header>
+
+  <h2>Summary</h2>
+  <p class="summary">
+    Front-end developer with 3+ years of experience, specialized in React, Next.js and TypeScript,
+    with working back-end and DevOps skills (Node.js, Docker, CI/CD). Currently the sole front-end
+    engineer of a production inventory management system used daily by a retail company. Started out
+    in web development at Trybe, with ongoing specialization at Rocketseat. Comfortable owning the
+    full cycle: architecture, implementation, testing and deploys.
+  </p>
+
+  <div class="two-col">
+    <div>
+      <h2>Experience</h2>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Front-End Developer <span class="item-org">— Retail client (freelance contract)</span></div>
+          <div class="period">2025 — Present</div>
+        </div>
+        <ul>
+          <li>Sole front-end engineer of a production inventory &amp; production-tracking web system (Next.js 15, React 19, TypeScript, Tailwind CSS).</li>
+          <li>Integrated an external API with role-based authentication, protected routes and permission handling.</li>
+          <li>Built rich reporting: XLSX, PDF and DOCX exports used in daily operations.</li>
+          <li>Set up Playwright end-to-end tests, conventional commits and automated changelog releases (~230 TS files, 28 routes).</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Freelance Web Developer <span class="item-org">— Self-employed</span></div>
+          <div class="period">2022 — Present</div>
+        </div>
+        <ul>
+          <li>Design, build and deploy web applications for clients and own products with React, Next.js and TypeScript.</li>
+          <li>Shipped a cross-platform desktop inventory app with Tauri (Rust) + React (DesPensa).</li>
+          <li>Built a full-stack habit tracker: one Node.js API serving React web and React Native mobile clients.</li>
+        </ul>
+      </div>
+
+      <h2>Selected Projects</h2>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">DesPensa — cross-platform desktop inventory manager</div>
+          <div class="period"><a href="https://des-pensa.vercel.app">des-pensa.vercel.app</a></div>
+        </div>
+        <ul>
+          <li>Native desktop app built with Tauri (Rust) and a React + TypeScript front end.</li>
+          <li>Multi-profile support with backup/restore, withdrawal history, dark mode and offline-first persistence.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Ignite Shop — e-commerce with Stripe checkout</div>
+          <div class="period"><a href="https://github.com/ageumenezesDev19/04-ignite-shop">github.com/…/04-ignite-shop</a></div>
+        </div>
+        <ul>
+          <li>Next.js storefront with real Stripe checkout sessions, server-side rendering and an API-managed product catalog.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Habits — full-stack tracker (web / API / mobile)</div>
+          <div class="period"><a href="https://github.com/ageumenezesDev19/habits-web">github.com/…/habits-web</a></div>
+        </div>
+        <ul>
+          <li>One Node.js + Prisma REST API serving both a React web client and a React Native mobile app.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Developer portfolio — bilingual, serverless contact form</div>
+          <div class="period"><a href="https://github.com/ageumenezesDev19/ageumenezesDP2">github.com/…/ageumenezesDP2</a></div>
+        </div>
+        <ul>
+          <li>React + Vite + TypeScript, EN/PT content layer, dark/light themes and a Vercel serverless function for email delivery. Lighthouse: 100 SEO / 100 accessibility.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <h2>Skills</h2>
+      <div class="skill-row"><span class="skill-label">Front-End</span><span>React, Next.js, TypeScript, JavaScript (ES6+), Tailwind CSS, styled-components, Framer Motion, React Native, Tauri</span></div>
+      <div class="skill-row" style="margin-top:5px"><span class="skill-label">Back-End</span><span>Node.js, Express, REST APIs, MySQL, Prisma, Sequelize, JWT auth</span></div>
+      <div class="skill-row" style="margin-top:5px"><span class="skill-label">DevOps</span><span>Docker, CI/CD (GitHub Actions), Vercel, release automation</span></div>
+      <div class="skill-row" style="margin-top:5px"><span class="skill-label">Testing</span><span>Playwright (e2e), Jest, React Testing Library</span></div>
+      <div class="skill-row" style="margin-top:5px"><span class="skill-label">Languages</span><span>Portuguese (native), English (professional)</span></div>
+
+      <h2>Education</h2>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Trybe</div>
+          <div class="period">2021 — 2022</div>
+        </div>
+        <div>
+          Web Development — intensive program.
+          <a href="https://www.credential.net/b94dcdea-0ce4-4d09-9f81-30ff1a2f5bc2"><strong>Certified</strong></a>
+          in the Web Development Fundamentals module: Unix &amp; Bash, Git &amp; GitHub, HTML &amp; CSS,
+          JavaScript, DOM and unit testing.
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Rocketseat</div>
+          <div class="period">2024 — Present</div>
+        </div>
+        <div>Ongoing specialization — 11 certificates including:</div>
+        <ul>
+          <li>React Fundamentals &amp; Advanced Hooks</li>
+          <li>Next.js Fundamentals &amp; Advanced</li>
+          <li>Node.js Fundamentals &amp; DDD in Node.js</li>
+          <li>Design System</li>
+          <li>DevOps Culture Fundamentals</li>
+          <li>HTTP &amp; Performance</li>
+        </ul>
+      </div>
+
+      <h2>Links</h2>
+      <ul style="list-style:none; margin-left:0">
+        <li>Portfolio: <a href="https://ageumenezes-dp-2.vercel.app">ageumenezes-dp-2.vercel.app</a></li>
+        <li>GitHub: <a href="https://github.com/ageumenezesDev19">github.com/ageumenezesDev19</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/ageu-menezes-silva-dev/">in/ageu-menezes-silva-dev</a></li>
+        <li>WhatsApp: +55 88 98177-4397</li>
+      </ul>
+
+      <h2>Availability</h2>
+      <p>Open to freelance projects and remote roles. Based in Brazil (UTC-3), with overlap for US and European working hours.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

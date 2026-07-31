@@ -5,9 +5,9 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./providers/theme-provider";
 import { LanguageProvider } from "./providers/language-provider";
+import { inject } from "@vercel/analytics";
 
-import { TempoDevtools } from "tempo-devtools";
-TempoDevtools.init();
+inject();
 
 const basename = import.meta.env.BASE_URL;
 

@@ -1,0 +1,58 @@
+- generic [active] [ref=f20e1]:
+  - banner [ref=f20e2]:
+    - generic [ref=f20e3]:
+      - link "Pitch folio" [ref=f20e4] [cursor=pointer]:
+        - /url: /
+        - text: Pitch
+        - generic [ref=f20e5]: folio
+      - navigation [ref=f20e6]:
+        - generic [ref=f20e7]:
+          - link "Proposals" [ref=f20e8] [cursor=pointer]:
+            - /url: /
+          - link "Cases" [ref=f20e9] [cursor=pointer]:
+            - /url: /cases
+          - link "Profile" [ref=f20e10] [cursor=pointer]:
+            - /url: /profile
+        - link "New proposal" [ref=f20e11] [cursor=pointer]:
+          - /url: /new
+        - button "Account, signed out" [ref=f20e13]
+  - main [ref=f20e18]:
+    - generic [ref=f20e19]:
+      - paragraph [ref=f20e20]: Proposals
+      - heading "Your reply rate" [level=1] [ref=f20e21]
+      - paragraph [ref=f20e22]:
+        - text: This is example data.
+        - link "Sign in" [ref=f20e23] [cursor=pointer]:
+          - /url: /login
+        - text: to track your own proposals.
+    - generic [ref=f20e24]:
+      - generic [ref=f20e25]:
+        - heading "Recent proposals" [level=2] [ref=f20e26]
+        - paragraph [ref=f20e27]:
+          - text: Reply rate
+          - strong [ref=f20e28]: 67%
+          - text: of 3
+      - table [ref=f20e30]:
+        - rowgroup [ref=f20e31]:
+          - row [ref=f20e32]:
+            - columnheader "Job" [ref=f20e33]
+            - columnheader "Budget" [ref=f20e34]
+            - columnheader "Sent" [ref=f20e35]
+            - columnheader "Status" [ref=f20e36]
+        - rowgroup [ref=f20e37]:
+          - row [ref=f20e38]:
+            - cell "Inventory dashboard for Shopify store" [ref=f20e39]
+            - cell "$3–5k" [ref=f20e40]
+            - cell "Jul 24" [ref=f20e41]
+            - cell "won" [ref=f20e42]
+          - row [ref=f20e43]:
+            - cell "Next.js marketing site rebuild" [ref=f20e44]
+            - cell "$2k" [ref=f20e45]
+            - cell "Jul 22" [ref=f20e46]
+            - cell "replied" [ref=f20e47]
+          - row [ref=f20e48]:
+            - cell "React Native app — bug triage" [ref=f20e49]
+            - cell "$45/h" [ref=f20e50]
+            - cell "Jul 19" [ref=f20e51]
+            - cell "sent" [ref=f20e52]
+  - button "Open Next.js Dev Tools" [ref=f20e58] [cursor=pointer]

@@ -1,0 +1,32 @@
+- generic [active] [ref=f23e1]:
+  - banner [ref=f23e2]:
+    - generic [ref=f23e3]:
+      - link "Pitch folio" [ref=f23e4] [cursor=pointer]:
+        - /url: /
+        - text: Pitch
+        - generic [ref=f23e5]: folio
+      - navigation [ref=f23e6]:
+        - generic [ref=f23e7]:
+          - link "Proposals" [ref=f23e8] [cursor=pointer]:
+            - /url: /
+          - link "Cases" [ref=f23e9] [cursor=pointer]:
+            - /url: /cases
+          - link "Profile" [ref=f23e10] [cursor=pointer]:
+            - /url: /profile
+        - link "New proposal" [ref=f23e11] [cursor=pointer]:
+          - /url: /new
+        - button "Account, signed out" [ref=f23e13]
+  - main [ref=f23e18]:
+    - generic [ref=f23e19]:
+      - paragraph [ref=f23e20]: New proposal
+      - heading "Start with the job post" [level=1] [ref=f23e21]
+      - paragraph [ref=f23e22]: Pitchfolio reads it for you, pulls out what the client actually needs, and drafts a reply from the cases you have saved.
+    - generic [ref=f23e23]:
+      - generic [ref=f23e24]: The job post
+      - textbox "The job post" [ref=f23e25]:
+        - /placeholder: Paste the whole post — the rambling parts are where the real requirements hide.
+      - generic [ref=f23e26]:
+        - button "Analyse job post" [disabled]
+        - button "Try it with an example post" [ref=f23e27]
+        - paragraph [ref=f23e28]: Nothing is sent anywhere until you press analyse.
+  - button "Open Next.js Dev Tools" [ref=f23e34] [cursor=pointer]

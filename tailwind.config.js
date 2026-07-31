@@ -17,6 +17,10 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["Archivo", "system-ui", "-apple-system", "sans-serif"],
+        mono: ["'JetBrains Mono'", "ui-monospace", "SFMono-Regular", "monospace"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -50,6 +54,18 @@ module.exports = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        /* Mount for images that carry their own dark ground — see index.css. */
+        "surface-deep": {
+          DEFAULT: "hsl(var(--surface-deep))",
+          foreground: "hsl(var(--surface-deep-foreground))",
+          muted: "hsl(var(--surface-deep-muted))",
+        },
+        /* Mount that follows the portrait of the current theme. */
+        "surface-mount": {
+          DEFAULT: "hsl(var(--surface-mount))",
+          foreground: "hsl(var(--surface-mount-foreground))",
+          muted: "hsl(var(--surface-mount-muted))",
         },
       },
       borderRadius: {

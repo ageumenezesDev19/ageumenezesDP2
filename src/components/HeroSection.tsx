@@ -1,115 +1,184 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDown, FileText, Mail } from "lucide-react";
 import { Button } from "./ui/button";
-import { ArrowDown } from "lucide-react";
-
 import { useLanguage } from "@/providers/language-provider";
+import { useTheme } from "@/providers/theme-provider";
+import { profile } from "@/data/profile";
+import { handleAnchorClick } from "@/lib/scroll";
+import { useResumeShare } from "@/lib/use-resume-share";
 
-interface HeroSectionProps {
-  name?: string;
-  title?: string;
-  bio?: string;
-  avatarUrl?: string;
-  onExploreClick?: () => void;
-}
+/**
+ * The same portrait shot on two grounds, one per theme. A photograph carries
+ * its own background, so on the wrong theme it lands as a block: the navy one
+ * against the light page is a step of 221 out of 255, and the light one against
+ * the dark page is 218. Served this way each is within ~15 of its page and
+ * neither needs a frame to mediate. Only one ever loads.
+ */
+const heroPhotos = {
+  dark: "/photos/ageu-hero.webp",
+  light: "/photos/ageu-hero-light.webp",
+};
 
 const content = {
   en: {
-    greeting: "Hi, I'm",
-    title: "Full Stack Web Developer",
-    bio: "Full Stack Web Developer passionate about technology and innovation. Specialized in React, Node.js, TypeScript, and development of modern, scalable web applications.",
-    exploreButton: "Explore My Work",
+    status: "available for freelance work",
+    headline1: "Front-end developer",
+    headline2: "who ships full products.",
+    viewWork: "View work",
+    downloadResume: "Download resume",
+    contact: "Contact",
+    photoCaption: "Ageu Menezes — front-end developer",
   },
   pt: {
-    greeting: "Olá, eu sou",
-    title: "Desenvolvedor Web Full Stack",
-    bio: "Desenvolvedor Web Full Stack apaixonado por tecnologia e inovação. Especializado em React, Node.js, TypeScript e desenvolvimento de aplicações web modernas e escaláveis.",
-    exploreButton: "Explorar Meu Trabalho",
+    status: "disponível para freelas",
+    headline1: "Dev front-end",
+    headline2: "que entrega produtos completos.",
+    viewWork: "Ver projetos",
+    downloadResume: "Baixar currículo",
+    contact: "Contato",
+    photoCaption: "Ageu Menezes — desenvolvedor front-end",
   },
 };
 
-const HeroSection: React.FC<HeroSectionProps> = ({
-  name = "Ageu Menezes",
-  avatarUrl = "https://github.com/ageumenezesDev19.png",
-  onExploreClick = () => {},
-}) => {
-  const { language } = useLanguage();
-  const t = content[language];
+interface HeroSectionProps {
+  onExploreClick?: () => void;
+}
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
+const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
+  const { language } = useLanguage();
+  const { theme } = useTheme();
+  const reduceMotion = useReducedMotion();
+  const t = content[language];
+  const resume = profile.resume[language];
+  const shareResume = useResumeShare(resume);
+  const heroPhoto = heroPhotos[theme];
+
+  const container = {
+    hidden: {},
     visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.3 },
+      transition: { staggerChildren: reduceMotion ? 0 : 0.12 },
     },
   };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+  const item = {
+    hidden: { opacity: 0, y: reduceMotion ? 0 : 16 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-background px-4 sm:px-6 lg:px-8">
+    // dvh keeps the hero from being clipped by mobile browser toolbars
+    <section className="min-h-screen supports-[min-height:100dvh]:min-h-[100dvh] flex items-center bg-background px-4 sm:px-6 lg:px-8 pt-24 pb-12 lg:pt-20 lg:pb-0">
       <motion.div
-        className="max-w-7xl mx-auto text-center"
-        variants={containerVariants}
+        className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center"
+        variants={container}
         initial="hidden"
         animate="visible"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div variants={itemVariants} className="order-2 lg:order-1">
-            <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-4"
-              variants={itemVariants}
-            >
-              {language === "pt" ? (
-                <>
-                  {t.greeting}
-                  <br />
-                  {name}
-                </>
-              ) : (
-                <>
-                  {t.greeting} {name}
-                </>
-              )}
-            </motion.h1>
-            <motion.h2
-              className="text-2xl sm:text-3xl md:text-4xl text-muted-foreground mb-6"
-              variants={itemVariants}
-            >
-              {t.title}
-            </motion.h2>
-            <motion.p
-              className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto"
-              variants={itemVariants}
-            >
-              {t.bio}
-            </motion.p>
-            <motion.div variants={itemVariants}>
-              <Button size="lg" onClick={onExploreClick} className="group">
-                {t.exploreButton}
-                <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
-              </Button>
-            </motion.div>
+        <div>
+          {/* Mobile identity row: the face shows up before the fold. The full
+              badge card below takes over from lg: up. */}
+          <motion.div variants={item} className="flex items-center gap-3 mb-6 lg:hidden">
+            <img
+              src={heroPhoto}
+              alt={t.photoCaption}
+              width={800}
+              height={1067}
+              className="h-14 w-14 rounded-full border border-border object-cover object-top shrink-0"
+            />
+            <p className="eyebrow flex items-center gap-2">
+              <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+                <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+              </span>
+              {t.status}
+            </p>
           </motion.div>
 
-          <motion.div
-            variants={itemVariants}
-            className="order-1 lg:order-2 flex justify-center"
+          <motion.p variants={item} className="eyebrow hidden lg:flex items-center gap-2 mb-6">
+            <span className="relative flex h-2 w-2" aria-hidden="true">
+              <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+            </span>
+            {t.status}
+          </motion.p>
+
+          <motion.h1
+            variants={item}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-6"
           >
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-96 md:h-96">
-              <motion.img
-                src={avatarUrl}
-                alt={name}
-                className="rounded-full shadow-2xl dark:shadow-[2px_2px_15px_#FFA500] relative z-10"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              />
-            </div>
+            {t.headline1}
+            <br />
+            <span className="text-primary">{t.headline2}</span>
+          </motion.h1>
+
+          <motion.p
+            variants={item}
+            className="text-lg text-muted-foreground max-w-xl mb-8"
+          >
+            {profile.tagline[language]}
+          </motion.p>
+
+          <motion.div
+            variants={item}
+            className="flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-10"
+          >
+            <Button
+              size="lg"
+              onClick={onExploreClick}
+              className="group font-semibold w-full sm:w-auto min-h-11"
+            >
+              {t.viewWork}
+              <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
+            </Button>
+            <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-11" asChild>
+              <a
+                href={resume.url}
+                download={resume.fileName}
+                onClick={shareResume}
+              >
+                <FileText className="mr-2 h-4 w-4" />
+                {t.downloadResume}
+              </a>
+            </Button>
+            <Button size="lg" variant="ghost" className="w-full sm:w-auto min-h-11" asChild>
+              <a href="#contact" onClick={handleAnchorClick}>
+                <Mail className="mr-2 h-4 w-4" />
+                {t.contact}
+              </a>
+            </Button>
           </motion.div>
+
+          <motion.p
+            variants={item}
+            className="font-mono text-xs text-muted-foreground leading-relaxed"
+          >
+            {profile.location[language]}
+            <span className="hidden sm:inline"> · </span>
+            <span className="block sm:inline">
+              React · Next.js · TypeScript · Node.js
+            </span>
+          </motion.p>
+        </div>
+
+        {/* Badge card is desktop-only; mobile shows the compact avatar above. */}
+        <div className="hidden lg:flex justify-center lg:justify-end">
+          {/* One mount token that follows the portrait of the current theme, so
+              the frame reads the same in both: a soft edge around the picture
+              rather than a card the picture was placed on. The shadow is scaled
+              per theme because weight that vanishes on navy turns the same card
+              into a sticker on off-white. */}
+          <figure className="w-64 sm:w-72 lg:w-80 rounded-xl border border-surface-mount bg-surface-mount p-2 pb-0 overflow-hidden shadow-lg shadow-black/5 dark:shadow-2xl dark:shadow-black/30">
+            <img
+              src={heroPhoto}
+              alt={t.photoCaption}
+              width={800}
+              height={1067}
+              className="object-cover aspect-[4/5] w-full rounded-lg"
+            />
+            <figcaption className="mt-2 flex items-center gap-2 border-t-2 border-primary px-2 py-3 font-mono text-xs text-surface-mount-muted">
+              <span className="inline-flex rounded-full h-1.5 w-1.5 bg-primary shrink-0" aria-hidden="true" />
+              {t.photoCaption}
+            </figcaption>
+          </figure>
         </div>
       </motion.div>
     </section>

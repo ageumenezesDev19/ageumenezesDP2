@@ -1,0 +1,53 @@
+- generic [active] [ref=f3e1]:
+  - banner [ref=f3e2]:
+    - generic [ref=f3e3]:
+      - link "Pitch folio" [ref=f3e4] [cursor=pointer]:
+        - /url: /
+        - text: Pitch
+        - generic [ref=f3e5]: folio
+      - navigation [ref=f3e6]:
+        - generic [ref=f3e7]:
+          - link "Proposals" [ref=f3e8] [cursor=pointer]:
+            - /url: /
+          - link "Cases" [ref=f3e9] [cursor=pointer]:
+            - /url: /cases
+          - link "Profile" [ref=f3e10] [cursor=pointer]:
+            - /url: /profile
+        - link "Sign in" [ref=f3e12] [cursor=pointer]:
+          - /url: /login
+        - link "New proposal" [ref=f3e13] [cursor=pointer]:
+          - /url: /new
+  - main [ref=f3e14]:
+    - generic [ref=f3e15]:
+      - paragraph [ref=f3e16]: Profile
+      - heading "How your drafts should sound" [level=1] [ref=f3e17]
+      - paragraph [ref=f3e18]: This is the voice every proposal borrows. Write it the way you would talk to a client on a first call.
+    - generic [ref=f3e19]:
+      - paragraph [ref=f3e20]:
+        - text: You're viewing an example profile.
+        - link "Sign in" [ref=f3e21] [cursor=pointer]:
+          - /url: /login
+        - text: to save your own — every draft borrows this voice.
+      - generic [ref=f3e22]:
+        - generic [ref=f3e23]:
+          - text: Headline
+          - generic [ref=f3e24]: "One line: what you do and for whom"
+          - 'textbox "Headline One line: what you do and for whom" [ref=f3e25]': Front-end developer who ships full products
+        - generic [ref=f3e26]:
+          - text: How you introduce yourself
+          - generic [ref=f3e27]: Two or three sentences, in your own words
+          - textbox "How you introduce yourself Two or three sentences, in your own words" [ref=f3e28]: I build and maintain a production inventory system for a retail client, and I own the front end end to end — architecture, tests and releases.
+        - generic [ref=f3e29]:
+          - text: Stack
+          - generic [ref=f3e30]: Separated by commas
+          - textbox "Stack Separated by commas" [ref=f3e31]: React, Next.js, TypeScript, Node.js, Playwright
+        - generic [ref=f3e32]:
+          - text: What you will not take on
+          - generic [ref=f3e33]: Saying this up front saves both sides a call
+          - textbox "What you will not take on Saying this up front saves both sides a call" [ref=f3e34]:
+            - /placeholder: Unpaid test tasks, fixed price on undefined scope
+      - generic [ref=f3e35]:
+        - button "Save profile" [disabled]
+        - paragraph
+  - button "Open Next.js Dev Tools" [ref=f3e41] [cursor=pointer]
+  - alert [ref=f3e45]

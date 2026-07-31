@@ -1,185 +1,264 @@
-import React from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { motion, useReducedMotion } from "framer-motion";
+import { Github, Linkedin, Mail, MessageCircle, Send, Loader2, FileText } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Github, Linkedin, Mail, FileText, Send } from "lucide-react";
-import { motion } from "framer-motion";
-
-interface SocialLink {
-  icon: React.ReactNode;
-  href: string;
-  label: string;
-}
-
-interface ContactSectionProps {
-  socialLinks?: SocialLink[];
-  resumeUrl?: string;
-  onSubmit?: (data: { name: string; email: string; message: string }) => void;
-}
-
+import { Label } from "./ui/label";
 import { useLanguage } from "@/providers/language-provider";
+import { profile } from "@/data/profile";
+import { useResumeShare } from "@/lib/use-resume-share";
 
 const content = {
   en: {
-    title: "Get In Touch",
+    eyebrow: "get in touch",
+    title: "Let's build something",
     subtitle:
-      "I'm always looking for new challenges and opportunities to grow professionally. If you're seeking a developer who's passionate about technology and committed to excellence, let's connect!",
-    contactForm: "Contact Form",
-    namePlaceholder: "Your Name",
-    emailPlaceholder: "Your Email",
-    messagePlaceholder: "Your Message",
-    sendButton: "Send Message",
-    connectWithMe: "Connect With Me",
-    downloadResume: "Download Resume",
+      "Have a project in mind, or want to talk through an idea? Send a message — I usually reply within one business day.",
+    nameLabel: "Name",
+    namePlaceholder: "Your name",
+    emailLabel: "Email",
+    emailPlaceholder: "you@company.com",
+    messageLabel: "Message",
+    messagePlaceholder: "Tell me about your project…",
+    send: "Send message",
+    sending: "Sending…",
+    success: "Message sent. I'll get back to you soon.",
+    error: "Something went wrong sending your message. Email me directly at",
+    directTitle: "Direct channels",
+    downloadResume: "Download resume",
+    validation: {
+      name: "Enter your name.",
+      email: "Enter a valid email so I can reply.",
+      message: "Write a short message (at least 10 characters).",
+    },
   },
   pt: {
-    title: "Entre em Contato",
+    eyebrow: "contato",
+    title: "Vamos construir algo",
     subtitle:
-      "Estou sempre em busca de novos desafios e oportunidades para crescer profissionalmente. Se você procura um desenvolvedor apaixonado por tecnologia e comprometido com a excelência, vamos nos conectar!",
-    contactForm: "Formulário de Contato",
-    namePlaceholder: "Seu Nome",
-    emailPlaceholder: "Seu Email",
-    messagePlaceholder: "Sua Mensagem",
-    sendButton: "Enviar Mensagem",
-    connectWithMe: "Conecte-se Comigo",
-    downloadResume: "Baixar Currículo",
+      "Tem um projeto em mente ou quer discutir uma ideia? Mande uma mensagem — normalmente respondo em um dia útil.",
+    nameLabel: "Nome",
+    namePlaceholder: "Seu nome",
+    emailLabel: "Email",
+    emailPlaceholder: "voce@empresa.com",
+    messageLabel: "Mensagem",
+    messagePlaceholder: "Me conte sobre seu projeto…",
+    send: "Enviar mensagem",
+    sending: "Enviando…",
+    success: "Mensagem enviada. Retorno em breve.",
+    error: "Algo deu errado no envio. Me escreva direto em",
+    directTitle: "Canais diretos",
+    downloadResume: "Baixar currículo",
+    validation: {
+      name: "Informe seu nome.",
+      email: "Informe um email válido para eu responder.",
+      message: "Escreva uma mensagem curta (mínimo 10 caracteres).",
+    },
   },
 };
 
-const ContactSection = ({
-  socialLinks = [
-    {
-      icon: <Github className="h-5 w-5" />,
-      href: "https://github.com/ageumenezesDev19",
-      label: "GitHub",
-    },
-    {
-      icon: <Linkedin className="h-5 w-5" />,
-      href: "https://www.linkedin.com/in/ageu-menezes-silva-dev/",
-      label: "LinkedIn",
-    },
-    {
-      icon: <Mail className="h-5 w-5" />,
-      href: "mailto:ageumenezes.dev19@gmail.com",
-      label: "Email",
-    },
-  ],
-  resumeUrl = "/resume.pdf",
-  onSubmit = () => {},
-}: ContactSectionProps) => {
-  const { language } = useLanguage();
-  const t = content[language];
+const socialIcons = {
+  github: Github,
+  linkedin: Linkedin,
+  email: Mail,
+  whatsapp: MessageCircle,
+};
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    onSubmit({
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      message: formData.get("message") as string,
-    });
+const ContactSection = () => {
+  const { language } = useLanguage();
+  const reduceMotion = useReducedMotion();
+  const t = content[language];
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const resume = profile.resume[language];
+  const shareResume = useResumeShare(resume);
+
+  const schema = z.object({
+    name: z.string().min(2, t.validation.name),
+    email: z.string().email(t.validation.email),
+    message: z.string().min(10, t.validation.message),
+    // Honeypot: humans never fill this
+    company: z.string().max(0).optional().or(z.literal("")),
+  });
+  type FormData = z.infer<typeof schema>;
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormData>({ resolver: zodResolver(schema) });
+
+  const onSubmit = async (data: FormData) => {
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setStatus("success");
+      reset();
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  const reveal = {
+    initial: { opacity: 0, y: reduceMotion ? 0 : 24 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: "-80px" },
+    transition: { duration: 0.5 },
   };
 
   return (
-    <section className="py-16 px-4 bg-background min-h-screen">
+    <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl font-bold mb-4">{t.title}</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            {t.subtitle}
-          </p>
+        <motion.div {...reveal} className="mb-8 md:mb-12">
+          <p className="eyebrow mb-3">{t.eyebrow}</p>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
+            {t.title}
+          </h2>
+          <p className="text-muted-foreground max-w-2xl">{t.subtitle}</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle>{t.contactForm}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <Input
-                      placeholder={t.namePlaceholder}
-                      name="name"
-                      required
-                      className="w-full"
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      type="email"
-                      placeholder={t.emailPlaceholder}
-                      name="email"
-                      required
-                      className="w-full"
-                    />
-                  </div>
-                  <div>
-                    <Textarea
-                      placeholder={t.messagePlaceholder}
-                      name="message"
-                      required
-                      className="w-full min-h-[150px]"
-                    />
-                  </div>
-                  <Button type="submit" className="w-full">
-                    <Send className="mr-2 h-4 w-4" /> {t.sendButton}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12">
+          {/* Direct channels */}
+          <motion.div {...reveal}>
+            <h3 className="font-mono text-sm uppercase tracking-widest text-muted-foreground mb-6">
+              {t.directTitle}
+            </h3>
+            <ul className="space-y-4 mb-8">
+              {profile.socials.map((social) => {
+                const Icon = socialIcons[social.id];
+                return (
+                  <li key={social.id}>
+                    <a
+                      href={social.url}
+                      target={social.id === "email" ? undefined : "_blank"}
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-card group-hover:border-primary/50 transition-colors">
+                        <Icon className="h-4 w-4" aria-hidden="true" />
+                      </span>
+                      <span className="font-mono text-sm">
+                        {social.id === "email" ? profile.email : social.label}
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <Button variant="outline" className="min-h-11 w-full sm:w-auto" asChild>
+              <a
+                href={resume.url}
+                download={resume.fileName}
+                onClick={shareResume}
+              >
+                <FileText className="mr-2 h-4 w-4" />
+                {t.downloadResume}
+              </a>
+            </Button>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="space-y-6"
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle>{t.connectWithMe}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-col space-y-4">
-                  {socialLinks.map((link, index) => (
-                    <a
-                      key={index}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {link.icon}
-                      <span>{link.label}</span>
-                    </a>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+          {/* Form */}
+          <motion.div {...reveal}>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="rounded-xl border border-border bg-card p-6 sm:p-8 space-y-5"
+              noValidate
+            >
+              <div className="space-y-2">
+                <Label htmlFor="contact-name">{t.nameLabel}</Label>
+                <Input
+                  id="contact-name"
+                  placeholder={t.namePlaceholder}
+                  autoComplete="name"
+                  aria-invalid={!!errors.name}
+                  {...register("name")}
+                />
+                {errors.name && (
+                  <p className="text-sm text-destructive">{errors.name.message}</p>
+                )}
+              </div>
 
-            <Card>
-              <CardContent className="pt-6">
-                <Button
-                  variant="outline"
-                  className="w-full"
-                  onClick={() => window.open(resumeUrl, "_blank")}
-                >
-                  <FileText className="mr-2 h-4 w-4" /> {t.downloadResume}
-                </Button>
-              </CardContent>
-            </Card>
+              <div className="space-y-2">
+                <Label htmlFor="contact-email">{t.emailLabel}</Label>
+                <Input
+                  id="contact-email"
+                  type="email"
+                  placeholder={t.emailPlaceholder}
+                  autoComplete="email"
+                  aria-invalid={!!errors.email}
+                  {...register("email")}
+                />
+                {errors.email && (
+                  <p className="text-sm text-destructive">{errors.email.message}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="contact-message">{t.messageLabel}</Label>
+                <Textarea
+                  id="contact-message"
+                  placeholder={t.messagePlaceholder}
+                  className="min-h-[140px]"
+                  aria-invalid={!!errors.message}
+                  {...register("message")}
+                />
+                {errors.message && (
+                  <p className="text-sm text-destructive">{errors.message.message}</p>
+                )}
+              </div>
+
+              {/* Honeypot field, hidden from humans */}
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="contact-company">Company</label>
+                <input
+                  id="contact-company"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  {...register("company")}
+                />
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full min-h-11 font-semibold"
+                disabled={status === "sending"}
+              >
+                {status === "sending" ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> {t.sending}
+                  </>
+                ) : (
+                  <>
+                    <Send className="mr-2 h-4 w-4" /> {t.send}
+                  </>
+                )}
+              </Button>
+
+              <p aria-live="polite" className="text-sm min-h-5">
+                {status === "success" && (
+                  <span className="text-emerald-500">{t.success}</span>
+                )}
+                {status === "error" && (
+                  <span className="text-destructive">
+                    {t.error}{" "}
+                    <a href={`mailto:${profile.email}`} className="underline underline-offset-4">
+                      {profile.email}
+                    </a>
+                  </span>
+                )}
+              </p>
+            </form>
           </motion.div>
         </div>
       </div>
