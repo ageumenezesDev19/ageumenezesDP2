@@ -61,7 +61,12 @@ const AboutSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-8 md:gap-12 mb-10 md:mb-16 items-start">
-          <motion.figure {...reveal} className="max-w-[220px] sm:max-w-xs mx-auto lg:mx-0">
+          {/* Same mount as the hero portrait: this one is near-black, so on a
+              light page it was the starkest block on the screen. */}
+          <motion.figure
+            {...reveal}
+            className="max-w-[220px] sm:max-w-xs mx-auto lg:mx-0 rounded-xl bg-surface-deep p-2"
+          >
             <img
               src={aboutPhoto}
               alt={profile.name}
@@ -69,7 +74,7 @@ const AboutSection = () => {
               height={938}
               loading="lazy"
               decoding="async"
-              className="rounded-xl border border-border grayscale w-full"
+              className="rounded-lg grayscale w-full"
             />
           </motion.figure>
 

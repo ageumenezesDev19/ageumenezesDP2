@@ -148,15 +148,18 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
 
         {/* Badge card is desktop-only; mobile shows the compact avatar above. */}
         <div className="hidden lg:flex justify-center lg:justify-end">
-          <figure className="w-64 sm:w-72 lg:w-80 rounded-xl border border-border bg-card overflow-hidden shadow-2xl shadow-black/30">
+          {/* Mounted in the photo's own navy rather than on white: on a light
+              page the portrait's dark ground would otherwise sit against the
+              brightest surface on screen, with nothing between them. */}
+          <figure className="w-64 sm:w-72 lg:w-80 rounded-xl border border-surface-deep bg-surface-deep p-2 pb-0 overflow-hidden shadow-2xl shadow-black/30">
             <img
               src={heroPhoto}
               alt={t.photoCaption}
               width={800}
               height={1067}
-              className="object-cover aspect-[4/5] w-full"
+              className="object-cover aspect-[4/5] w-full rounded-lg"
             />
-            <figcaption className="flex items-center gap-2 border-t-2 border-primary px-4 py-3 font-mono text-xs text-muted-foreground">
+            <figcaption className="mt-2 flex items-center gap-2 border-t-2 border-primary px-2 py-3 font-mono text-xs text-surface-deep-muted">
               <span className="inline-flex rounded-full h-1.5 w-1.5 bg-primary shrink-0" aria-hidden="true" />
               {t.photoCaption}
             </figcaption>

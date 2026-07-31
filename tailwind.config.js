@@ -55,6 +55,12 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        /* Mount for images that carry their own dark ground — see index.css. */
+        "surface-deep": {
+          DEFAULT: "hsl(var(--surface-deep))",
+          foreground: "hsl(var(--surface-deep-foreground))",
+          muted: "hsl(var(--surface-deep-muted))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

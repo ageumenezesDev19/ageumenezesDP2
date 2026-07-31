@@ -34,6 +34,23 @@
     --ring: 26 90% 37%;
 
     --radius: 0.625rem;
+
+    /*
+     * Photographs shot on a navy ground, and dark product screenshots, arrive
+     * with their own darkness. Dropped straight onto a light page they read as
+     * holes: every surface here sits between 86% and 100% lightness, and the
+     * photo's ground is 12% — a bigger step than the entire range of the
+     * surfaces put together.
+     *
+     * So they get a mount in the same navy instead of a white one, which turns
+     * the jump into a step the eye can take and makes the darkness look
+     * deliberate. Deliberately identical in both themes: it matches the dark
+     * theme's --card, so these blocks look the same either way and can't drift
+     * into "only broken in light mode".
+     */
+    --surface-deep: 221 46% 12%;
+    --surface-deep-foreground: 216 33% 97%;
+    --surface-deep-muted: 215 20% 72%;
   }
 
   .dark {

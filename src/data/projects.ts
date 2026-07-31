@@ -84,7 +84,10 @@ export const projects: Project[] = [
       "Groq",
       "Gemini",
     ],
-    links: {},
+    links: {
+      live: "https://proposal-assistant-mocha.vercel.app",
+      repo: "https://github.com/ageumenezesDev19/proposal-assistant",
+    },
   },
   {
     id: "exacta",

@@ -153,15 +153,19 @@ const ProjectsSection = () => {
             </div>
 
             <figure className="relative border-t lg:border-t-0 lg:border-l border-border bg-muted/40 p-6 sm:p-10 flex flex-col justify-center">
-              <img
-                src={komerbenImg}
-                alt={t.imageCaption}
-                width={1280}
-                height={800}
-                loading="lazy"
-                decoding="async"
-                className="rounded-lg border border-border w-full"
-              />
+              {/* The screenshot is of a dark interface, so it gets the same
+                  navy mount as the portraits rather than a light border. */}
+              <div className="rounded-xl bg-surface-deep p-2">
+                <img
+                  src={komerbenImg}
+                  alt={t.imageCaption}
+                  width={1280}
+                  height={800}
+                  loading="lazy"
+                  decoding="async"
+                  className="rounded-lg w-full"
+                />
+              </div>
               <figcaption className="mt-3 font-mono text-xs text-muted-foreground">
                 {t.imageCaption}
               </figcaption>
