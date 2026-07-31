@@ -125,6 +125,50 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "design-system",
+    title: "Emerald UI — Design System",
+    category: "frontend",
+    role: {
+      en: "Creator and sole maintainer",
+      pt: "Criador e único mantenedor",
+    },
+    description: {
+      en: "A component library published to npm, versioned through a release pipeline and documented in Storybook. Nine components built on seven token scales, in a monorepo that also ships the shared ESLint and TypeScript configs the packages consume.",
+      pt: "Biblioteca de componentes publicada no npm, versionada por um pipeline de release e documentada no Storybook. Nove componentes construídos sobre sete escalas de tokens, num monorepo que também publica as configurações de ESLint e TypeScript que os pacotes consomem.",
+    },
+    highlights: [
+      {
+        en: "Published as @emerald-ui/react — four releases through 2.2.0, versioned with Changesets",
+        pt: "Publicado como @emerald-ui/react — quatro releases até a 2.2.0, versionado com Changesets",
+      },
+      {
+        en: "Monorepo of five packages (react, tokens, docs, eslint-config, ts-config) orchestrated with Turborepo",
+        pt: "Monorepo de cinco pacotes (react, tokens, docs, eslint-config, ts-config) orquestrado com Turborepo",
+      },
+      {
+        en: "Design tokens as the single source of truth: colours, spacing, radii, and four typography scales",
+        pt: "Design tokens como fonte única da verdade: cores, espaçamento, raios e quatro escalas tipográficas",
+      },
+      {
+        en: "Storybook docs with the accessibility addon, over Radix primitives for the components where keyboard and ARIA behaviour is worth not reinventing",
+        pt: "Documentação em Storybook com o addon de acessibilidade, sobre primitivos Radix nos componentes em que teclado e ARIA não valem a pena reinventar",
+      },
+    ],
+    stack: [
+      "React",
+      "TypeScript",
+      "Stitches",
+      "Radix UI",
+      "Storybook",
+      "Turborepo",
+      "Changesets",
+    ],
+    links: {
+      live: "https://ageumenezesdev19.github.io/05-design-system/",
+      repo: "https://github.com/ageumenezesDev19/05-design-system",
+    },
+  },
+  {
     id: "fitflow",
     title: "FitFlow",
     category: "fullstack",
@@ -200,30 +244,6 @@ export const projects: Project[] = [
     stack: ["React", "Vite", "TypeScript", "styled-components", "Zod"],
     links: {
       repo: "https://github.com/ageumenezesDev19/chrono-track",
-    },
-  },
-  {
-    id: "ignite-shop",
-    title: "Ignite Shop",
-    category: "fullstack",
-    role: {
-      en: "Developer",
-      pt: "Desenvolvedor",
-    },
-    description: {
-      en: "An e-commerce storefront with a real Stripe checkout flow, server-side rendering and product catalog managed through the Stripe API.",
-      pt: "Loja e-commerce com fluxo real de checkout via Stripe, renderização no servidor e catálogo de produtos gerenciado pela API da Stripe.",
-    },
-    highlights: [
-      {
-        en: "Stripe integration: products, prices and checkout sessions",
-        pt: "Integração com Stripe: produtos, preços e sessões de checkout",
-      },
-    ],
-    stack: ["Next.js", "TypeScript", "Stripe"],
-    links: {
-      live: "https://04-ignite-shop-roan.vercel.app",
-      repo: "https://github.com/ageumenezesDev19/04-ignite-shop",
     },
   },
 ];

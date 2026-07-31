@@ -36,3 +36,9 @@ core
 
 CLAUDE.md
 .claude/
+
+# Working notes — kept locally, never published.
+# The resume sources in docs/ stay tracked: they generate the PDFs in public/.
+docs/NEXT-STEPS.md
+docs/PLANNING.md
+docs/PROFILE-README-SUGGESTION.md
