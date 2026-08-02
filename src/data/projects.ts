@@ -133,13 +133,13 @@ export const projects: Project[] = [
       pt: "Criador e único mantenedor",
     },
     description: {
-      en: "A component library published to npm, versioned through a release pipeline and documented in Storybook. Nine components built on seven token scales, in a monorepo that also ships the shared ESLint and TypeScript configs the packages consume.",
-      pt: "Biblioteca de componentes publicada no npm, versionada por um pipeline de release e documentada no Storybook. Nove componentes construídos sobre sete escalas de tokens, num monorepo que também publica as configurações de ESLint e TypeScript que os pacotes consomem.",
+      en: "A component library with a published Storybook, built as a monorepo with a release pipeline wired end to end. Nine components on seven token scales, alongside the shared ESLint and TypeScript configs the other packages consume.",
+      pt: "Biblioteca de componentes com Storybook publicado, construída como monorepo com pipeline de release configurado de ponta a ponta. Nove componentes sobre sete escalas de tokens, ao lado das configurações de ESLint e TypeScript que os outros pacotes consomem.",
     },
     highlights: [
       {
-        en: "Published as @emerald-ui/react — four releases through 2.2.0, versioned with Changesets",
-        pt: "Publicado como @emerald-ui/react — quatro releases até a 2.2.0, versionado com Changesets",
+        en: "Versioned with Changesets and a Turborepo release task — the packaging is set up to publish, not bolted on afterwards",
+        pt: "Versionado com Changesets e uma task de release no Turborepo — o empacotamento nasceu pronto para publicar, não foi remendado depois",
       },
       {
         en: "Monorepo of five packages (react, tokens, docs, eslint-config, ts-config) orchestrated with Turborepo",
