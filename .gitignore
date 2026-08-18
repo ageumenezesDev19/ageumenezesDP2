@@ -49,5 +49,9 @@ docs/CLIENTE-COMBINADO.md
 
 # Playwright MCP session artifacts — accessibility snapshots, console logs and
 # inspection screenshots. Debug output, not the product.
-.playwright-mcp/
+.playwright-mcp
 note-*.png
+
+# The knowledge graph an agent builds of this repo. Derived, and about the code
+# rather than part of it.
+graphify-out
