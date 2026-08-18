@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Client-facing pages, meant to be reached only through a link sent in a
+# proposal. Keeping them out of search is what stops a client landing on the
+# recruiter-facing portfolio instead.
+Disallow: /hire/
+
 Sitemap: https://ageumenezes-dp-2.vercel.app/sitemap.xml

@@ -2,7 +2,7 @@ import { Project } from "./types";
 
 /**
  * Featured projects, in display order. The flagship client project is
- * confidential (NDA): no repo/live links and no real data in screenshots.
+ * confidential: no repo/live links and no real data in screenshots.
  */
 export const projects: Project[] = [
   {

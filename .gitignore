@@ -41,4 +41,13 @@ CLAUDE.md
 # The resume sources in docs/ stay tracked: they generate the PDFs in public/.
 docs/NEXT-STEPS.md
 docs/PLANNING.md
+docs/POSICIONAMENTO.md
 docs/PROFILE-README-SUGGESTION.md
+docs/CORTEX-PLAN.md
+docs/WORKANA-PROFILE.md
+docs/CLIENTE-COMBINADO.md
+
+# Playwright MCP session artifacts — accessibility snapshots, console logs and
+# inspection screenshots. Debug output, not the product.
+.playwright-mcp/
+note-*.png

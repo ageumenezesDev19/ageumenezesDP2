@@ -37,8 +37,24 @@
       a first-time visitor gets. Someone with light saved fetches the other one
       normally — worth it to keep the common path fast rather than preloading
       both and wasting a request on every visit.
+
+      Inserted by script rather than declared, because the portrait is the LCP
+      element on / only: /hire/* never renders it, and a client opening that
+      page from a proposal would download 65 kB for nothing.
     -->
-    <link rel="preload" as="image" href="/photos/ageu-hero.webp" type="image/webp" fetchpriority="high" />
+    <script>
+      if (!location.pathname.startsWith("/hire")) {
+        document.head.appendChild(
+          Object.assign(document.createElement("link"), {
+            rel: "preload",
+            as: "image",
+            href: "/photos/ageu-hero.webp",
+            type: "image/webp",
+            fetchPriority: "high",
+          }),
+        );
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

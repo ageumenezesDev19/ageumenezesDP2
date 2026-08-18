@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Ageu Menezes — Resume (ATS)</title>
+<!--
+  ATS-safe twin of resume.html. Same facts, layout stripped of everything that
+  broke Workana's parser: single column, no letter-spacing on headings, bullets
+  as literal "• " text (Chromium omits CSS list markers from the PDF text run),
+  ASCII hyphens in dates, and one label per line.
+  Print to public/resume-ats.pdf — never replace resume.pdf with this one.
+-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @page { size: A4; margin: 0; }
+  body {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    color: #000;
+    font-size: 9.6px;
+    line-height: 1.28;
+    width: 210mm;
+  }
+  .page { padding: 10mm 13mm; }
+  h1 { font-size: 19px; margin-bottom: 2px; }
+  h2 {
+    font-size: 11px; text-transform: uppercase;
+    border-bottom: 1px solid #000;
+    padding-bottom: 2px; margin: 7px 0 4px;
+    break-after: avoid;
+  }
+  p { margin-bottom: 3px; }
+  .role { font-size: 11px; font-weight: bold; margin-bottom: 4px; }
+  .contact div { margin-bottom: 0.5px; }
+  .item { margin-bottom: 6px; break-inside: avoid; }
+  .item-title { font-weight: bold; font-size: 10.5px; }
+  .item-org { font-weight: bold; }
+  .period { margin-bottom: 2px; }
+  .bullet { margin-bottom: 1px; padding-left: 10px; text-indent: -10px; }
+  .skill-row { margin-bottom: 2px; }
+  a { color: #000; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>Ageu Menezes</h1>
+  <div class="role">Front-End Developer</div>
+  <div class="contact">
+    <div>Email: ageumenezes23@gmail.com</div>
+    <div>Phone: +55 88 98177-4397</div>
+    <div>Location: Ceara, Brazil (UTC-3)</div>
+    <div>LinkedIn: https://www.linkedin.com/in/ageu-menezes-silva-dev/</div>
+    <div>GitHub: https://github.com/ageumenezesDev19</div>
+    <div>Portfolio: https://ageumenezes-dp-2.vercel.app</div>
+  </div>
+
+  <h2>Summary</h2>
+  <p>
+    Front-end developer with 3+ years of experience, specialized in React, Next.js and TypeScript,
+    with working back-end and DevOps skills (Node.js, Docker, CI/CD). Currently the sole front-end
+    engineer of a production inventory management system used daily by a retail company. Started out
+    in web development at Trybe, with ongoing specialization at Rocketseat. Comfortable owning the
+    full cycle: architecture, implementation, testing and deploys.
+  </p>
+
+  <h2>Work Experience</h2>
+
+  <div class="item">
+    <div class="item-title">Front-End Developer</div>
+    <div class="item-org">Confidential Retail Client (freelance contract)</div>
+    <div class="period">01/2025 - Present | Remote, Brazil</div>
+    <div class="bullet">&bull; Sole front-end engineer of a production inventory and production-tracking web system (Next.js 15, React 19, TypeScript, Tailwind CSS).</div>
+    <div class="bullet">&bull; Integrated an external API with role-based authentication, protected routes and permission handling.</div>
+    <div class="bullet">&bull; Built rich reporting: XLSX, PDF and DOCX exports used in daily operations.</div>
+    <div class="bullet">&bull; Set up Playwright end-to-end tests, conventional commits and automated changelog releases (approx. 230 TypeScript files, 28 routes).</div>
+  </div>
+
+  <div class="item">
+    <div class="item-title">Freelance Web Developer</div>
+    <div class="item-org">Self-employed</div>
+    <div class="period">01/2022 - Present | Remote, Brazil</div>
+    <div class="bullet">&bull; Design, build and deploy web applications for clients and own products with React, Next.js and TypeScript.</div>
+    <div class="bullet">&bull; Shipped a cross-platform desktop inventory app with Tauri (Rust) and React (Exacta).</div>
+    <div class="bullet">&bull; Built a full-stack habit tracker: one Node.js API serving React web and React Native mobile clients.</div>
+  </div>
+
+  <h2>Skills</h2>
+  <div class="skill-row"><strong>Front-End:</strong> JavaScript (3 years), React (2 years), Next.js (1 year), TypeScript, Tailwind CSS, styled-components, Framer Motion, React Native, Tauri</div>
+  <div class="skill-row"><strong>Back-End:</strong> Node.js (2 years), Express, REST APIs, MySQL, Prisma, Sequelize, JWT authentication</div>
+  <div class="skill-row"><strong>DevOps:</strong> Docker, CI/CD (GitHub Actions), Vercel, release automation</div>
+  <div class="skill-row"><strong>Testing:</strong> Playwright (end-to-end), Jest, React Testing Library</div>
+  <div class="skill-row"><strong>Languages:</strong> Portuguese (native), English (professional)</div>
+
+  <h2>Education</h2>
+
+  <div class="item">
+    <div class="item-title">Trybe</div>
+    <div class="item-org">Web Development, intensive program</div>
+    <div class="period">01/2021 - 12/2022</div>
+    <div class="bullet">&bull; Certified in the Web Development Fundamentals module: Unix and Bash, Git and GitHub, HTML and CSS, JavaScript, DOM and unit testing.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-title">Rocketseat</div>
+    <div class="item-org">Ongoing specialization, 11 certificates</div>
+    <div class="period">01/2024 - Present</div>
+    <div class="bullet">&bull; React Fundamentals and Advanced Hooks</div>
+    <div class="bullet">&bull; Next.js Fundamentals and Advanced</div>
+    <div class="bullet">&bull; Node.js Fundamentals and DDD in Node.js</div>
+    <div class="bullet">&bull; Design System</div>
+    <div class="bullet">&bull; DevOps Culture Fundamentals</div>
+    <div class="bullet">&bull; HTTP and Performance</div>
+  </div>
+
+  <h2>Projects</h2>
+
+  <div class="item">
+    <div class="item-title">Pitchfolio - AI assistant for freelance proposals</div>
+    <div class="period">https://proposal-assistant-mocha.vercel.app</div>
+    <div class="bullet">&bull; Reads a job post, extracts requirements and risks, and drafts a reply from saved case studies; tracks which proposals get replies.</div>
+    <div class="bullet">&bull; Provider-agnostic AI layer with automatic failover (Groq to Gemini), Zod-validated structured output, Supabase auth with row-level security and per-user rate limiting.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-title">Emerald UI - design system with published Storybook</div>
+    <div class="period">https://ageumenezesdev19.github.io/05-design-system/</div>
+    <div class="bullet">&bull; Nine components over seven token scales, documented in Storybook with the accessibility addon, built on Radix primitives.</div>
+    <div class="bullet">&bull; Five-package monorepo on Turborepo, versioned with Changesets, shipping the shared ESLint and TypeScript configs the other packages consume.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-title">Exacta - exact-value stock search</div>
+    <div class="period">https://github.com/ageumenezesDev19/DesPensa-</div>
+    <div class="bullet">&bull; Solves a subset-sum search over a live inventory (which combination of products adds up to exactly this amount) in a Web Worker so the interface never blocks.</div>
+    <div class="bullet">&bull; Native desktop build with Tauri (Rust), multiple profiles with backup and restore, and offline-first persistence.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-title">Developer portfolio - bilingual, serverless contact form</div>
+    <div class="period">https://github.com/ageumenezesDev19/ageumenezesDP2</div>
+    <div class="bullet">&bull; React, Vite and TypeScript with an EN/PT content layer, dark and light themes, and a Vercel serverless function for email delivery. Lighthouse: 100 SEO, 100 accessibility.</div>
+  </div>
+
+  <h2>Availability</h2>
+  <p>Open to freelance projects and remote roles. Based in Brazil (UTC-3), with overlap for US and European working hours.</p>
+
+</div>
+</body>
+</html>
