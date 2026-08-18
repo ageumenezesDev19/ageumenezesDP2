@@ -25,10 +25,10 @@ const content = {
     title: "Projects",
     subtitle:
       "Real products with real deploys — starting with the client system I maintain in production.",
-    underNda: "under NDA",
+    confidential: "confidential",
     inProduction: "in production",
     imageCaption: "Representative interface — client data withheld",
-    ndaNote:
+    confidentialNote:
       "This is client work: the code and data are confidential. I'm happy to talk through the architecture and my decisions on a call.",
     askAbout: "Ask me about this project",
     carouselLabel: "Other projects, swipe to browse",
@@ -39,10 +39,10 @@ const content = {
     title: "Projetos",
     subtitle:
       "Produtos reais com deploys reais — começando pelo sistema de cliente que mantenho em produção.",
-    underNda: "sob NDA",
+    confidential: "confidencial",
     inProduction: "em produção",
     imageCaption: "Interface representativa — dados do cliente omitidos",
-    ndaNote:
+    confidentialNote:
       "Este é um trabalho para cliente: código e dados são confidenciais. Posso falar sobre a arquitetura e minhas decisões em uma call.",
     askAbout: "Pergunte sobre este projeto",
     carouselLabel: "Outros projetos, deslize para navegar",
@@ -87,7 +87,7 @@ const ProjectsSection = () => {
           <p className="text-muted-foreground max-w-2xl">{t.subtitle}</p>
         </motion.div>
 
-        {/* Flagship: confidential client work presented as an NDA dossier */}
+        {/* Flagship: the client system, shown without name, link or real data. */}
         <motion.article
           {...reveal}
           className="rounded-xl border border-border bg-card overflow-hidden mb-12"
@@ -97,7 +97,7 @@ const ProjectsSection = () => {
               <div className="flex flex-wrap items-center gap-2 mb-5">
                 <span className="chip border-primary/50 text-primary">
                   <Lock className="h-3 w-3 mr-1.5" aria-hidden="true" />
-                  {t.underNda}
+                  {t.confidential}
                 </span>
                 <span className="chip">
                   <span
@@ -139,7 +139,7 @@ const ProjectsSection = () => {
               </div>
 
               <p className="text-xs text-muted-foreground border-l-2 border-primary/40 pl-3 mb-6">
-                {t.ndaNote}
+                {t.confidentialNote}
               </p>
 
               <a

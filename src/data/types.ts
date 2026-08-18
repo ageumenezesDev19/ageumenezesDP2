@@ -24,7 +24,7 @@ export interface Project {
   };
   /** Resolved image URL (imported asset), wired in the components layer */
   image?: string;
-  /** Client work under NDA: no repo/live links, generic screenshots only */
+  /** Confidential client work: no repo/live links, generic screenshots only */
   confidential?: boolean;
   flagship?: boolean;
 }
@@ -72,4 +72,47 @@ export interface Profile {
   socials: SocialLink[];
   /** One resume per language: both the file and its download name differ. */
   resume: Record<Language, { url: string; fileName: string }>;
+}
+
+/**
+ * The client-facing pages under /hire. English only — the marketplace they're
+ * sent into is English first, and half a translation converts worse than one
+ * good version.
+ */
+export type HireSlug = "dev" | "va";
+
+export interface HireService {
+  name: string;
+  includes: string[];
+}
+
+/**
+ * Told as situation → change → result, because that is the order a client
+ * recognises their own problem in. `built` is the one quiet line for the
+ * client who does happen to be technical.
+ */
+export interface HireProofCase {
+  situation: string;
+  change: string;
+  result: string;
+  built: string;
+}
+
+export interface HireProcessStep {
+  title: string;
+  body: string;
+}
+
+export interface HireVariant {
+  slug: HireSlug;
+  eyebrow: string;
+  headline: string;
+  subhead: string;
+  /** Three pains, in the client's words rather than the trade's. */
+  problems: string[];
+  proof: HireProofCase;
+  process: HireProcessStep[];
+  services: HireService[];
+  /** One line reaching into the other variant. A section here would dilute both. */
+  crossSell: string;
 }

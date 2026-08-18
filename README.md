@@ -18,7 +18,7 @@ Bilingual (EN/PT) portfolio of a front-end developer who ships full products.
 
 - English by default with a Portuguese toggle; theme (dark/light) toggle
 - Unified bilingual content layer in `src/data/` (projects, profile, experience, skills, certificates)
-- Flagship client case study presented under NDA — no confidential data exposed
+- Flagship client case study presented as confidential — no client name, links or real data
 - Real project screenshots, optimized WebP images, preloaded LCP hero photo
 - SEO: full meta/OG/Twitter tags, sitemap, robots.txt — Lighthouse SEO 100 / a11y 100
 - Downloadable one-page resume (`public/resume.pdf`, source in `docs/resume.html`)
