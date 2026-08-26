@@ -21,6 +21,10 @@ const content = {
   en: {
     menuItems: [
       { label: "Projects", href: "#projects" },
+      // Every card in this section carries a Source link, so the label is exact;
+      // "Products", the other candidate, would sit next to "Projects" and read
+      // as the same word at a glance.
+      { label: "Open source", href: "#work" },
       { label: "Experience", href: "#experience" },
       { label: "About", href: "#about" },
       { label: "Skills", href: "#skills" },
@@ -33,6 +37,7 @@ const content = {
   pt: {
     menuItems: [
       { label: "Projetos", href: "#projects" },
+      { label: "Open source", href: "#work" },
       { label: "Experiência", href: "#experience" },
       { label: "Sobre", href: "#about" },
       { label: "Habilidades", href: "#skills" },

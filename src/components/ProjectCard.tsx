@@ -1,6 +1,7 @@
-import { Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, Maximize2 } from "lucide-react";
 import { useLanguage } from "@/providers/language-provider";
 import { Project } from "@/data/types";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 
 const content = {
   en: {
@@ -9,6 +10,7 @@ const content = {
     building: "in progress",
     source: "Source",
     demo: "Live",
+    open: "Open details",
   },
   pt: {
     liveDemo: "demo online",
@@ -16,12 +18,17 @@ const content = {
     building: "em construção",
     source: "Código",
     demo: "Ver online",
+    open: "Abrir detalhes",
   },
 };
 
 interface ProjectCardProps {
   project: Project;
   image?: string;
+  /** Summary that opens the full card in a dialog. On a phone the whole card is
+   *  a long vertical scroll inside a card that already scrolls; the summary keeps
+   *  the section skimmable and puts the detail one tap away. */
+  compact?: boolean;
 }
 
 /** Typographic fallback for projects without a screenshot yet: a stack manifest panel. */
@@ -39,9 +46,92 @@ const StackManifest = ({ project }: { project: Project }) => (
   </div>
 );
 
-const ProjectCard = ({ project, image }: ProjectCardProps) => {
+/** The dot and word that say what kind of thing this is. */
+const Status = ({ project, t }: { project: Project; t: (typeof content)["en"] }) => (
+  <p className="font-mono text-[11px] text-muted-foreground flex items-center gap-1.5">
+    {project.links.live ? (
+      <>
+        <span className="inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" aria-hidden="true" />
+        {t.liveDemo}
+      </>
+    ) : project.links.repo ? (
+      <>
+        <span className="inline-flex rounded-full h-1.5 w-1.5 bg-muted-foreground/50" aria-hidden="true" />
+        {t.openSource}
+      </>
+    ) : (
+      <>
+        <span className="inline-flex rounded-full h-1.5 w-1.5 bg-amber-500/70" aria-hidden="true" />
+        {t.building}
+      </>
+    )}
+  </p>
+);
+
+const ProjectCard = ({ project, image, compact }: ProjectCardProps) => {
   const { language } = useLanguage();
   const t = content[language];
+
+  if (compact) {
+    return (
+      <Dialog>
+        <DialogTrigger asChild>
+          <button
+            type="button"
+            className="group flex w-full items-center gap-3 rounded-xl border border-border
+              bg-card p-3 text-left transition-colors hover:border-primary/50
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            {image ? (
+              <img
+                src={image}
+                alt=""
+                width={1280}
+                height={800}
+                loading="lazy"
+                decoding="async"
+                className="h-16 w-20 shrink-0 rounded-lg border border-border object-cover object-top"
+              />
+            ) : (
+              <span
+                className="flex h-16 w-20 shrink-0 items-center justify-center rounded-lg
+                  border border-border bg-muted/40 font-mono text-[10px] text-primary"
+                aria-hidden="true"
+              >
+                $ stack
+              </span>
+            )}
+            <span className="min-w-0 flex-1">
+              <Status project={project} t={t} />
+              <span className="mt-1 block truncate font-bold tracking-tight">
+                {project.title}
+              </span>
+              {/* No `block` beside it: `line-clamp` needs the `-webkit-box`
+                  display it sets, and a display utility next to it wins. */}
+              <span className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
+                {project.description[language]}
+              </span>
+            </span>
+            <Maximize2
+              className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary"
+              aria-hidden="true"
+            />
+            <span className="sr-only">{t.open}</span>
+          </button>
+        </DialogTrigger>
+
+        {/* The rail behind it keeps its shape; the blur is what says the card is
+            on top of the page rather than part of it. */}
+        <DialogContent
+          className="max-h-[85dvh] w-[92vw] max-w-lg overflow-y-auto overscroll-contain
+            rounded-2xl p-0 sm:max-w-lg"
+        >
+          <DialogTitle className="sr-only">{project.title}</DialogTitle>
+          <ProjectCard project={project} image={image} />
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   return (
     <article className="group h-full flex flex-col rounded-xl border border-border bg-card overflow-hidden transition-colors hover:border-primary/50">

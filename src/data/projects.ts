@@ -70,6 +70,10 @@ export const projects: Project[] = [
         pt: "Rate limiting sobre a cota de IA compartilhada, para que uma conta não esgote o dia de todos",
       },
       {
+        en: "A golden-dataset eval suite: real job posts plus hand-written prompt-injection cases carrying a canary token, run through the same analyze path the app ships, and scored against the previous run",
+        pt: "Suíte de evals com dataset dourado: anúncios reais mais casos de prompt injection escritos à mão com um token canário, rodando pelo mesmo caminho de análise que o app entrega, e pontuados contra a rodada anterior",
+      },
+      {
         en: "Lighthouse 93 / 100 / 100 / 100 on the production build",
         pt: "Lighthouse 93 / 100 / 100 / 100 na build de produção",
       },

@@ -94,9 +94,12 @@ function stopServe() {
 
 console.log(`\n  ➜  Tailnet:  ${url}\n`);
 
+// Bound explicitly to the address `tailscale serve` was pointed at above. Left
+// to itself Vite binds `localhost`, which Node 17+ resolves to ::1 only, and the
+// proxy then hits a closed IPv4 port — the phone gets a white page.
 const vite = spawn(
   "npx",
-  ["vite", "--port", String(VITE_PORT), "--strictPort"],
+  ["vite", "--port", String(VITE_PORT), "--strictPort", "--host", "127.0.0.1"],
   {
     stdio: "inherit",
     env: {
