@@ -36,6 +36,8 @@ core
 
 CLAUDE.md
 .claude/
+.agents
+skills-lock.json
 
 # Working notes — kept locally, never published.
 # The resume sources in docs/ stay tracked: they generate the PDFs in public/.

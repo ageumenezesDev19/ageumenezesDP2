@@ -29,7 +29,7 @@ const ExperienceSection = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-background">
+    <div className="p-4 sm:p-10 lg:p-14">
       <div className="max-w-6xl mx-auto">
         <motion.div {...reveal} className="mb-8 md:mb-12">
           <p className="eyebrow mb-3">{t.eyebrow}</p>
@@ -101,7 +101,7 @@ const ExperienceSection = () => {
           </motion.div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

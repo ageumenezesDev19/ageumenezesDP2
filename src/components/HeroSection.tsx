@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
 import { ArrowDown, FileText, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import { useLanguage } from "@/providers/language-provider";
@@ -6,77 +7,51 @@ import { useTheme } from "@/providers/theme-provider";
 import { profile } from "@/data/profile";
 import { handleAnchorClick } from "@/lib/scroll";
 import { useResumeShare } from "@/lib/use-resume-share";
+import { OPENING, OPENING_EASE, openingRuns } from "@/lib/motion";
+import { heroPhotos, heroText } from "./hero-content";
 
 /**
- * The same portrait shot on two grounds, one per theme. A photograph carries
- * its own background, so on the wrong theme it lands as a block: the navy one
- * against the light page is a step of 221 out of 255, and the light one against
- * the dark page is 218. Served this way each is within ~15 of its page and
- * neither needs a frame to mediate. Only one ever loads.
+ * The desktop hero. Below `lg` the page renders `MobileDeck` instead, which
+ * carries its own hero — the two layouts share content, not markup, because one
+ * file holding both had 23 branches in it and every mobile change risked this one.
  */
-const heroPhotos = {
-  dark: "/photos/ageu-hero.webp",
-  light: "/photos/ageu-hero-light.webp",
-};
-
-const content = {
-  en: {
-    status: "available for freelance work",
-    headline1: "Front-end developer",
-    headline2: "who ships full products.",
-    viewWork: "View work",
-    downloadResume: "Download resume",
-    contact: "Contact",
-    photoCaption: "Ageu Menezes — front-end developer",
-  },
-  pt: {
-    status: "disponível para freelas",
-    headline1: "Dev front-end",
-    headline2: "que entrega produtos completos.",
-    viewWork: "Ver projetos",
-    downloadResume: "Baixar currículo",
-    contact: "Contato",
-    photoCaption: "Ageu Menezes — desenvolvedor front-end",
-  },
-};
-
-interface HeroSectionProps {
-  onExploreClick?: () => void;
-}
-
-const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
+const HeroSection = ({ onExploreClick = () => {} }: { onExploreClick?: () => void }) => {
   const { language } = useLanguage();
   const { theme } = useTheme();
   const reduceMotion = useReducedMotion();
-  const t = content[language];
+  const t = heroText[language];
   const resume = profile.resume[language];
   const shareResume = useResumeShare(resume);
   const heroPhoto = heroPhotos[theme];
 
-  const container = {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: reduceMotion ? 0 : 0.12 },
-    },
-  };
-  const item = {
-    hidden: { opacity: 0, y: reduceMotion ? 0 : 16 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
+  // Whether the arrival plays: a reload half-way down the page must not replay it.
+  const opening = useRef(openingRuns()).current;
+
+  /**
+   * One clock for the arrival, shared with the deck's fan. The stagger stays
+   * tight: LCP is recorded on the first frame the <h1> has any opacity, so it is
+   * the delay that would cost, never the duration.
+   */
+  const enter = (at: number) =>
+    !opening || reduceMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 22 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.65, delay: at / 1000, ease: OPENING_EASE },
+        };
 
   return (
     // dvh keeps the hero from being clipped by mobile browser toolbars
     <section className="min-h-screen supports-[min-height:100dvh]:min-h-[100dvh] flex items-center bg-background px-4 sm:px-6 lg:px-8 pt-24 pb-12 lg:pt-20 lg:pb-0">
-      <motion.div
-        className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center"
-        variants={container}
-        initial="hidden"
-        animate="visible"
-      >
+      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center">
         <div>
           {/* Mobile identity row: the face shows up before the fold. The full
               badge card below takes over from lg: up. */}
-          <motion.div variants={item} className="flex items-center gap-3 mb-6 lg:hidden">
+          <motion.div
+            {...enter(OPENING.portrait)}
+            className="flex items-center gap-3 mb-6 lg:hidden"
+          >
             <img
               src={heroPhoto}
               alt={t.photoCaption}
@@ -93,7 +68,10 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
             </p>
           </motion.div>
 
-          <motion.p variants={item} className="eyebrow hidden lg:flex items-center gap-2 mb-6">
+          <motion.p
+            {...enter(OPENING.portrait)}
+            className="eyebrow hidden lg:flex items-center gap-2 mb-6"
+          >
             <span className="relative flex h-2 w-2" aria-hidden="true">
               <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
@@ -102,7 +80,7 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
           </motion.p>
 
           <motion.h1
-            variants={item}
+            {...enter(OPENING.headline)}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-6"
           >
             {t.headline1}
@@ -111,14 +89,14 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
           </motion.h1>
 
           <motion.p
-            variants={item}
+            {...enter(OPENING.rest)}
             className="text-lg text-muted-foreground max-w-xl mb-8"
           >
             {profile.tagline[language]}
           </motion.p>
 
           <motion.div
-            variants={item}
+            {...enter(OPENING.rest)}
             className="flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-10"
           >
             <Button
@@ -130,11 +108,7 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
               <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
             </Button>
             <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-11" asChild>
-              <a
-                href={resume.url}
-                download={resume.fileName}
-                onClick={shareResume}
-              >
+              <a href={resume.url} download={resume.fileName} onClick={shareResume}>
                 <FileText className="mr-2 h-4 w-4" />
                 {t.downloadResume}
               </a>
@@ -148,7 +122,7 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
           </motion.div>
 
           <motion.p
-            variants={item}
+            {...enter(OPENING.rest)}
             className="font-mono text-xs text-muted-foreground leading-relaxed"
           >
             {profile.location[language]}
@@ -159,28 +133,39 @@ const HeroSection = ({ onExploreClick = () => {} }: HeroSectionProps) => {
           </motion.p>
         </div>
 
-        {/* Badge card is desktop-only; mobile shows the compact avatar above. */}
-        <div className="hidden lg:flex justify-center lg:justify-end">
-          {/* One mount token that follows the portrait of the current theme, so
-              the frame reads the same in both: a soft edge around the picture
-              rather than a card the picture was placed on. The shadow is scaled
-              per theme because weight that vanishes on navy turns the same card
-              into a sticker on off-white. */}
-          <figure className="w-64 sm:w-72 lg:w-80 rounded-xl border border-surface-mount bg-surface-mount p-2 pb-0 overflow-hidden shadow-lg shadow-black/5 dark:shadow-2xl dark:shadow-black/30">
-            <img
-              src={heroPhoto}
-              alt={t.photoCaption}
-              width={800}
-              height={1067}
-              className="object-cover aspect-[4/5] w-full rounded-lg"
-            />
-            <figcaption className="mt-2 flex items-center gap-2 border-t-2 border-primary px-2 py-3 font-mono text-xs text-surface-mount-muted">
-              <span className="inline-flex rounded-full h-1.5 w-1.5 bg-primary shrink-0" aria-hidden="true" />
-              {t.photoCaption}
-            </figcaption>
-          </figure>
-        </div>
-      </motion.div>
+        {/* Badge card is desktop-only; mobile shows the compact avatar above.
+            It carries the same variant as the text: without one it was the only
+            piece of the hero that arrived already finished. */}
+        <motion.div
+          {...enter(OPENING.portrait)}
+          className="hidden lg:flex justify-center lg:justify-end"
+        >
+          {/* The deck measures this box to sit itself behind the portrait. */}
+          <div className="relative w-64 sm:w-72 lg:w-80" data-deck-anchor>
+            {/* One mount token that follows the portrait of the current theme, so
+                the frame reads the same in both: a soft edge around the picture
+                rather than a card the picture was placed on. The shadow is scaled
+                per theme because weight that vanishes on navy turns the same card
+                into a sticker on off-white. */}
+            <figure className="relative w-full rounded-xl border border-surface-mount bg-surface-mount p-2 pb-0 overflow-hidden shadow-lg shadow-black/5 dark:shadow-2xl dark:shadow-black/30">
+              <img
+                src={heroPhoto}
+                alt={t.photoCaption}
+                width={800}
+                height={1067}
+                className="object-cover aspect-[4/5] w-full rounded-lg"
+              />
+              <figcaption className="mt-2 flex items-center gap-2 border-t-2 border-primary px-2 py-3 font-mono text-xs text-surface-mount-muted">
+                <span
+                  className="inline-flex rounded-full h-1.5 w-1.5 bg-primary shrink-0"
+                  aria-hidden="true"
+                />
+                {t.photoCaption}
+              </figcaption>
+            </figure>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };
