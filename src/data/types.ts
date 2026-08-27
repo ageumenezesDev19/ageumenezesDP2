@@ -18,6 +18,9 @@ export interface Project {
   category: ProjectCategory;
   links: {
     live?: string;
+    /** Replaces the default "live demo" wording. For a link that is a demo over
+     *  invented data rather than the product itself running. */
+    liveLabel?: LocalizedString;
     repo?: string;
     /** Extra repos (e.g. server/mobile of a multi-repo project) */
     extraRepos?: { label: string; url: string }[];

@@ -33,9 +33,9 @@
     />
     <meta name="twitter:image" content="https://ageumenezes-dp-2.vercel.app/og-image.png" />
     <!--
-      Preloads the dark portrait because dark is the default theme, so it's what
-      a first-time visitor gets. Someone with light saved fetches the other one
-      normally — worth it to keep the common path fast rather than preloading
+      Preloads the light portrait because light is the default theme, so it's
+      what a first-time visitor gets. Someone with dark saved fetches the other
+      one normally — worth it to keep the common path fast rather than preloading
       both and wasting a request on every visit.
 
       Inserted by script rather than declared, because the portrait is the LCP
@@ -48,7 +48,7 @@
           Object.assign(document.createElement("link"), {
             rel: "preload",
             as: "image",
-            href: "/photos/ageu-hero.webp",
+            href: "/photos/ageu-hero-light.webp",
             type: "image/webp",
             fetchPriority: "high",
           }),
