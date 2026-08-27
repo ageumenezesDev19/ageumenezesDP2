@@ -2,25 +2,8 @@ import { Github, ExternalLink, Maximize2 } from "lucide-react";
 import { useLanguage } from "@/providers/language-provider";
 import { Project } from "@/data/types";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
+import { ProjectStatus, useProjectText } from "./project-labels";
 
-const content = {
-  en: {
-    liveDemo: "live demo",
-    openSource: "open source",
-    building: "in progress",
-    source: "Source",
-    demo: "Live",
-    open: "Open details",
-  },
-  pt: {
-    liveDemo: "demo online",
-    openSource: "código aberto",
-    building: "em construção",
-    source: "Código",
-    demo: "Ver online",
-    open: "Abrir detalhes",
-  },
-};
 
 interface ProjectCardProps {
   project: Project;
@@ -46,31 +29,10 @@ const StackManifest = ({ project }: { project: Project }) => (
   </div>
 );
 
-/** The dot and word that say what kind of thing this is. */
-const Status = ({ project, t }: { project: Project; t: (typeof content)["en"] }) => (
-  <p className="font-mono text-[11px] text-muted-foreground flex items-center gap-1.5">
-    {project.links.live ? (
-      <>
-        <span className="inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" aria-hidden="true" />
-        {t.liveDemo}
-      </>
-    ) : project.links.repo ? (
-      <>
-        <span className="inline-flex rounded-full h-1.5 w-1.5 bg-muted-foreground/50" aria-hidden="true" />
-        {t.openSource}
-      </>
-    ) : (
-      <>
-        <span className="inline-flex rounded-full h-1.5 w-1.5 bg-amber-500/70" aria-hidden="true" />
-        {t.building}
-      </>
-    )}
-  </p>
-);
 
 const ProjectCard = ({ project, image, compact }: ProjectCardProps) => {
   const { language } = useLanguage();
-  const t = content[language];
+  const { t, buttonText } = useProjectText(project);
 
   if (compact) {
     return (
@@ -102,7 +64,7 @@ const ProjectCard = ({ project, image, compact }: ProjectCardProps) => {
               </span>
             )}
             <span className="min-w-0 flex-1">
-              <Status project={project} t={t} />
+              <ProjectStatus project={project} />
               <span className="mt-1 block truncate font-bold tracking-tight">
                 {project.title}
               </span>
@@ -154,24 +116,9 @@ const ProjectCard = ({ project, image, compact }: ProjectCardProps) => {
       <div className="p-5 flex flex-col flex-1">
         {/* Three states, because "open source" with no repo link to show for it
             is a claim the card can't back up. */}
-        <p className="font-mono text-[11px] text-muted-foreground mb-2 flex items-center gap-1.5">
-          {project.links.live ? (
-            <>
-              <span className="inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" aria-hidden="true" />
-              {t.liveDemo}
-            </>
-          ) : project.links.repo ? (
-            <>
-              <span className="inline-flex rounded-full h-1.5 w-1.5 bg-muted-foreground/50" aria-hidden="true" />
-              {t.openSource}
-            </>
-          ) : (
-            <>
-              <span className="inline-flex rounded-full h-1.5 w-1.5 bg-amber-500/70" aria-hidden="true" />
-              {t.building}
-            </>
-          )}
-        </p>
+        <div className="mb-2">
+          <ProjectStatus project={project} />
+        </div>
 
         <h3 className="text-lg font-bold tracking-tight mb-2">{project.title}</h3>
         <p className="text-sm text-muted-foreground mb-4 flex-1">
@@ -218,7 +165,7 @@ const ProjectCard = ({ project, image, compact }: ProjectCardProps) => {
               className="inline-flex min-h-11 items-center gap-1.5 font-mono text-xs text-primary hover:underline underline-offset-4"
             >
               <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-              {t.demo}
+              {buttonText}
             </a>
           )}
         </div>

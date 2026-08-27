@@ -21,24 +21,78 @@ export const projects: Project[] = [
     },
     highlights: [
       {
-        en: "Role-based authentication and protected routes against an external API",
-        pt: "Autenticação com papéis/permissões e rotas protegidas integradas a uma API externa",
+        en: "I built the whole front end against an API I don't own — including the sign-in and the rules for who gets to reach which screen",
+        pt: "Construí todo o front-end sobre uma API que não é minha — incluindo o login e as regras de quem pode chegar a qual tela",
       },
       {
-        en: "Rich reporting: XLSX, PDF and DOCX exports for daily operations",
-        pt: "Relatórios completos: exportação em XLSX, PDF e DOCX para a operação diária",
+        en: "The team exports its day's work as spreadsheets, PDFs and documents straight from the interface. It is the part they touch most, so it is the part that could not break",
+        pt: "A equipe exporta o trabalho do dia em planilha, PDF e documento direto da interface. É a parte que eles mais usam, então é a parte que não podia quebrar",
       },
       {
-        en: "Playwright end-to-end tests, conventional commits and automated changelog releases",
-        pt: "Testes end-to-end com Playwright, conventional commits e releases com changelog automatizado",
+        en: "It goes out on a pipeline rather than by hand: end-to-end tests in Playwright, and a changelog that writes itself from the commits",
+        pt: "Sobe por um pipeline em vez de na mão: testes end-to-end no Playwright e um changelog que se escreve a partir dos commits",
       },
       {
-        en: "~230 TypeScript files across 28 app routes, shipped and evolving in production",
-        pt: "~230 arquivos TypeScript em 28 rotas, em produção e em evolução contínua",
+        en: "Around 230 TypeScript files across 28 routes, in production and still growing — I am the only front-end engineer on it",
+        pt: "Uns 230 arquivos TypeScript em 28 rotas, em produção e ainda crescendo — sou o único engenheiro de front-end nele",
       },
     ],
     stack: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "shadcn/ui", "Playwright"],
     links: {},
+  },
+  {
+    id: "cortex",
+    title: "Cortex",
+    category: "desktop",
+    role: {
+      en: "Creator and sole developer",
+      pt: "Criador e único desenvolvedor",
+    },
+    description: {
+      en: "A local-first knowledge base for course notes and screenshots. Every image dropped into the vault goes through OCR automatically, so searching finds the text inside a screenshot the same way it finds prose. Markdown on disk is the source of truth — the SQLite index beside it is derived and disposable.",
+      pt: "Base de conhecimento local-first para anotações e prints de curso. Toda imagem que entra no vault passa por OCR automático, então a busca encontra o texto dentro do print do mesmo jeito que encontra prosa. Markdown em disco é a fonte da verdade — o índice SQLite ao lado é derivado e descartável.",
+    },
+    highlights: [
+      {
+        en: "You can open the vault from your phone — the same app answers in Safari over the tailnet. The desktop window and the phone go through one set of commands rather than two, so whatever I add on the Mac is there on the phone the same day",
+        pt: "Dá para abrir o vault pelo celular — o mesmo app responde no Safari pelo tailnet. A janela do desktop e o celular passam por um único conjunto de comandos em vez de dois, então o que eu adiciono no Mac está no celular no mesmo dia",
+      },
+      {
+        en: "Ask it a question and it answers out of your own notes, numbering the passages it used — clicking a citation jumps to that exact spot in the note rather than just opening the file",
+        pt: "Você faz uma pergunta e ele responde a partir das suas próprias notas, numerando as passagens que usou — clicar numa citação salta para aquele trecho exato da nota, em vez de só abrir o arquivo",
+      },
+      {
+        en: "It has a classifier that works out what a screenshot is about, and it scores rather than parses: OCR gets code wrong in ways you can predict, reading a lowercase 'l' as the digit '1' and a curly brace as a parenthesis. Since almost everything I paste in is a screenshot of code, anything that insisted on valid syntax would fail on exactly the images the app exists for",
+        pt: "Tem um classificador que descobre do que é um screenshot, e ele pontua em vez de parsear: o OCR erra código de formas previsíveis, lendo um 'l' minúsculo como o dígito '1' e uma chave como parêntese. Como quase tudo que eu colo ali é print de código, qualquer coisa que exigisse sintaxe válida falharia justamente nas imagens que motivam o app",
+      },
+      {
+        en: "The notes never leave the machine to be understood: the model that turns them into vectors runs inside the app, not in somebody's cloud. The one thing that does go out is a question you send to an AI provider, and even then the key stays put — it reaches the request on stdin, so it never turns up in the process list",
+        pt: "As notas nunca saem da máquina para serem entendidas: o modelo que as transforma em vetores roda dentro do app, não na nuvem de alguém. A única coisa que sai é a pergunta que você manda a um provedor de IA, e mesmo aí a chave fica onde está — ela chega ao pedido pelo stdin, então nunca aparece na lista de processos",
+      },
+      {
+        en: "It sits at 178 MB with a 243-note vault indexed and a search on screen, because it draws in the WebView macOS already ships instead of carrying its own copy of Chromium, and hands OCR to the system's text recognition rather than keeping a model in memory",
+        pt: "Fica em 178 MB com um vault de 243 notas indexado e uma busca na tela, porque desenha na WebView que o macOS já traz em vez de carregar a própria cópia do Chromium, e entrega o OCR ao reconhecimento de texto do sistema em vez de manter um modelo na memória",
+      },
+      {
+        en: "The demo you can click is the real front end with the Rust half rebuilt in the browser, and it says where it differs instead of pretending it doesn't: it splits and ranks passages the way the desktop does, but with no SQLite underneath it can order two near-ties differently",
+        pt: "A demo que dá para clicar é o front-end de verdade com a metade em Rust refeita no navegador, e ela diz onde difere em vez de fingir que não difere: separa e ranqueia as passagens como o desktop, mas sem SQLite por baixo pode ordenar dois quase-empates de forma diferente",
+      },
+    ],
+    stack: [
+      "Tauri 2",
+      "Rust",
+      "React 19",
+      "TypeScript",
+      "SQLite FTS5",
+      "ProseMirror",
+      "axum",
+      "Transformers.js",
+    ],
+    links: {
+      live: "https://cortex-tawny-ten.vercel.app",
+      liveLabel: { en: "browser demo", pt: "demo no navegador" },
+      repo: "https://github.com/ageumenezesDev19/cortex",
+    },
   },
   {
     id: "pitchfolio",
