@@ -58,3 +58,6 @@ note-*.png
 # rather than part of it.
 graphify-out
 .graphifyignore
+
+# Qodo agent scratch directory.
+.qodo
