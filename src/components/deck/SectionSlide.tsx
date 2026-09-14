@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDealt, useSuccessor } from "./DeckContext";
 import { DECK, shellOf } from "./sections";
 import { useDeckEnabled } from "./useDeckEnabled";
-import { CARD_ORIGIN, PERSPECTIVE, ease, handover } from "./origin";
+import { ARRIVAL, ARRIVAL_SPAN, CARD_ORIGIN, PERSPECTIVE, ease, handover } from "./origin";
 import { remeasureScroll } from "./remeasure";
 import { isProgrammaticScroll } from "@/lib/scroll";
 import { useProgrammaticScrollValue } from "./useProgrammaticScroll";
@@ -21,21 +21,6 @@ import { useProgrammaticScrollValue } from "./useProgrammaticScroll";
  * clips the overflow.
  */
 const EXIT_TRAVEL = 1800;
-
-/**
- * The window a card arrives in and — read on the card below — the one it leaves
- * in. It opens as early as the geometry allows, because a card cannot begin to
- * slide aside until its successor is near, and by then the scroll has already
- * carried it up by roughly its own height.
- */
-const ARRIVAL = ["start end", "start 15%"] as const;
-
-/**
- * How much of a viewport the page scrolls across that window — the successor's
- * top travels from the bottom edge to 15 %. It is also exactly how far a card
- * would be carried up while it leaves, which is what the hold gives back.
- */
-const ARRIVAL_SPAN = 1 - 0.15;
 
 /**
  * Chasing the scroll with less drag than before; still short of a bounce.
@@ -77,10 +62,7 @@ type Props = {
  */
 const SectionSlide = ({ id, children }: Props) => {
   const enabled = useDeckEnabled();
-  // A shortcut crosses up to five cards in 900 ms. Measured, six of them were
-  // transformed at once and the browser dropped to ~37 fps: no amount of easing
-  // fits five full gestures into that, so the choreography stands down and what
-  // scrolls past is the plain page.
+  // Navigation tracks geometry directly; only its crossfade is softened.
   const jump = useProgrammaticScrollValue();
   const ref = useRef<HTMLElement>(null);
   const dealt = useDealt(id);
@@ -125,15 +107,24 @@ const SectionSlide = ({ id, children }: Props) => {
   // node that had no layout. See `remeasure.ts`.
   useEffect(() => remeasureScroll(), []);
 
-  // Text under a transform is resampled and goes soft, most visibly in WebKit,
-  // so the reading state carries no transform at all rather than an identity one.
+  // Keep the motion graph attached even when the reading pose is untransformed.
+  // Separate thresholds prevent spring noise from toggling the reading state.
   const [moving, setMoving] = useState(true);
+  const movingRef = useRef(true);
   const settle = () => {
-    const still = entry.get() > 0.995 && exit.get() < 0.005;
-    setMoving(!still);
+    const e = entry.get();
+    const o = exit.get();
+    const next = movingRef.current
+      ? !(e >= 0.9995 && o <= 0.0005)
+      : e < 0.998 || o > 0.002;
+    if (next !== movingRef.current) {
+      movingRef.current = next;
+      setMoving(next);
+    }
   };
   useMotionValueEvent(entry, "change", settle);
   useMotionValueEvent(exit, "change", settle);
+  useEffect(settle, [entry, exit]);
 
   useEffect(() => {
     if (!dealt) return;
@@ -169,9 +160,8 @@ const SectionSlide = ({ id, children }: Props) => {
   // that drives `x`: the two halves of the move cannot fall out of phase.
   const y = useTransform(exit, (o) => o * ARRIVAL_SPAN * vh);
 
-  // The section is invisible until the deck's card starts dissolving, and gains
-  // exactly what the card loses: the two are congruent through the window, so
-  // what reads is one card filling with content.
+  // The real content fades over an opaque, congruent backing in the deck.
+  // The backing is released only after this surface reaches full opacity.
   const opacity = useTransform([entry, exit, jump], ([e, o, j]: number[]) => {
     const natural = Math.min(handover(e), 1 - o * 0.9);
     return natural + (1 - natural) * j * OPACITY_LIFT;
@@ -206,11 +196,10 @@ const SectionSlide = ({ id, children }: Props) => {
           className={`w-full overflow-hidden rounded-3xl border shadow-2xl shadow-black/10 dark:shadow-black/40 lg:min-h-[92vh] ${shellOf(
             DECK[index].tone,
           )}`}
-          style={
-            enabled && moving
-              ? { z, x, y, rotateX, rotateY, opacity, transformOrigin: "50% 0%" }
-              : undefined
-          }
+          data-deck-surface={id}
+          data-deck-reading={!enabled || !moving ? "true" : "false"}
+          transformTemplate={!enabled || !moving ? () => "none" : undefined}
+          style={{ z, x, y, rotateX, rotateY, opacity, transformOrigin: "50% 0%" }}
         >
           {children}
         </motion.div>

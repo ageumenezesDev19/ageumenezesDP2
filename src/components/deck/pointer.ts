@@ -3,7 +3,10 @@
  * from the WebGL version this replaced, easing and amplitude included — those
  * numbers were already calibrated against the same deck.
  */
-export const POINTER_EASE = 0.06;
+const POINTER_EASE = 0.06;
+/** Preserve the 60 Hz response independently of the display refresh rate. */
+export const pointerBlend = (elapsedMs: number) =>
+  1 - Math.pow(1 - POINTER_EASE, Math.min(Math.max(elapsedMs, 0), 64) / (1000 / 60));
 export const POINTER_SWING = { x: 5, y: 8 };
 
 export const pointerTarget = { x: 0, y: 0 };
@@ -17,6 +20,7 @@ export function parallaxAvailable() {
 }
 
 export function trackPointer() {
+  pointerTarget.x = pointerTarget.y = 0;
   if (!parallaxAvailable()) return () => {};
 
   const handle = (event: PointerEvent) => {

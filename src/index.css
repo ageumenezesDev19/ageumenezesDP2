@@ -144,3 +144,8 @@
     @apply inline-flex items-center rounded-md border border-border bg-muted/60 px-2.5 py-1 font-mono text-xs text-muted-foreground;
   }
 }
+
+/* The graph stays subscribed while the reading surface remains crisp. */
+[data-deck-reading="true"] {
+  opacity: 1 !important;
+}

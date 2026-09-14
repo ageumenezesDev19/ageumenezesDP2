@@ -31,7 +31,7 @@ const ProjectDetail = forwardRef<HTMLDivElement, Props>(function ProjectDetail(
   const backRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    backRef.current?.focus();
+    backRef.current?.focus({ preventScroll: true });
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };

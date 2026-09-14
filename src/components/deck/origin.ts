@@ -1,3 +1,8 @@
+/** Shared geometry for scroll tracking and soft settling. */
+export const READ_AT = 0.15;
+export const ARRIVAL = ["start end", "start 15%"] as const;
+export const ARRIVAL_SPAN = 1 - READ_AT;
+
 /**
  * The one attitude an undealt card has: where it waits in the deck, and where a
  * section flies in from. Both sides read these numbers, so the card leaving the

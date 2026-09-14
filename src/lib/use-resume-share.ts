@@ -2,9 +2,20 @@ import { useEffect, useRef } from "react";
 
 const MIME = "application/pdf";
 
-/** Can this browser share an actual PDF file (iOS Safari, Android Chrome)? */
+/**
+ * macOS Safari implements the file share sheet too, so `canShare` alone sent
+ * desktop users a "share this PDF" prompt when they had asked to download one.
+ */
+function isAppleTouchDevice() {
+  if (typeof navigator === "undefined") return false;
+  const ua = navigator.userAgent;
+  // iPadOS 13+ claims to be a Mac; the touch points give it away.
+  return /iP(hone|ad|od)/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+}
+
+/** Can this browser share an actual PDF file, and does it need to? */
 function canSharePdf(fileName: string) {
-  if (typeof navigator === "undefined" || !navigator.canShare) return false;
+  if (!isAppleTouchDevice() || !navigator.canShare) return false;
   try {
     const probe = new File([""], fileName, { type: MIME });
     return navigator.canShare({ files: [probe] });
@@ -20,7 +31,7 @@ function canSharePdf(fileName: string) {
  * awaiting a fetch first makes Safari throw NotAllowedError. So the file is
  * fetched ahead of time and the click handler stays synchronous.
  *
- * Desktop browsers fall through to the anchor's normal download behaviour.
+ * Everywhere else the anchor's own `download` already does the right thing.
  */
 export function useResumeShare(resume: { url: string; fileName: string }) {
   const { url, fileName } = resume;
