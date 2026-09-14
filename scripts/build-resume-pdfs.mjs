@@ -10,7 +10,7 @@
  *   npm run resume
  */
 import { execFileSync } from "node:child_process";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -29,6 +29,17 @@ const RESUMES = [
   ["docs/resume-pt.html", "public/resume-pt.pdf"],
   ["docs/resume-ats.html", "public/resume-ats.pdf"],
 ];
+
+const EXPECTED_PAGES = 1;
+
+// A resume that silently grew to two pages is worse than one that fails to
+// build: docs/resume-pt.html lays its body out in a CSS grid, and Chrome never
+// splits a grid across pages — it moves the whole thing to page 2 and leaves
+// page 1 holding just the header. Chrome still exits 0, so count the pages.
+function pageCount(pdfPath) {
+  return readFileSync(pdfPath).toString("latin1").match(/\/Type\s*\/Page[^s]/g)
+    ?.length ?? 0;
+}
 
 const chrome = CHROME_CANDIDATES.find((path) => existsSync(path));
 if (!chrome) {
@@ -58,6 +69,15 @@ for (const [source, target] of RESUMES) {
       ],
       { stdio: "ignore" },
     );
+    const pages = pageCount(resolve(root, target));
+    if (pages !== EXPECTED_PAGES) {
+      console.error(
+        `fail  ${source} -> ${target} came out ${pages} pages, expected ${EXPECTED_PAGES}.` +
+          " Tighten the vertical spacing in the HTML until it fits.",
+      );
+      failed = true;
+      continue;
+    }
     console.log(`ok    ${source} -> ${target}`);
   } catch {
     console.error(`fail  ${source}`);

@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import Navigation from "./Navigation";
 import HeroSection from "./HeroSection";
-import { scrollToSection } from "@/lib/scroll";
+import { cancelScroll, scrollToSection } from "@/lib/scroll";
 import { useLanguage } from "@/providers/language-provider";
 import SectionSlide from "./deck/SectionSlide";
 import { DeckProvider } from "./deck/DeckContext";
@@ -46,6 +46,7 @@ const Home = () => {
     // bought was small and the commit is both more precise and cancellable.
     root.style.scrollPaddingTop = "64px";
     return () => {
+      cancelScroll();
       root.style.removeProperty("overflow");
       root.style.removeProperty("overscroll-behavior");
       root.style.removeProperty("scroll-padding-top");

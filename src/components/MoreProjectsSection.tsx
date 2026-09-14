@@ -82,7 +82,7 @@ const MoreProjectsSection = ({ compact }: { compact?: boolean } = {}) => {
     requestAnimationFrame(() =>
       document
         .querySelector<HTMLButtonElement>(`[data-project-row="${id}"]`)
-        ?.focus(),
+        ?.focus({ preventScroll: true }),
     );
   };
 

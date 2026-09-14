@@ -14,7 +14,10 @@
     width: 210mm;
     min-height: 297mm;
   }
-  .page { padding: 13mm 15mm; }
+  /* Tighter vertical rhythm than resume.html: the Portuguese text runs longer
+     and .two-col below never splits across pages, so overflowing by one line
+     drops the whole grid onto page 2 and leaves page 1 nearly blank. */
+  .page { padding: 11mm 15mm; }
   header { border-bottom: 2.5px solid #0B1120; padding-bottom: 12px; margin-bottom: 14px; }
   h1 { font-size: 26px; letter-spacing: 0.5px; color: #0B1120; }
   .role { font-size: 13px; color: #b7791f; font-weight: 600; margin-top: 2px; }
@@ -23,15 +26,15 @@
   h2 {
     font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.6px;
     color: #0B1120; border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 3px; margin: 14px 0 8px;
+    padding-bottom: 3px; margin: 11px 0 6px;
   }
-  .item { margin-bottom: 10px; }
+  .item { margin-bottom: 8px; }
   .item-head { display: flex; justify-content: space-between; align-items: baseline; }
   .item-title { font-weight: 700; font-size: 11.5px; }
   .item-org { color: #b7791f; font-weight: 600; }
   .period { color: #718096; font-size: 9.5px; white-space: nowrap; }
   ul { margin: 4px 0 0 14px; }
-  li { margin-bottom: 2.5px; }
+  li { margin-bottom: 2px; }
   .skill-row { display: flex; gap: 6px; }
   .skill-label { font-weight: 700; white-space: nowrap; min-width: 78px; }
   .two-col { display: grid; grid-template-columns: 1.6fr 1fr; gap: 0 26px; }

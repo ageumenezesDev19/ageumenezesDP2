@@ -1,10 +1,12 @@
-/** Height of the fixed navigation bar (h-16 = 64px). */
-const NAV_OFFSET = 64;
+import { isPageScrollInput } from './scroll-input';
 
+const NAV_OFFSET = 64;
 const easeInOutCubic = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-let activeAnimation: number | null = null;
+type CancelScroll = () => void;
+let active: { cancel: CancelScroll } | null = null;
+let generation = 0;
 let programmatic = false;
 const listeners = new Set<() => void>();
 
@@ -14,122 +16,101 @@ function setProgrammatic(value: boolean) {
   listeners.forEach((notify) => notify());
 }
 
-/**
- * Whether a nav shortcut is driving the scroll right now. 900 ms covers any
- * distance, so a shortcut moves the page by hundreds of pixels a frame — far
- * more than the deck's choreography was ever meant to follow. It stands down
- * while this is true.
- */
+/** Navigation shortcuts bypass the deck spring; soft settling does not. */
 export const isProgrammaticScroll = () => programmatic;
+export const isScrollAnimating = () => active !== null;
+export const cancelScroll = () => active?.cancel();
 
-/** Kept framework-agnostic so this file owes nothing to the animation library. */
 export function subscribeToProgrammaticScroll(notify: () => void) {
   listeners.add(notify);
-  return () => {
-    listeners.delete(notify);
-  };
+  return () => { listeners.delete(notify); };
 }
-
-/** Anything the reader does with the page outranks an animation of it. */
-const INTERRUPTS = ["wheel", "touchstart", "keydown"] as const;
 
 type ScrollOptions = {
   duration?: number;
-  /**
-   * Leaves the programmatic flag down. That flag makes the deck stand aside and
-   * the slides swap their spring for a jump, which is right for a nav shortcut
-   * moving ~110 px a frame and wrong for a commit moving ~15 — there the
-   * choreography is the whole point and must keep running.
-   */
   silent?: boolean;
-  /** Re-read at the end: lazy sections shift the layout mid-flight. */
+  /** Remaining distance to a destination whose layout can change during flight. */
   settle?: () => number;
-  /** `cancelled` is true when the reader interrupted; a caller that would
-   *  otherwise start the same animation again needs to know the difference. */
   onDone?: (cancelled: boolean) => void;
 };
 
-/**
- * Scrolls to an absolute y with a longer, eased animation. The native
- * `behavior: "smooth"` uses a fixed browser duration that feels abrupt on short
- * distances, so we animate manually.
- */
-export function scrollToY(target: number, options: ScrollOptions = {}) {
-  const { duration = 900, silent = false, settle, onDone } = options;
-  const start = window.scrollY;
-  const to = Math.max(0, target);
-
-  const finish = () => {
-    activeAnimation = null;
-    const drift = settle?.() ?? 0;
-    if (Math.abs(drift) > 4) window.scrollTo(0, window.scrollY + drift);
-    if (!silent) setProgrammatic(false);
-    stop();
-    onDone?.(false);
-  };
-
-  // `onDone` fires here too: a caller holding a "one at a time" lock would keep
-  // it forever if the reader interrupted the only path that released it.
-  const abort = () => {
-    if (activeAnimation !== null) cancelAnimationFrame(activeAnimation);
-    activeAnimation = null;
-    if (!silent) setProgrammatic(false);
-    stop();
-    onDone?.(true);
-  };
-
-  const stop = () =>
-    INTERRUPTS.forEach((type) => window.removeEventListener(type, abort));
-
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    if (!silent) setProgrammatic(true);
-    window.scrollTo(0, to);
-    requestAnimationFrame(() => {
-      if (!silent) setProgrammatic(false);
-      onDone?.(false);
-    });
-    return;
+/** One owner for every animated document scroll. Cancellation is idempotent. */
+export function scrollToY(target: number, options: ScrollOptions = {}): CancelScroll {
+  const request = ++generation;
+  active?.cancel();
+  // A completion callback may itself request a newer destination.
+  if (request !== generation) {
+    options.onDone?.(true);
+    return () => {};
   }
+  const { duration = 900, silent = false, settle, onDone } = options;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const desktop = window.matchMedia('(min-width: 1024px)');
+  const startedWide = desktop.matches;
+  const start = window.scrollY;
+  const clamp = (y: number) => Math.max(0, Math.min(y, Math.max(0, document.documentElement.scrollHeight - window.innerHeight)));
+  const to = clamp(Number.isFinite(target) ? target : start);
+  let frame = 0;
+  let done = false;
 
-  if (activeAnimation !== null) cancelAnimationFrame(activeAnimation);
-  if (!silent) setProgrammatic(true);
-  INTERRUPTS.forEach((type) =>
-    window.addEventListener(type, abort, { passive: true, once: true }),
-  );
-
-  const distance = to - start;
-  const startTime = performance.now();
-
-  const step = (now: number) => {
-    const progress = Math.min((now - startTime) / duration, 1);
-    window.scrollTo(0, start + distance * easeInOutCubic(progress));
-    if (progress < 1) {
-      activeAnimation = requestAnimationFrame(step);
-      return;
+  const complete = (cancelled: boolean) => {
+    if (done) return;
+    done = true;
+    cancelAnimationFrame(frame);
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((type) => window.removeEventListener(type, interrupt));
+    window.removeEventListener('pagehide', cancel);
+    reduce.removeEventListener('change', preferenceChanged);
+    desktop.removeEventListener('change', modeChanged);
+    if (active === owner) {
+      active = null;
+      setProgrammatic(false);
     }
-    finish();
+    onDone?.(cancelled);
   };
+  const cancel = () => complete(true);
+  const interrupt = (event: Event) => { if (isPageScrollInput(event)) cancel(); };
+  const preferenceChanged = () => { if (reduce.matches) cancel(); };
+  const modeChanged = () => { if (startedWide && !desktop.matches) cancel(); };
+  const owner = { cancel };
+  active = owner;
+  setProgrammatic(!silent);
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((type) => window.addEventListener(type, interrupt, { passive: true }));
+  window.addEventListener('pagehide', cancel);
+  reduce.addEventListener('change', preferenceChanged);
+  desktop.addEventListener('change', modeChanged);
 
-  activeAnimation = requestAnimationFrame(step);
+  const startTime = performance.now();
+  const immediate = reduce.matches || duration <= 0;
+  const step = (now: number) => {
+    if (done) return;
+    const progress = immediate ? 1 : Math.min((now - startTime) / duration, 1);
+    // Read before writing; lazy content and expanded rows can move the target.
+    const destination = settle ? clamp(window.scrollY + settle()) : to;
+    window.scrollTo(0, start + (destination - start) * easeInOutCubic(progress));
+    if (progress < 1) frame = requestAnimationFrame(step);
+    else complete(false);
+  };
+  if (immediate) {
+    window.scrollTo(0, to);
+    // Keep completion asynchronous so every caller can first retain its cancel handle.
+  }
+  frame = requestAnimationFrame(step);
+  return cancel;
 }
 
-/** Scrolls to a section, leaving its top under the fixed navigation. */
 export function scrollToSection(selector: string, duration = 900) {
   const element = document.querySelector(selector);
   if (!element) return;
-
-  scrollToY(window.scrollY + element.getBoundingClientRect().top - NAV_OFFSET, {
+  return scrollToY(window.scrollY + element.getBoundingClientRect().top - NAV_OFFSET, {
     duration,
     settle: () => element.getBoundingClientRect().top - NAV_OFFSET,
   });
 }
 
-/** Click handler for in-page anchor links (`href="#section"`). */
 export function handleAnchorClick(event: React.MouseEvent<HTMLAnchorElement>) {
-  const href = event.currentTarget.getAttribute("href");
-  if (!href?.startsWith("#")) return;
-
+  const href = event.currentTarget.getAttribute('href');
+  if (!href?.startsWith('#')) return;
   event.preventDefault();
   scrollToSection(href);
-  history.replaceState(null, "", href);
+  history.replaceState(null, '', href);
 }
