@@ -302,8 +302,12 @@ const MobileDeck = ({ cards }: { cards: Card[] }) => {
         // straight down, and with `auto` on both the sideways part of the gesture
         // nudged the rail, which `mandatory` then yanked back — the judder.
         // Half a card's gap at each end lets the first and last reach the middle.
+        // The card stops at phone width: in a half-screen Safari 92vw stretched it
+        // to 680px, so the gap keeps a neighbour's edge peeking as little as on a phone.
         className="flex flex-1 snap-x snap-mandatory overflow-x-auto overflow-y-hidden
-          px-[4vw] pt-16 touch-pan-x [-ms-overflow-style:none] [perspective:1200px]
+          [--rail-card:min(92vw,480px)] px-[calc((100vw_-_var(--rail-card))/2)]
+          gap-[max(0px,calc((100vw_-_var(--rail-card))/2_-_4vw))]
+          pt-16 touch-pan-x [-ms-overflow-style:none] [perspective:1200px]
           [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {cards.map((card, i) => (
@@ -317,7 +321,7 @@ const MobileDeck = ({ cards }: { cards: Card[] }) => {
             }}
             aria-roledescription="slide"
             aria-label={card.label}
-            className="w-[92vw] shrink-0 snap-center"
+            className="w-[var(--rail-card)] shrink-0 snap-center"
           >
             <div
               ref={(node) => {

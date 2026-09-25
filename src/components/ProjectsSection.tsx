@@ -22,7 +22,7 @@ const content = {
     eyebrow: "trabalhos selecionados",
     title: "Projetos",
     subtitle:
-      "Produtos reais com deploys reais — começando pelo sistema de cliente que mantenho em produção.",
+      "Produtos reais com deploys reais — começando pelo sistema do cliente que mantenho em produção.",
     confidential: "confidencial",
     inProduction: "em produção",
     imageCaption: "Interface representativa — dados do cliente omitidos",

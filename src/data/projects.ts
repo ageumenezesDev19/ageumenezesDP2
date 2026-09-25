@@ -90,7 +90,7 @@ export const projects: Project[] = [
     ],
     links: {
       live: "https://cortex-tawny-ten.vercel.app",
-      liveLabel: { en: "browser demo", pt: "demo no navegador" },
+      liveLabel: { en: "web preview", pt: "prévia web" },
       repo: "https://github.com/ageumenezesDev19/cortex",
     },
   },
@@ -179,7 +179,8 @@ export const projects: Project[] = [
     ],
     stack: ["Tauri", "React", "TypeScript", "SCSS", "i18next", "Web Workers"],
     links: {
-      repo: "https://github.com/ageumenezesDev19/DesPensa-",
+      live: "https://des-pensa.vercel.app",
+      repo: "https://github.com/ageumenezesDev19/Exacta",
     },
   },
   {

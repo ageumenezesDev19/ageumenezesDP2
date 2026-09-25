@@ -47,7 +47,7 @@ export interface EducationItem {
 }
 
 export interface SkillGroup {
-  id: "frontend" | "backend" | "devops" | "tools";
+  id: "ai" | "frontend" | "backend" | "devops" | "tools";
   label: LocalizedString;
   skills: string[];
 }

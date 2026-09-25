@@ -22,7 +22,7 @@ export const projectImages: Record<string, string> = {
 };
 
 /** The three that carry the section. This order is the order on screen. */
-const FEATURED = ["cortex", "pitchfolio", "design-system"];
+const FEATURED = ["cortex", "pitchfolio", "exacta"];
 
 const content = {
   en: {
