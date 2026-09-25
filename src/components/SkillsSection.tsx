@@ -1,7 +1,8 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { Layout, Server, Container, Wrench } from "lucide-react";
+import { Layout, Server, Container, Wrench, Sparkles, type LucideIcon } from "lucide-react";
 import { useLanguage } from "@/providers/language-provider";
 import { skillGroups } from "@/data/skills";
+import type { SkillGroup } from "@/data/types";
 
 const content = {
   en: {
@@ -16,7 +17,10 @@ const content = {
   },
 };
 
-const groupIcons = {
+// Typed against every group id: a new group without an icon rendered undefined
+// and blanked the whole page, and strict is off so nothing flagged it.
+const groupIcons: Record<SkillGroup["id"], LucideIcon> = {
+  ai: Sparkles,
   frontend: Layout,
   backend: Server,
   devops: Container,
@@ -46,9 +50,12 @@ const SkillsSection = () => {
           <p className="text-muted-foreground max-w-2xl">{t.subtitle}</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Five groups: 3 + 2 on a six-column grid, and the first alone on a
+            row at two columns, so no card is left orphaned on its own line. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
           {skillGroups.map((group, i) => {
             const Icon = groupIcons[group.id];
+            const span = `${i === 0 ? "sm:col-span-2" : ""} ${i < 3 ? "lg:col-span-2" : "lg:col-span-3"}`;
             return (
               <motion.div
                 key={group.id}
@@ -56,7 +63,7 @@ const SkillsSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: reduceMotion ? 0 : i * 0.08 }}
-                className="rounded-xl border border-border bg-card p-5"
+                className={`rounded-xl border border-border bg-card p-5 ${span}`}
               >
                 <h3 className="flex items-center gap-2 font-mono text-sm uppercase tracking-widest text-primary mb-4">
                   <Icon className="h-4 w-4" aria-hidden="true" />

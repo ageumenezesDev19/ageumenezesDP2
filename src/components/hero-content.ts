@@ -1,3 +1,5 @@
+import { profile } from "@/data/profile";
+
 /**
  * What the two heroes share. The desktop and the mobile deck lay themselves out
  * nothing alike, so they share the words and the images and not a line of markup.
@@ -15,25 +17,30 @@ export const heroPhotos = {
   light: "/photos/ageu-hero-light.webp",
 };
 
+/** The stack, read by both heroes: chips on desktop, one line on the mobile card. */
+export const heroStack = ["React", "Next.js", "TypeScript", "Node.js", "RAG", "LLMs"];
+
+// The role line comes from profile.headline, so it cannot drift from the
+// title the resumes and LinkedIn use; it once said "front-end" alone here.
 export const heroText = {
   en: {
     status: "available for freelance work",
-    headline1: "Front-end developer",
+    headline1: profile.headline.en,
     headline2: "who ships full products.",
     viewWork: "View work",
     downloadResume: "Download resume",
     contact: "Contact",
-    photoCaption: "Ageu Menezes — front-end developer",
+    photoCaption: `${profile.name} — ${profile.headline.en}`,
     swipeHint: "Swipe to explore",
   },
   pt: {
     status: "disponível para freelas",
-    headline1: "Dev front-end",
+    headline1: profile.headline.pt,
     headline2: "que entrega produtos completos.",
     viewWork: "Ver projetos",
     downloadResume: "Baixar currículo",
     contact: "Contato",
-    photoCaption: "Ageu Menezes — desenvolvedor front-end",
+    photoCaption: `${profile.name} — ${profile.headline.pt}`,
     swipeHint: "Deslize para explorar",
   },
 };

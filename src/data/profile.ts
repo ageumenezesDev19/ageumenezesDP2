@@ -7,12 +7,12 @@ export const profile: Profile = {
     pt: "Ceará, Brasil (UTC-3)",
   },
   headline: {
-    en: "Front-End Developer who ships full products",
-    pt: "Desenvolvedor Front-End que entrega produtos completos",
+    en: "AI & Front-End Engineer",
+    pt: "AI & Front-End Engineer",
   },
   tagline: {
-    en: "React · Next.js · TypeScript — with the backend and DevOps skills to take an idea from design to production.",
-    pt: "React · Next.js · TypeScript — com backend e DevOps suficientes para levar uma ideia do design à produção.",
+    en: "3+ years on the front end. These days I also build AI features, like search that finds the text inside screenshots, and answers built on what it finds.",
+    pt: "Mais de 3 anos no front-end, hoje também implementando funcionalidades com IA, como buscas que encontram o texto dentro de prints e respostas inteligentes baseadas nesses dados.",
   },
   bio: {
     en: "I'm a front-end developer from Brazil, currently building and maintaining a production inventory management system for a retail client as a freelancer. I started out in web development at Trybe and keep specializing through Rocketseat — React, Next.js, Node.js and DevOps fundamentals. I care about the whole product: clean UI, tested code, real deploys.",
@@ -28,7 +28,7 @@ export const profile: Profile = {
     {
       id: "linkedin",
       label: "LinkedIn",
-      url: "https://www.linkedin.com/in/ageu-menezes-silva-dev/",
+      url: "https://www.linkedin.com/in/ageu-m-costa-307852197/",
     },
     {
       id: "email",
@@ -38,7 +38,7 @@ export const profile: Profile = {
     {
       id: "whatsapp",
       label: "WhatsApp",
-      url: "https://wa.me/5588981774397",
+      url: "https://wa.me/5588981524177",
     },
   ],
   resume: {

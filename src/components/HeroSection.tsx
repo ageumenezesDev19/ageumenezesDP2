@@ -8,7 +8,8 @@ import { profile } from "@/data/profile";
 import { handleAnchorClick } from "@/lib/scroll";
 import { useResumeShare } from "@/lib/use-resume-share";
 import { OPENING, OPENING_EASE, openingRuns } from "@/lib/motion";
-import { heroPhotos, heroText } from "./hero-content";
+import { heroPhotos, heroStack, heroText } from "./hero-content";
+import { NoBreakHyphens } from "./NoBreakHyphens";
 
 /**
  * The desktop hero. Below `lg` the page renders `MobileDeck` instead, which
@@ -83,17 +84,25 @@ const HeroSection = ({ onExploreClick = () => {} }: { onExploreClick?: () => voi
             {...enter(OPENING.headline)}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-6"
           >
-            {t.headline1}
+            <NoBreakHyphens text={t.headline1} />
             <br />
             <span className="text-primary">{t.headline2}</span>
           </motion.h1>
 
           <motion.p
             {...enter(OPENING.rest)}
-            className="text-lg text-muted-foreground max-w-xl mb-8"
+            className="text-lg text-muted-foreground max-w-xl mb-5"
           >
             {profile.tagline[language]}
           </motion.p>
+
+          <motion.ul {...enter(OPENING.rest)} className="flex flex-wrap gap-1.5 mb-8">
+            {heroStack.map((item) => (
+              <li key={item} className="chip">
+                {item}
+              </li>
+            ))}
+          </motion.ul>
 
           <motion.div
             {...enter(OPENING.rest)}
@@ -126,10 +135,6 @@ const HeroSection = ({ onExploreClick = () => {} }: { onExploreClick?: () => voi
             className="font-mono text-xs text-muted-foreground leading-relaxed"
           >
             {profile.location[language]}
-            <span className="hidden sm:inline"> · </span>
-            <span className="block sm:inline">
-              React · Next.js · TypeScript · Node.js
-            </span>
           </motion.p>
         </div>
 
@@ -160,7 +165,7 @@ const HeroSection = ({ onExploreClick = () => {} }: { onExploreClick?: () => voi
                   className="inline-flex rounded-full h-1.5 w-1.5 bg-primary shrink-0"
                   aria-hidden="true"
                 />
-                {t.photoCaption}
+                <span><NoBreakHyphens text={t.photoCaption} /></span>
               </figcaption>
             </figure>
           </div>

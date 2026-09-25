@@ -9,7 +9,7 @@
   body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #1a2233;
-    font-size: 10.5px;
+    font-size: 12px;
     line-height: 1.5;
     width: 210mm;
     min-height: 297mm;
@@ -23,15 +23,15 @@
   h2 {
     font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.6px;
     color: #0B1120; border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 3px; margin: 14px 0 8px;
+    padding-bottom: 3px; margin: 18px 0 10px;
   }
-  .item { margin-bottom: 10px; }
+  .item { margin-bottom: 14px; }
   .item-head { display: flex; justify-content: space-between; align-items: baseline; }
   .item-title { font-weight: 700; font-size: 11.5px; }
   .item-org { color: #b7791f; font-weight: 600; }
   .period { color: #718096; font-size: 9.5px; white-space: nowrap; }
   ul { margin: 4px 0 0 14px; }
-  li { margin-bottom: 2.5px; }
+  li { margin-bottom: 4px; }
   .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; }
   .skill-row { display: flex; gap: 6px; }
   .skill-label { font-weight: 700; white-space: nowrap; min-width: 70px; }
@@ -46,22 +46,20 @@
 <div class="page">
   <header>
     <h1>Ageu Menezes</h1>
-    <div class="role">Front-End Developer · React · Next.js · TypeScript</div>
+    <div class="role">AI Engineer & Front-End Engineer · React · Next.js · TypeScript · RAG</div>
     <div class="contact">
       <span>Ceará, Brazil (UTC-3)</span>
       <span>ageumenezes23@gmail.com</span>
       <span>github.com/ageumenezesDev19</span>
-      <span>linkedin.com/in/ageu-menezes-silva-dev</span>
+      <span>linkedin.com/in/ageu-m-costa-307852197</span>
     </div>
   </header>
 
   <h2>Summary</h2>
   <p class="summary">
-    Front-end developer with 3+ years of experience, specialized in React, Next.js and TypeScript,
-    with working back-end and DevOps skills (Node.js, Docker, CI/CD). Currently the sole front-end
-    engineer of a production inventory management system used daily by a retail company. Started out
-    in web development at Trybe, with ongoing specialization at Rocketseat. Comfortable owning the
-    full cycle: architecture, implementation, testing and deploys.
+    AI Engineer with 3+ years on the front end (React, Next.js, TypeScript), integrating AI into
+    systems: search that answers from documents and assistants that turn long text into organized
+    information. Sole front-end engineer of a production system a retail team uses every day.
   </p>
 
   <div class="two-col">
@@ -73,10 +71,10 @@
           <div class="period">2025 — Present</div>
         </div>
         <ul>
-          <li>Sole front-end engineer of a production inventory &amp; production-tracking web system (Next.js 15, React 19, TypeScript, Tailwind CSS).</li>
-          <li>Integrated an external API with role-based authentication, protected routes and permission handling.</li>
-          <li>Built rich reporting: XLSX, PDF and DOCX exports used in daily operations.</li>
-          <li>Set up Playwright end-to-end tests, conventional commits and automated changelog releases (~230 TS files, 28 routes).</li>
+          <li>Sole front-end engineer of an inventory and orders system used every day by 15 employees.</li>
+          <li>Rebuilt the most-used flow, field visits and orders, for mobile: filling it in now takes about half the time.</li>
+          <li>Write the API contracts the back-end developer implements; end-to-end tests and automated releases.</li>
+          <li>Built the reports the team exports every day (spreadsheet, PDF and document).</li>
         </ul>
       </div>
       <div class="item">
@@ -85,61 +83,51 @@
           <div class="period">2022 — Present</div>
         </div>
         <ul>
-          <li>Design, build and deploy web applications for clients and own products with React, Next.js and TypeScript.</li>
-          <li>Shipped a cross-platform desktop inventory app with Tauri (Rust) + React (Exacta).</li>
-          <li>Built a full-stack habit tracker: one Node.js API serving React web and React Native mobile clients.</li>
+          <li>Built Exacta for a retail tax routine: a manual process went from 1-1.5 hours to 30 minutes, with more accurate values.</li>
         </ul>
       </div>
 
       <h2>Selected Projects</h2>
       <div class="item">
-        <div class="item-head">
-          <div class="item-title">Pitchfolio — AI assistant for freelance proposals</div>
-          <div class="period"><a href="https://proposal-assistant-mocha.vercel.app">proposal-assistant-mocha.vercel.app</a></div>
-        </div>
+        <div class="item-title">Cortex — note-taking app with AI search</div>
         <ul>
-          <li>Reads a job post, extracts requirements and risks, and drafts a reply from saved case studies; tracks which proposals get replies.</li>
-          <li>Provider-agnostic AI layer with automatic failover (Groq → Gemini), Zod-validated structured output, Supabase auth with row-level security and per-user rate limiting.</li>
+          <li>Finds the text inside screenshots and answers questions, citing the note each answer came from.</li>
         </ul>
       </div>
       <div class="item">
-        <div class="item-head">
-          <div class="item-title">Emerald UI — design system with published Storybook</div>
-          <div class="period"><a href="https://ageumenezesdev19.github.io/05-design-system/">Storybook</a></div>
-        </div>
+        <div class="item-title">Pitchfolio — AI assistant for freelance proposals</div>
         <ul>
-          <li>Nine components over seven token scales, documented in Storybook with the accessibility addon, built on Radix primitives.</li>
-          <li>Five-package monorepo on Turborepo, versioned with Changesets, shipping the shared ESLint and TypeScript configs the other packages consume.</li>
+          <li>Reads a job post, pulls out requirements and risks, and drafts the reply; its answers are checked by automated tests, including prompt injection.</li>
         </ul>
       </div>
       <div class="item">
-        <div class="item-head">
-          <div class="item-title">Exacta — exact-value stock search</div>
-          <div class="period"><a href="https://github.com/ageumenezesDev19/DesPensa-">github.com/…/DesPensa-</a></div>
-        </div>
+        <div class="item-title">Emerald UI — design system</div>
         <ul>
-          <li>Solves a subset-sum search over a live inventory — which combination of products adds up to exactly this amount — in a Web Worker so the interface never blocks.</li>
-          <li>Native desktop build with Tauri (Rust), multiple profiles with backup/restore and offline-first persistence.</li>
+          <li>Nine components documented in Storybook, published from a monorepo.</li>
         </ul>
       </div>
-      <div class="item">
-        <div class="item-head">
-          <div class="item-title">Developer portfolio — bilingual, serverless contact form</div>
-          <div class="period"><a href="https://github.com/ageumenezesDev19/ageumenezesDP2">github.com/…/ageumenezesDP2</a></div>
-        </div>
-        <ul>
-          <li>React + Vite + TypeScript, EN/PT content layer, dark/light themes and a Vercel serverless function for email delivery. Lighthouse: 100 SEO / 100 accessibility.</li>
-        </ul>
-      </div>
+      <h2>Links</h2>
+      <ul style="list-style:none; margin-left:0">
+        <li>Portfolio: <a href="https://ageumenezes-dp-2.vercel.app">ageumenezes-dp-2.vercel.app</a></li>
+        <li>GitHub: <a href="https://github.com/ageumenezesDev19">github.com/ageumenezesDev19</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/ageu-m-costa-307852197/">in/ageu-m-costa-307852197</a></li>
+        <li>WhatsApp: +55 88 98152-4177</li>
+      </ul>
+
+      <h2>Availability</h2>
+      <p>Open to freelance projects and remote roles. Based in Brazil (UTC-3), with overlap for US and European working hours.</p>
     </div>
 
     <div>
       <h2>Skills</h2>
-      <div class="skill-row"><span class="skill-label">Front-End</span><span>React, Next.js, TypeScript, JavaScript (ES6+), Tailwind CSS, styled-components, Framer Motion, React Native, Tauri</span></div>
-      <div class="skill-row" style="margin-top:5px"><span class="skill-label">Back-End</span><span>Node.js, Express, REST APIs, MySQL, Prisma, Sequelize, JWT auth</span></div>
-      <div class="skill-row" style="margin-top:5px"><span class="skill-label">DevOps</span><span>Docker, CI/CD (GitHub Actions), Vercel, release automation</span></div>
-      <div class="skill-row" style="margin-top:5px"><span class="skill-label">Testing</span><span>Playwright (e2e), Jest, React Testing Library</span></div>
+      <div class="skill-row"><span class="skill-label">AI</span><span>RAG, embeddings, hybrid search, LLMs (Groq, Gemini), structured output, evals, prompt injection testing</span></div>
+      <div class="skill-row" style="margin-top:5px"><span class="skill-label">Front-End</span><span>React, Next.js, TypeScript, JavaScript, Tailwind CSS, React Native</span></div>
+      <div class="skill-row" style="margin-top:5px"><span class="skill-label">Back-End</span><span>Node.js, Express, REST APIs, PostgreSQL, MySQL, Prisma, JWT</span></div>
+      <div class="skill-row" style="margin-top:5px"><span class="skill-label">DevOps</span><span>Docker, CI/CD (GitHub Actions), Vercel</span></div>
+      <div class="skill-row" style="margin-top:5px"><span class="skill-label">Testing</span><span>Playwright, Jest, React Testing Library</span></div>
       <div class="skill-row" style="margin-top:5px"><span class="skill-label">Languages</span><span>Portuguese (native), English (professional)</span></div>
+
+
 
       <h2>Education</h2>
       <div class="item">
@@ -169,17 +157,6 @@
           <li>HTTP &amp; Performance</li>
         </ul>
       </div>
-
-      <h2>Links</h2>
-      <ul style="list-style:none; margin-left:0">
-        <li>Portfolio: <a href="https://ageumenezes-dp-2.vercel.app">ageumenezes-dp-2.vercel.app</a></li>
-        <li>GitHub: <a href="https://github.com/ageumenezesDev19">github.com/ageumenezesDev19</a></li>
-        <li>LinkedIn: <a href="https://www.linkedin.com/in/ageu-menezes-silva-dev/">in/ageu-menezes-silva-dev</a></li>
-        <li>WhatsApp: +55 88 98177-4397</li>
-      </ul>
-
-      <h2>Availability</h2>
-      <p>Open to freelance projects and remote roles. Based in Brazil (UTC-3), with overlap for US and European working hours.</p>
     </div>
   </div>
 </div>

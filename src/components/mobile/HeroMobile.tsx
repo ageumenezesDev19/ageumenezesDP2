@@ -7,7 +7,8 @@ import { useTheme } from "@/providers/theme-provider";
 import { profile } from "@/data/profile";
 import { useResumeShare } from "@/lib/use-resume-share";
 import { OPENING, OPENING_EASE, openingRuns } from "@/lib/motion";
-import { heroPhotos, heroText } from "../hero-content";
+import { heroPhotos, heroStack, heroText } from "../hero-content";
+import { NoBreakHyphens } from "../NoBreakHyphens";
 
 /**
  * Card zero of the mobile deck. It holds the full portrait and the name; from the
@@ -60,7 +61,7 @@ const HeroMobile = () => {
             className="inline-flex h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
             aria-hidden="true"
           />
-          {t.photoCaption}
+          <span><NoBreakHyphens text={t.photoCaption} /></span>
         </figcaption>
       </motion.figure>
 
@@ -76,7 +77,7 @@ const HeroMobile = () => {
         {...enter(OPENING.headline)}
         className="text-[2rem] font-bold leading-[1.05] tracking-tight"
       >
-        {t.headline1}
+        <NoBreakHyphens text={t.headline1} />
         <br />
         <span className="text-primary">{t.headline2}</span>
       </motion.h1>
@@ -111,7 +112,7 @@ const HeroMobile = () => {
         className="font-mono text-[0.7rem] leading-relaxed text-muted-foreground"
       >
         {profile.location[language]}
-        <span className="block">React · Next.js · TypeScript · Node.js</span>
+        <span className="block">{heroStack.join(" · ")}</span>
       </motion.p>
     </div>
   );
