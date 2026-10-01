@@ -13,13 +13,17 @@ export const projects: Project[] = [
     category: "fullstack",
     role: {
       en: "Freelance developer — sole front-end engineer for a retail client",
-      pt: "Desenvolvedor freelancer — único engenheiro front-end para um cliente do varejo",
+      pt: "Desenvolvedor freelancer — único engenheiro front-end para um cliente de varejo",
     },
     description: {
-      en: "A production web system I build and maintain for a retail client: inventory, stock movements and production tracking used daily by the company's team. I own the front-end end-to-end — from architecture and API integration to releases.",
-      pt: "Sistema web em produção que construo e mantenho para um cliente do varejo: estoque, movimentações e acompanhamento de produção usados diariamente pela equipe da empresa. Sou responsável por todo o front-end — da arquitetura e integração com a API até as releases.",
+      en: "A web inventory and orders system I build and maintain for a retail client, used every day by 15 employees. I own the whole front end, from architecture and API integration to releases.",
+      pt: "Sistema web de estoque e pedidos que construo e mantenho para um cliente de varejo, usado todo dia por 15 funcionários. Sou responsável por todo o front-end, da arquitetura e integração com a API até as releases.",
     },
     highlights: [
+      {
+        en: "I rebuilt the flow the team uses most, visits and orders, for mobile. Filling it in now takes about half the time it used to",
+        pt: "O fluxo que a equipe mais usa, visitas e pedidos, eu refiz para o celular. Hoje o preenchimento leva cerca de metade do tempo de antes",
+      },
       {
         en: "I built the whole front end against an API I don't own — including the sign-in and the rules for who gets to reach which screen",
         pt: "Construí todo o front-end sobre uma API que não é minha — incluindo o login e as regras de quem pode chegar a qual tela",
@@ -156,8 +160,8 @@ export const projects: Project[] = [
       pt: "Criador e único desenvolvedor",
     },
     description: {
-      en: "A stock tool built around one hard question: which combination of products adds up to exactly this amount? It solves that subset-sum search over a live inventory, then writes the withdrawal back. I use it daily at a retail counter, which is how its worst bug got caught.",
-      pt: "Ferramenta de estoque construída em torno de uma pergunta difícil: qual combinação de produtos soma exatamente este valor? Ela resolve essa busca de subset-sum sobre um estoque real e depois registra a baixa. Uso diariamente num balcão de varejo, e foi assim que o pior bug dela apareceu.",
+      en: "A stock tool built around one question: which combination of products adds up to exactly this amount? It solves that subset-sum search over a live inventory, then writes the withdrawal back. I built it for the tax workflow at the stores of a company I work for: a manual process went from 1–1.5 hours to 30 minutes, and it's used every day.",
+      pt: "Ferramenta de estoque construída em torno de uma pergunta: qual combinação de produtos soma exatamente este valor? Ela resolve essa busca de subset-sum sobre um estoque real e depois registra a baixa. Criei para o fluxo do fiscal nas lojas de uma empresa onde trabalho: o processo, que era manual, caiu de 1h–1h30 para 30 minutos, sendo usado todo dia.",
     },
     highlights: [
       {
@@ -166,7 +170,7 @@ export const projects: Project[] = [
       },
       {
         en: "Found and fixed a money bug in daily use: the displayed total summed the whole combination including items already removed, claiming R$27.80 on a R$22.90 withdrawal",
-        pt: "Encontrei e corrigi um bug de dinheiro no uso diário: o total exibido somava a combinação inteira incluindo itens já removidos, informando R$27,80 numa retirada de R$22,90",
+        pt: "Encontrei e corrigi um erro no valor: o total exibido somava a combinação inteira, incluindo itens já retirados, e mostrava R$27,80 numa retirada de R$22,90",
       },
       {
         en: "Rebuilt the visual layer on a design token system — replacing loose SCSS, emoji-as-icons and developer copy leaking into the interface",

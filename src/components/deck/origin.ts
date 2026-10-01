@@ -1,7 +1,6 @@
 /** Shared geometry for scroll tracking and soft settling. */
 export const READ_AT = 0.15;
 export const ARRIVAL = ["start end", "start 15%"] as const;
-export const ARRIVAL_SPAN = 1 - READ_AT;
 
 /**
  * The one attitude an undealt card has: where it waits in the deck, and where a
@@ -13,12 +12,15 @@ export const ARRIVAL_SPAN = 1 - READ_AT;
  * second profile of these numbers was tried and the effect never read at 430 px,
  * because the card is as wide as the portrait covering it and there is no pointer
  * to parallax against.
+ *
+ * Behind, to the left and below, where the fan waits: every card comes out of
+ * the deck the same way, as the phone's rail deals from one side only.
  */
 export const CARD_ORIGIN = {
-  x: 260,
-  z: -900,
-  rotateX: -9,
-  rotateY: 18,
+  x: -60,
+  y: 40,
+  z: -520,
+  rotateX: 8,
 };
 
 /** Fan of the waiting cards behind the portrait, in pixels. */

@@ -9,6 +9,7 @@ import {
   HANDOVER,
   HERO_FAN,
   PERSPECTIVE,
+  READ_AT,
   ease,
   spread,
 } from "./origin";
@@ -24,18 +25,13 @@ import {
 } from "./pointer";
 
 type Box = { left: number; top: number; width: number; height: number };
-type Slot = Box & { full: number };
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n);
 
-/**
- * How far down the viewport a card is drawn. Sections run past 2000 px and a
- * card that tall would be absurd; what has to match at the handover is the top
- * edge, the sides and the surface, so anything below a screenful is masked away
- * instead of drawn.
- */
-const CARD_SPAN = 1;
+/** Past the portrait the cards run to the foot of the screen like the sections
+ *  in front of them, and fade there instead of ending on a hard cut. */
+const FADE = "linear-gradient(to bottom, #000 84%, transparent)";
 
 /** Share of the first section's entry spent leaving the portrait behind. */
 const LEAVE_HERO = 0.35;
@@ -91,6 +87,8 @@ const Deck = () => {
     // frames use document coordinates and never read layout after style writes.
     let anchor: Box = { left: 0, top: 0, width: 320, height: 400 };
     const slots = new Map<number, Box>();
+    // Slot top relative to its section, which is what lands on `READ_AT`.
+    const insets = new Map<number, number>();
     const observed = new Set<Element>();
     let dirty = true;
     let disposed = false;
@@ -111,13 +109,25 @@ const Deck = () => {
         if (!node) { slots.delete(i); return; }
         const rect = node.getBoundingClientRect();
         slots.set(i, { left: rect.left, top: rect.top + window.scrollY, width: rect.width, height: rect.height });
+        const section = node.closest("section");
+        insets.set(i, section ? rect.top - section.getBoundingClientRect().top : 0);
         observe(node);
       });
       dirty = false;
     };
-    const slot = (i: number, vh: number): Slot | null => {
+    // Where a section rests once dealt, down to the foot of the screen. Past
+    // the hero the waiting cards sit here and never follow the page: anything
+    // repositioned from script on scroll trails the browser's own scrolling.
+    const dock = (i: number, vh: number): Box | null => {
       const box = slots.get(i);
-      return box ? { ...box, top: box.top - window.scrollY, height: Math.min(box.height, vh * CARD_SPAN), full: box.height } : null;
+      if (!box) return null;
+      const top = vh * READ_AT + (insets.get(i) ?? 0);
+      return { left: box.left, top, width: box.width, height: Math.max(vh - top, 0) };
+    };
+    const slot = (i: number, vh: number): Box | null => {
+      const box = slots.get(i);
+      const rest = dock(i, vh);
+      return box && rest ? { ...rest, top: box.top - window.scrollY } : null;
     };
 
     const stopPointer = trackPointer();
@@ -169,10 +179,8 @@ const Deck = () => {
 
       const held = { ...anchor, top: anchor.top - window.scrollY };
       const to = slot(target, vh);
-      const from =
-        target === 0
-          ? held && { ...held, full: held.height }
-          : slot(target - 1, vh);
+      const docked = target === 0 ? null : dock(target, vh);
+      const from = docked ?? held;
       const box =
         from && to
           ? {
@@ -183,14 +191,17 @@ const Deck = () => {
             }
           : (to ?? from);
       if (!box) return;
+      // The group holds the waiting cards. Behind the portrait it travels with
+      // the card being dealt; past it, it stays docked and only that card moves.
+      const base = docked ?? box;
 
-      if (box.width !== previousWidth) {
-        g.style.width = `${box.width}px`;
-        previousWidth = box.width;
+      if (base.width !== previousWidth) {
+        g.style.width = `${base.width}px`;
+        previousWidth = base.width;
       }
-      if (box.height !== previousHeight) {
-        g.style.height = `${box.height}px`;
-        previousHeight = box.height;
+      if (base.height !== previousHeight) {
+        g.style.height = `${base.height}px`;
+        previousHeight = base.height;
       }
 
       // A section shrinks toward the top of its own slot. The deck has to use
@@ -211,24 +222,25 @@ const Deck = () => {
       s.y += (pointerTarget.y - s.y) * blend;
       // Any swing still on the group at the handover breaks the coincidence, so
       // it dies as the front card lands and returns for the cards behind it.
-      const sway = 1 - seat;
+      // Past the hero there is no swing: a docked deck that tilts with the mouse
+      // reads as cards moving on their own.
+      const sway = docked ? 0 : 1 - seat;
       g.style.transform =
-        `translate3d(${box.left}px, ${box.top}px, 0) ` +
+        `translate3d(${base.left}px, ${base.top}px, 0) ` +
         `rotateX(${-s.y * POINTER_SWING.x * sway}deg) ` +
         `rotateY(${s.x * POINTER_SWING.y * sway}deg)`;
 
       // A fixed step reads behind the portrait and disappears inside a section,
-      // so the fan is pixels there and a share of the card here.
+      // so the fan is pixels there and a share of the card here. Flat once
+      // docked: with depth, the vanishing point following the card being dealt
+      // would drag the waiting ones along with it.
       const fan = {
-        x: lerp(HERO_FAN.x, DECK_FAN.x * box.width, hero),
-        y: lerp(HERO_FAN.y, DECK_FAN.y * box.height, hero),
-        z: lerp(HERO_FAN.z, DECK_FAN.z * box.width, hero),
+        x: lerp(HERO_FAN.x, DECK_FAN.x * base.width, hero),
+        y: lerp(HERO_FAN.y, DECK_FAN.y * base.height, hero),
+        z: lerp(HERO_FAN.z, 0, hero),
       };
 
-      // A fixed mask changes only when a tall slot needs clipping. It never
-      // interpolates a gradient during the flight, and stays off short cards.
-      const cut = to ? to.height < to.full - 1 && hero === 1 : false;
-      const mask = cut ? "linear-gradient(to bottom, #000 84%, transparent)" : "none";
+      const mask = hero === 1 ? FADE : "none";
 
       // Keep an opaque backing until the real surface is fully opaque. Two
       // complementary alpha layers would still leak the waiting cards through.
@@ -236,7 +248,10 @@ const Deck = () => {
       for (let i = 0; i < DECK.length; i += 1) {
         const card = cards.current[i];
         if (!card) continue;
-        const visible = i >= target && (hero < 1 || i < target + 3);
+        // Distance from the reading position: 0 is the section itself, 1 is the
+        // next card waiting, and it counts up into the depth from there.
+        const d = i - dealt + 1;
+        const visible = i >= target && (hero < 1 || d < 3);
         if (!visible) {
           card.style.opacity = "0";
           card.style.visibility = "hidden";
@@ -245,9 +260,6 @@ const Deck = () => {
         }
         card.style.visibility = "visible";
 
-        // Distance from the reading position: 0 is the section itself, 1 is the
-        // next card waiting, and it counts up into the depth from there.
-        const d = i - dealt + 1;
         // Compositor hints exist only while these visible surfaces are moving.
         card.style.willChange = changing || opening ? "transform, opacity" : "auto";
         const near = ease(d);
@@ -264,19 +276,35 @@ const Deck = () => {
           1 - hero,
         );
 
+        // Only the card being dealt leaves the group's box, to fly to its slot.
+        const dealing = i === target && base !== box;
+        const width = dealing ? `${box.width}px` : "";
+        const height = dealing ? `${box.height}px` : "";
+        if (card.style.width !== width) card.style.width = width;
+        if (card.style.height !== height) card.style.height = height;
+        const shift = dealing ? `translate3d(${box.left - base.left}px, ${box.top - base.top}px, 0) ` : "";
+
         const step = spread(d) * open;
         card.style.transform =
+          shift +
           `translate3d(${lerp(CARD_ORIGIN.x * near, fan.x * step, rest)}px, ` +
-          `${lerp(0, fan.y * step, rest)}px, ` +
+          `${lerp(CARD_ORIGIN.y * near, fan.y * step, rest)}px, ` +
           `${lerp(CARD_ORIGIN.z * near, fan.z * step, rest)}px) ` +
-          `rotateX(${CARD_ORIGIN.rotateX * near * (1 - rest)}deg) ` +
-          `rotateY(${CARD_ORIGIN.rotateY * near * (1 - rest)}deg)`;
+          `rotateX(${CARD_ORIGIN.rotateX * near * (1 - rest)}deg)`;
 
         // Steeper than it was behind the portrait: the same card is 320 px
         // wide there and a screenful here, and at that size a bright ghost is
         // clutter rather than the edge of a deck.
         const dim = Math.max(1 - Math.max(d - 1, 0) * lerp(0.16, 0.3, hero), 0.1);
-        card.style.opacity = String((i === target ? backing : 1) * dim * open * (i >= target + 3 ? 1 - hero : 1));
+        // Three cards past the portrait, the third faded in on the same `d` that
+        // moves it: counted by whole cards, it appeared at once on each handover.
+        const tail = lerp(1, clamp01(3 - d), hero);
+        card.style.opacity = String((i === target ? backing : 1) * dim * open * tail);
+
+        if (card.style.maskImage !== mask) {
+          card.style.maskImage = mask;
+          card.style.webkitMaskImage = mask;
+        }
 
         const solid = solids.current[i];
         if (solid) solid.style.opacity = i === target ? String(seat) : "0";
@@ -291,11 +319,6 @@ const Deck = () => {
               ? 1 - clamp01((entry - FACE_OUT.start) / (FACE_OUT.end - FACE_OUT.start))
               : 1;
           face.style.opacity = String(lerp(1, clamp01(1.2 - d * 0.8), hero) * out);
-        }
-
-        if (card.style.maskImage !== mask) {
-          card.style.maskImage = mask;
-          card.style.webkitMaskImage = mask;
         }
       }
 

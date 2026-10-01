@@ -61,7 +61,8 @@ const HeroMobile = () => {
             className="inline-flex h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
             aria-hidden="true"
           />
-          <span><NoBreakHyphens text={t.photoCaption} /></span>
+          {/* Name only: the role is the headline right below the photo. */}
+          <span>{profile.name}</span>
         </figcaption>
       </motion.figure>
 
@@ -106,6 +107,12 @@ const HeroMobile = () => {
           </Button>
         </div>
       </motion.div>
+
+      {/* Below the buttons, not above: on a short iPhone the buttons already sit
+          at the fold, and this would push them under it. */}
+      <motion.p {...enter(OPENING.rest)} className="text-sm leading-relaxed text-muted-foreground">
+        {profile.tagline[language]}
+      </motion.p>
 
       <motion.p
         {...enter(OPENING.rest)}
