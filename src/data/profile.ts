@@ -11,12 +11,18 @@ export const profile: Profile = {
     pt: "AI & Front-End Engineer",
   },
   tagline: {
-    en: "3+ years on the front end. These days I also build AI features, like search that finds the text inside screenshots, and answers built on what it finds.",
-    pt: "Mais de 3 anos no front-end, hoje também implementando funcionalidades com IA, como buscas que encontram o texto dentro de prints e respostas inteligentes baseadas nesses dados.",
+    en: "3+ years on the front end, integrating AI into web systems, like search that answers from documents and structured data extraction from free text.",
+    pt: "Mais de 3 anos no front-end, integrando IA em sistemas web, como buscas que respondem com base em documentos e extração de dados estruturados de textos longos.",
   },
   bio: {
-    en: "I'm a front-end developer from Brazil, currently building and maintaining a production inventory management system for a retail client as a freelancer. I started out in web development at Trybe and keep specializing through Rocketseat — React, Next.js, Node.js and DevOps fundamentals. I care about the whole product: clean UI, tested code, real deploys.",
-    pt: "Sou desenvolvedor front-end brasileiro e atualmente construo e mantenho, como freelancer, um sistema de gestão de estoque em produção para um cliente do varejo. Comecei no desenvolvimento web pela Trybe e sigo me especializando pela Rocketseat — React, Next.js, Node.js e fundamentos de DevOps. Me importo com o produto inteiro: UI limpa, código testado, deploys reais.",
+    en:
+      "I work mostly as a freelancer, and I'm the only front-end developer on a system 15 employees at a retail company use every day to supply more than 30 stores a week.\n\n" +
+      "I also build tools to solve problems I've had myself: a note-taking app for studying, an assistant for freelance proposals, and the app that sped up the tax workflow at the stores of another company I work for.\n\n" +
+      "I started in web development at Trybe and keep specializing through Rocketseat: React, Next.js, Node.js and DevOps fundamentals.",
+    pt:
+      "Trabalho principalmente como freelancer e sou o único dev front-end de um sistema que 15 funcionários de uma empresa de varejo usam todo dia para abastecer mais de 30 lojas por semana.\n\n" +
+      "Também construo ferramentas para resolver problemas que eu mesmo tive: um app de notas para estudar, um assistente de propostas de freelance e o app que acelerou o fluxo do fiscal nas lojas de outra empresa onde trabalho.\n\n" +
+      "Comecei no desenvolvimento web pela Trybe e sigo me especializando pela Rocketseat: React, Next.js, Node.js e fundamentos de DevOps.",
   },
   email: "ageumenezes23@gmail.com",
   socials: [

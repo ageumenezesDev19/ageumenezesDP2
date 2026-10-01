@@ -5,6 +5,10 @@ import { READ_AT } from './origin';
 
 export const COMMIT_AT = 0.35;
 const DEAD_ZONE = 0.06;
+/** Rest allowed while the next card only peeks at the foot of the screen.
+ *  Experience, Skills and Contact are ~1 viewport tall: at 0.06 a 200 px wheel
+ *  past their landing was thrown 720 px on, and their end could not be read. */
+const PEEK_ZONE = 0.25;
 const COMMIT_MS = 450;
 const QUIET_FLOOR = 350;
 const QUIET_CEILING = 900;
@@ -54,7 +58,7 @@ export function watchForStalls() {
       if (!el) continue;
       const vh = window.innerHeight;
       const p = (vh - el.getBoundingClientRect().top) / (vh * (1 - READ_AT));
-      if (p <= DEAD_ZONE || p >= 1 - DEAD_ZONE) continue;
+      if (p <= PEEK_ZONE || p >= 1 - DEAD_ZONE) continue;
       const forward = heading === 0 ? p >= COMMIT_AT : heading > 0;
       const aim = () => el.getBoundingClientRect().top - window.innerHeight * (forward ? READ_AT : 1);
       cancelCommit = scrollToY(window.scrollY + aim(), {

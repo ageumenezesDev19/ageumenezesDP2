@@ -29,7 +29,7 @@ const content = {
     eyebrow: "everything else",
     title: "Products and open source",
     subtitle:
-      "What I build when the brief is mine — shipped apps, a design system, and tools I use every day.",
+      "What I build when the brief is mine — shipped apps, a design system, and tools that get used every day.",
     picked: "Start here",
     everythingElse: "Also built",
   },
@@ -37,7 +37,7 @@ const content = {
     eyebrow: "todo o resto",
     title: "Produtos e open source",
     subtitle:
-      "O que construo quando o escopo é meu — apps publicados, um design system e ferramentas que uso todo dia.",
+      "O que construo quando o escopo é meu — apps publicados, um design system e ferramentas usadas todo dia.",
     picked: "Comece por aqui",
     everythingElse: "Também construí",
   },

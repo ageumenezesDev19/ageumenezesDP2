@@ -13,7 +13,7 @@ const content = {
     factsLanguages: "Languages",
     factsLanguagesValue: "Portuguese (native) · English (professional)",
     factsInterests: "Off the clock",
-    factsInterestsValue: "Sci-fi, electronic music and video editing",
+    factsInterestsValue: "Movies and TV shows, English-language music, casual games and sci-fi",
     certificatesTitle: "Certificates",
     certificatesSubtitle: "Course certificates — click to open the credential.",
     view: "View PDF",
@@ -25,7 +25,7 @@ const content = {
     factsLanguages: "Idiomas",
     factsLanguagesValue: "Português (nativo) · Inglês (profissional)",
     factsInterests: "Fora do expediente",
-    factsInterestsValue: "Ficção científica, música eletrônica e edição de vídeo",
+    factsInterestsValue: "Filmes e séries, música internacional, jogos casuais e ficção científica",
     certificatesTitle: "Certificados",
     certificatesSubtitle: "Certificados de cursos — clique para abrir a credencial.",
     view: "Ver PDF",
@@ -79,7 +79,13 @@ const AboutSection = () => {
           </motion.figure>
 
           <motion.div {...reveal}>
-            <p className="text-lg leading-relaxed mb-8">{profile.bio[language]}</p>
+            <div className="space-y-4 mb-8">
+              {profile.bio[language].split("\n\n").map((paragraph) => (
+                <p key={paragraph} className="text-lg leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
 
             <ul className="space-y-4">
               {facts.map(({ icon: Icon, label, value }) => (

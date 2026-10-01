@@ -3,8 +3,8 @@ import { EducationItem, ExperienceItem } from "./types";
 export const experience: ExperienceItem[] = [
   {
     title: {
-      en: "Freelance Front-End Developer — Inventory Management System",
-      pt: "Desenvolvedor Front-End Freelancer — Sistema de Gestão de Estoque",
+      en: "Freelance Front-End Developer — Inventory and Orders System",
+      pt: "Desenvolvedor Front-End Freelancer — Sistema de Estoque e Pedidos",
     },
     organization: "Retail client (contract)",
     period: {
@@ -12,8 +12,8 @@ export const experience: ExperienceItem[] = [
       pt: "2025 — Presente",
     },
     description: {
-      en: "Sole front-end engineer for a production inventory and production-tracking system used daily by a retail company. Own the full front-end lifecycle: architecture, API integration with role-based auth, XLSX/PDF/DOCX reporting, Playwright e2e tests and versioned releases.",
-      pt: "Único engenheiro front-end de um sistema de estoque e acompanhamento de produção usado diariamente por uma empresa do varejo. Responsável por todo o ciclo do front-end: arquitetura, integração com API com autenticação por papéis, relatórios XLSX/PDF/DOCX, testes e2e com Playwright e releases versionadas.",
+      en: "Sole front-end developer on an inventory and orders system used every day by 15 employees. I rebuilt the visits and orders flow for mobile, the one the team uses most, and filling it in now takes about half the time. I write the API contracts the back-end developer implements, cover the flows with Playwright end-to-end tests, and maintain the reports the team exports every day as spreadsheets, PDFs and documents.",
+      pt: "Único dev front-end de um sistema de estoque e pedidos usado todo dia por 15 funcionários. Adaptei para o celular o fluxo de visitas e pedidos, o que a equipe mais usa, e o preenchimento passou a levar cerca de metade do tempo. Escrevo os contratos da API que o dev back-end implementa, cubro os fluxos com testes end-to-end no Playwright e mantenho os relatórios que a equipe exporta todo dia em planilha, PDF e documento.",
     },
     stack: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "Playwright"],
   },
@@ -28,8 +28,8 @@ export const experience: ExperienceItem[] = [
       pt: "2022 — Presente",
     },
     description: {
-      en: "Building web applications for clients and personal products with React, Next.js and TypeScript — from landing pages to full applications with authentication, dashboards and deploys on Vercel.",
-      pt: "Desenvolvimento de aplicações web para clientes e produtos próprios com React, Next.js e TypeScript — de landing pages a aplicações completas com autenticação, dashboards e deploys na Vercel.",
+      en: "Web applications for clients and my own products. One of the main ones is Exacta, which took the tax workflow at another company's stores from 1–1.5 hours down to 30 minutes, with more accurate values.",
+      pt: "Aplicações web para clientes e produtos próprios. Um dos principais é o Exacta, que levou o fluxo do fiscal nas lojas de outra empresa de 1h–1h30 para 30 minutos, com valores mais precisos.",
     },
     stack: ["React", "Next.js", "TypeScript", "Node.js"],
   },
