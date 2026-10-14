@@ -13,6 +13,7 @@ const content = {
       "Real products with real deploys — starting with the client system I maintain in production.",
     confidential: "confidential",
     inProduction: "in production",
+    since: "Mar 2026 —",
     imageCaption: "Representative interface — client data withheld",
     confidentialNote:
       "This is client work: the code and data are confidential. I'm happy to talk through the architecture and my decisions on a call.",
@@ -25,6 +26,7 @@ const content = {
       "Produtos reais com deploys reais — começando pelo sistema do cliente que mantenho em produção.",
     confidential: "confidencial",
     inProduction: "em produção",
+    since: "mar. 2026 —",
     imageCaption: "Interface representativa — dados do cliente omitidos",
     confidentialNote:
       "Este é um trabalho para cliente: código e dados são confidenciais. Posso falar sobre a arquitetura e minhas decisões em uma call.",
@@ -76,7 +78,7 @@ const ProjectsSection = () => {
                   />
                   {t.inProduction}
                 </span>
-                <span className="chip">2026 —</span>
+                <span className="chip">{t.since}</span>
               </div>
 
               <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">
