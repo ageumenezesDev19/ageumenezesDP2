@@ -2,7 +2,7 @@
 
 Bilingual (EN/PT) portfolio of a front-end developer who ships full products.
 
-**Live:** https://ageumenezes-dp-2.vercel.app
+**Live:** https://ageumenezes.dev
 
 ![Portfolio hero](public/og-image.png)
 
