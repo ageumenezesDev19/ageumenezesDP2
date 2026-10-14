@@ -76,7 +76,7 @@ const ProjectsSection = () => {
                   />
                   {t.inProduction}
                 </span>
-                <span className="chip">2025 —</span>
+                <span className="chip">2026 —</span>
               </div>
 
               <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">
