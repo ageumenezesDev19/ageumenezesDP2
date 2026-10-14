@@ -8,8 +8,8 @@ export const experience: ExperienceItem[] = [
     },
     organization: "Retail client (contract)",
     period: {
-      en: "2026 — Present",
-      pt: "2026 — Presente",
+      en: "Mar 2026 — Present",
+      pt: "mar. 2026 — Presente",
     },
     description: {
       en: "Sole front-end developer on an inventory and orders system used every day by 15 employees. I rebuilt the visits and orders flow for mobile, the one the team uses most, and filling it in now takes about half the time. I write the API contracts the back-end developer implements, cover the flows with Playwright end-to-end tests, and maintain the reports the team exports every day as spreadsheets, PDFs and documents.",
